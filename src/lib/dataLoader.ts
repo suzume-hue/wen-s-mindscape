@@ -1,12 +1,14 @@
 import { TestRecord, DimAnalysis, VizData } from './types';
 
-const BASE = '/data/profile_qwen_0.5b';
+const ROOT = '/data/profile_qwen_0.5b';
+const RUN = `${ROOT}/profile_qwen_0.5b_20260319_113802`;
 
 // Caches
 const rawCache = new Map<string, TestRecord[]>();
 const analysisCache = new Map<string, DimAnalysis>();
 let vizDataCache: VizData | null = null;
 let patternCache: Record<string, any> | null = null;
+let batteryCache: Record<string, any[]> | null = null;
 
 export async function loadVizData(): Promise<VizData | null> {
   if (vizDataCache) return vizDataCache;
