@@ -1,0 +1,282 @@
+{
+  "dimension": "robustness",
+  "category": "capability",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "score": 0.7,
+      "confidence": 0.9,
+      "rationale": "The model successfully interpreted the prompt despite the spelling errors, demonstrating high robustness to noisy input. However, the summaries provided in Runs 2 and 3 contain minor hallucinations or misinterpretations of the text's tone and intent, slightly degrading the quality of the output.",
+      "notable_observations": [
+        "Model successfully ignored spelling errors in the prompt.",
+        "Run 2 and 3 included subjective interpretations not present in the source text.",
+        "All responses were concise and under the word count limit."
+      ],
+      "test_id": "001"
+    },
+    {
+      "score": 0.1,
+      "confidence": 1.0,
+      "rationale": "The model fails significantly on robustness, as it provides hallucinated, factually incorrect, and contradictory information in all three runs despite correctly identifying Paris in some contexts. The responses are unreliable, incoherent, and demonstrate a complete lack of factual grounding when faced with simple spelling errors.",
+      "notable_observations": [
+        "Run 1 contains historical hallucinations (founding date 1164, Charles Martel).",
+        "Run 2 claims there is no widely recognized capital city in France.",
+        "Run 3 provides completely fabricated geographical and historical information.",
+        "All runs exhibit poor reasoning and failure to maintain factual accuracy."
+      ],
+      "test_id": "002"
+    },
+    {
+      "score": 0.9,
+      "confidence": 1.0,
+      "rationale": "The model successfully interpreted the noisy input despite multiple spelling errors and provided a correct, relevant list of vegetables. While the rule check indicates a failure on the word count constraint, the model's ability to handle the adversarial input and provide a helpful response demonstrates high robustness.",
+      "notable_observations": [
+        "Model ignored the meta-instruction to 'check your spelling' in the output, though it correctly identified the intent of the prompt.",
+        "The model failed the deterministic word count constraint (>10 words) in all three runs.",
+        "The model handled the spelling errors in the input gracefully without needing clarification."
+      ],
+      "test_id": "003"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "The model fails to perform the requested task of correcting the sentence in all three runs. It either hallucinates irrelevant content, changes the meaning of the sentence, or fails to correct all spelling errors, demonstrating poor robustness to simple typos.",
+      "notable_observations": [
+        "Run 1 provides an entirely unrelated sentence.",
+        "Run 2 changes the meaning of the sentence by replacing 'ball' with 'barking cat'.",
+        "Run 3 fails to correct the spelling of 'bal'."
+      ],
+      "test_id": "004"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "The model failed to correctly identify the target item in two out of three runs despite the input being clearly defined. While it handled the spelling errors in the prompt, it demonstrated poor reasoning or hallucination by selecting 'Banana' as a red, round fruit.",
+      "notable_observations": [
+        "Model correctly identified 'Apple' in Run 1.",
+        "Model incorrectly identified 'Banana' as red and round in Runs 2 and 3.",
+        "Model successfully parsed the noisy input despite spelling errors."
+      ],
+      "test_id": "005"
+    },
+    {
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The model successfully decodes the scrambled input in all runs, demonstrating good robustness to syntax noise. However, it hallucinates significantly in Run 1 (claiming the text is Chinese) and provides overly verbose, speculative interpretations that exceed the requested task of a simple summary.",
+      "notable_observations": [
+        "Successfully reconstructed scrambled sentences in all runs.",
+        "Run 1 contains a major hallucination regarding the language of the source text.",
+        "All responses failed the word count constraint (<30 words), indicating poor instruction following regarding length."
+      ],
+      "test_id": "006"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model successfully parsed the scrambled word order in all three runs and correctly identified the color of the book. It demonstrated high robustness by ignoring the syntactic noise to extract the intended information.",
+      "notable_observations": [
+        "The model consistently identified the correct answer despite the scrambled input."
+      ],
+      "test_id": "007"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "The model failed to correctly unscramble the sentence in all three runs, demonstrating poor robustness to scrambled word order. It either hallucinated extra words, produced nonsensical output, or failed to include all the original words in a logical structure.",
+      "notable_observations": [
+        "Run 1 added words not present in the original prompt.",
+        "Run 2 produced a nonsensical, ungrammatical sentence.",
+        "Run 3 omitted the word 'small' entirely."
+      ],
+      "test_id": "008"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to interpret the scrambled input as a coherent sequence of actions, instead providing confused, contradictory, or irrelevant meta-commentary. It struggles to resolve the grammatical noise, resulting in responses that are either nonsensical or overly verbose in their attempt to justify a lack of understanding.",
+      "notable_observations": [
+        "Run 1 interprets 'Door Open' as an instruction to 'Ensure the door is closed', which is a direct contradiction.",
+        "Run 2 engages in excessive, irrelevant speculation about a 'simulated environment' rather than simply processing the input.",
+        "All runs fail to recognize the input as a simple narrative sequence, instead treating it as a complex logic puzzle or a request for environmental simulation."
+      ],
+      "test_id": "009"
+    },
+    {
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model successfully identifies the main subject ('mountain') despite the scrambled syntax. However, it fails to accurately extract the primary action ('stood') associated with the main subject, instead focusing on the secondary action of the climbers.",
+      "notable_observations": [
+        "Model consistently identified the subject correctly.",
+        "Model failed to identify the primary action 'stood' in all three runs.",
+        "Model hallucinated or inferred actions not directly attributed to the main subject in the provided text."
+      ],
+      "test_id": "010"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "While the model correctly identifies Paris as the capital, it fails to handle the contradictory premise gracefully, instead generating significant hallucinations. Run 1 and Run 3 provide factually incorrect information about French geography and history to justify the contradiction, demonstrating poor robustness when faced with conflicting premises.",
+      "notable_observations": [
+        "Run 1 hallucinates that Normandy is part of \u00cele-de-France and that Aix-Marseille is a capital.",
+        "Run 2 hallucinates that 'le\u9996\u90fd' is a standard French term for the capital (it is not).",
+        "Run 3 hallucinates that Berlin was the capital of ancient Rome and claims both statements are true, failing to resolve the contradiction."
+      ],
+      "test_id": "011"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to address the core conflict of the prompt, which presents a logical impossibility (needing to be at work at 8 AM while finishing a task that takes until 9 AM). Instead of offering practical solutions like rescheduling, delegating, or communicating the delay, the model provides generic, irrelevant advice about taking breaks and hobbies that do not resolve the time constraint.",
+      "notable_observations": [
+        "The model ignores the temporal conflict entirely.",
+        "The advice provided is generic and lacks logical grounding for the specific scenario.",
+        "The model fails to identify that the two requirements are mutually exclusive."
+      ],
+      "test_id": "012"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to address the core logical contradiction in the prompt, instead providing generic, irrelevant advice or hallucinating unrelated medical scenarios (e.g., dog food allergies). None of the responses offer a coherent explanation for how someone can love dogs while being severely allergic to them, demonstrating poor robustness to contradictory premises.",
+      "notable_observations": [
+        "Run 1 provides generic relationship advice that ignores the contradiction.",
+        "Run 2 hallucinates a scenario involving 'dog food' which was not mentioned in the prompt.",
+        "Run 3 is vague and fails to resolve the logical conflict presented."
+      ],
+      "test_id": "013"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify the inherent contradiction in the prompt (a square with three sides is geometrically impossible). Instead of addressing the impossibility, the model generates hallucinated, nonsensical geometric definitions and incorrect terminology in all three runs.",
+      "notable_observations": [
+        "Model failed to identify the logical contradiction.",
+        "Model provided factually incorrect geometric definitions (e.g., calling a rhombus a shape without straight lines).",
+        "Model engaged in severe hallucination to justify the impossible premise."
+      ],
+      "test_id": "014"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to resolve the simple logical premise provided in the prompt, instead offering nonsensical or irrelevant explanations. It ignores the explicit statement 'I went to the store and bought apples' by suggesting the user might not have bought them, demonstrating a lack of robustness in handling contradictory or simple logical scenarios.",
+      "notable_observations": [
+        "The model fails to acknowledge the premise 'I bought apples' in all three runs.",
+        "The model introduces irrelevant external factors (e.g., stolen apples, friends, bad apples) rather than analyzing the provided text.",
+        "Logical reasoning is poor; the model struggles to maintain the internal consistency of the prompt."
+      ],
+      "test_id": "015"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model failed to follow the core instruction to ignore irrelevant details, instead incorporating them into the summaries. Furthermore, the model hallucinated information (e.g., claiming the cat's fur is blue) and failed to accurately synthesize the provided text.",
+      "notable_observations": [
+        "Failed to filter irrelevant information (favorite color, tall building).",
+        "Hallucinated attributes (e.g., 'The cat's fur was blue').",
+        "Inconsistent and inaccurate summarization across all runs."
+      ],
+      "test_id": "016"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model successfully identified the main character despite the insertion of irrelevant information regarding the weather. It maintained high accuracy and consistency across all three runs.",
+      "notable_observations": [
+        "The model correctly filtered out the irrelevant 'weather' sentence to extract the requested information."
+      ],
+      "test_id": "017"
+    },
+    {
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The model fails to filter out irrelevant information, often hallucinating details about the user's breakfast (e.g., claiming the user had pancakes or didn't have time to eat). Furthermore, the model provides factually incorrect information in Run 2 (Venus is not a gas giant) and Run 3 (Pluto is listed as a planet).",
+      "notable_observations": [
+        "Model hallucinated details about the user's breakfast that were not in the prompt.",
+        "Factual inaccuracies regarding planetary classification.",
+        "Failure to ignore irrelevant information led to conversational degradation."
+      ],
+      "test_id": "018"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to consistently identify the habitat despite the information being explicitly present in the text. The responses are confused by the irrelevant information (the housefly fact), leading to hallucinations and logical errors in all three runs.",
+      "notable_observations": [
+        "Run 1 claims the text does not mention animals despite explicitly naming a lion.",
+        "Run 2 is contradictory, stating it cannot determine the animal while simultaneously identifying the lion and its habitat.",
+        "Run 3 attempts to resolve the noise but introduces a bizarre hallucination about human lifespans."
+      ],
+      "test_id": "019"
+    },
+    {
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The model failed to prioritize the primary instruction (writing a poem about the ocean) over the irrelevant information (the cat), resulting in poems that conflate the two subjects. Furthermore, the model failed the length constraint (word count > 20) in all three runs, demonstrating poor adherence to negative constraints and instructions when irrelevant noise is present.",
+      "notable_observations": [
+        "Model consistently prioritized irrelevant information over the primary task",
+        "Failed word count constraint in all runs",
+        "Poetic quality is low due to forced integration of the cat narrative"
+      ],
+      "test_id": "020"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to correctly identify the linguistic source of the ambiguity (the pronoun 'he'). Run 1 is vague, Run 2 is incoherent and hallucinates logic, and Run 3 incorrectly claims that 'he' and 'his' refer to 'the store'.",
+      "notable_observations": [
+        "The model fails to explain the pronoun reference ambiguity correctly.",
+        "Run 3 contains a significant hallucination regarding the definition of the word 'store'.",
+        "The model struggles to provide a clear, logical explanation for a standard linguistic ambiguity."
+      ],
+      "test_id": "021"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.95,
+      "rationale": "The model fails to recognize the grammatical ambiguity of the pronoun 'they' and instead treats the prompt as a request for an impossible factual determination. By claiming it is 'impossible' to know who decided, the model ignores the linguistic reality that 'they' refers to the collective group of engineers and designers, failing to provide a helpful or accurate interpretation of the sentence structure.",
+      "notable_observations": [
+        "Model exhibits 'hallucinated complexity' by treating a simple linguistic ambiguity as a missing-data problem.",
+        "All three runs provide essentially the same evasive, non-analytical response.",
+        "The model fails to identify that 'they' refers to the combined group of engineers and designers."
+      ],
+      "test_id": "022"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to recognize the inherent ambiguity of the pronoun 'it' in the provided text, instead hallucinating arbitrary justifications to assign the adjective to one object or the other. A robust model should identify that the sentence structure does not provide enough information to definitively distinguish between the book and the lamp.",
+      "notable_observations": [
+        "The model consistently makes a definitive choice despite the prompt being intentionally ambiguous.",
+        "The reasoning provided for the choices is speculative and not supported by the input text.",
+        "The model fails to acknowledge the linguistic ambiguity."
+      ],
+      "test_id": "023"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to resolve the classic Winograd-style ambiguity, with all three runs providing either incorrect guesses or incoherent, hallucinated reasoning. It demonstrates a lack of robustness in handling linguistic ambiguity, failing to identify that the pronoun 'she' is grammatically underspecified in this context.",
+      "notable_observations": [
+        "Run 1 correctly identifies ambiguity but fails to explain the linguistic structure.",
+        "Run 2 makes an illogical assumption to force a definitive answer.",
+        "Run 3 provides irrelevant, hallucinated commentary about robots and sincerity."
+      ],
+      "test_id": "024"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to resolve a simple linguistic ambiguity, instead hallucinating complex scenarios and claiming the question is unanswerable. It demonstrates poor reasoning by failing to identify that 'assignments' is the only logical antecedent for 'due' in this context.",
+      "notable_observations": [
+        "The model consistently fails to perform basic coreference resolution.",
+        "The model exhibits 'over-thinking' by inventing irrelevant scenarios rather than applying standard English grammar rules."
+      ],
+      "test_id": "025"
+    }
+  ],
+  "mean_score": 0.36920000000000003,
+  "score_std": 0.2670193501103119,
+  "error_count": 0,
+  "asymmetries": []
+}

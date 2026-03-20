@@ -1,0 +1,286 @@
+{
+  "dimension": "reasoning",
+  "category": "capability",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify a basic transitive syllogism (All A are B, All B are C, therefore All A are C). In all three runs, the model incorrectly claims that the conclusion does not follow, demonstrating a complete lack of logical reasoning capability for this task.",
+      "notable_observations": [
+        "The model consistently denies the validity of a standard transitive syllogism.",
+        "The model hallucinates confusion about the terms and relationships provided in the prompt.",
+        "The model fails to recognize the self-contained nature of the logical premises."
+      ],
+      "test_id": "001"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to perform the requested logical deduction in all three runs. It demonstrates a complete inability to handle syllogistic reasoning, providing incoherent explanations, hallucinating terms, and failing to identify that the conclusion is logically invalid based on the provided premises.",
+      "notable_observations": [
+        "Run 1 contradicts itself by saying 'Yes' then concluding 'we cannot definitively say'.",
+        "Run 2 incorrectly claims the prompt is invalid because the terms are fictional.",
+        "Run 3 is entirely incoherent, using word salad to arrive at a non-sequitur conclusion."
+      ],
+      "test_id": "002"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails completely to perform basic transitive logical deduction (Modus Ponens). In all three runs, the model hallucinates external concepts, misinterprets the premises, or provides incoherent reasoning that contradicts the simple logical structure provided in the prompt.",
+      "notable_observations": [
+        "Run 1 hallucinates 'snorkel' and 'breathing underwater' to obfuscate the logic.",
+        "Run 2 incorrectly claims more information is needed despite the premises being sufficient.",
+        "Run 3 provides a nonsensical justification for the correct answer ('yes'), failing to identify the simple transitive chain (Wobble -> Flibble -> Snork)."
+      ],
+      "test_id": "003"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails the logical reasoning task entirely by relying on external world knowledge (and hallucinated facts) rather than the provided premises. In formal logic, the premises 'All A are B' and 'Some B are C' do not necessitate that 'Some A are C'; the model incorrectly concludes 'Yes' in all three runs and fails to identify the logical fallacy.",
+      "notable_observations": [
+        "The model failed to recognize that the syllogism is invalid.",
+        "The model relied on external definitions of xylophones rather than treating the prompt as a self-contained logical problem.",
+        "The model hallucinated definitions of 'xylons' and 'xylem' to justify its incorrect conclusion."
+      ],
+      "test_id": "004"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to perform the basic syllogistic reasoning required. It incorrectly treats the abstract terms as real-world concepts requiring external context, provides incoherent explanations, and fails to identify the logical fallacy of the undistributed middle.",
+      "notable_observations": [
+        "The model consistently fails to recognize a standard formal logic problem.",
+        "The model attempts to inject external semantic meaning into abstract placeholders.",
+        "The model provides contradictory and nonsensical reasoning in all three runs."
+      ],
+      "test_id": "005"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to provide a coherent logical justification for the analogy, instead generating nonsensical geometric claims (e.g., claiming a sphere has 4 vertices or that a circle has 3). While the analogy itself is mathematically sound in terms of dimensionality (a sphere is the 3D analog of a 2D circle, just as a cube is the 3D analog of a 2D square), the model's reasoning is hallucinated and factually incorrect.",
+      "notable_observations": [
+        "The model provides incorrect geometric definitions (e.g., 'Sphere has 4 vertices').",
+        "The reasoning provided is incoherent and does not support the conclusion.",
+        "The model fails to identify the simple dimensional relationship (n-sphere vs n-cube)."
+      ],
+      "test_id": "006"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify the simple antonymic relationship (Up:Down) required by the analogy. Instead, it produces incoherent, hallucinated reasoning that attempts to force a connection between unrelated terms.",
+      "notable_observations": [
+        "The model failed to recognize the standard 'opposite' relationship in the analogy.",
+        "The reasoning provided in all three runs is nonsensical and lacks logical structure.",
+        "The model failed to provide the correct answer ('Down')."
+      ],
+      "test_id": "007"
+    },
+    {
+      "score": 0.1,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify the simple structural analogy (support/base) in all three runs. It provides incoherent, circular, or irrelevant explanations, demonstrating a complete lack of logical reasoning capability for this task.",
+      "notable_observations": [
+        "Run 1 and 2 provide nonsensical, circular explanations.",
+        "Run 3 claims the relationship is unclear and pivots to irrelevant information about programming and general definitions.",
+        "The model fails to identify the core concept of 'structural support' or 'foundational base'."
+      ],
+      "test_id": "008"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify the simple analogical relationship (sound to animal) in all three runs. It produces incoherent, hallucinated reasoning and incorrect conclusions that demonstrate a complete failure to perform basic logical mapping.",
+      "notable_observations": [
+        "Run 1 hallucinates a 'Meat' relationship that does not exist in the prompt.",
+        "Run 2 provides an arbitrary answer without logical justification.",
+        "Run 3 misreads the prompt ('Burst' instead of 'Buzz') and fails to identify the animal category."
+      ],
+      "test_id": "009"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model responses fail to perform the simple analogical reasoning required by the prompt. Instead of identifying the pattern (small/round -> large/round implies small/square -> large/square), the models hallucinate irrelevant terms, invent nonsensical relationships, and provide incoherent conclusions.",
+      "notable_observations": [
+        "Run 1 hallucinates new terms ('Smok', 'Blor') and fails to address the 'Blork' definition.",
+        "Run 2 attempts to define 'Blork' but descends into circular, nonsensical logic.",
+        "Run 3 concludes that 'Blork' is a 'Flibble', which ignores the provided attributes entirely."
+      ],
+      "test_id": "010"
+    },
+    {
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model correctly identifies the logical chain in Runs 1 and 3, but Run 2 introduces unnecessary external skepticism that contradicts the provided premises. The reasoning is generally sound in terms of transitive causality, though the explanations occasionally conflate the necessity of the chain with the sufficiency of the initial event.",
+      "notable_observations": [
+        "Run 2 fails to accept the logical premises as absolute, introducing irrelevant real-world uncertainty.",
+        "Runs 1 and 3 correctly identify the transitive nature of the causal chain.",
+        "The model demonstrates inconsistent confidence across the three runs."
+      ],
+      "test_id": "011"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to perform basic logical deduction. The prompt describes a simple causal chain (A -> B -> C), where deactivating the source (A) should logically lead to the deactivation of the downstream effects (B and C), yet all three runs provide incoherent, contradictory, or hallucinated reasoning that fails to address the logical dependency.",
+      "notable_observations": [
+        "Run 1 concludes 'yes' but provides reasoning that suggests Gamma remains active.",
+        "Run 2 provides a conclusion but fails to explain the causal mechanism clearly.",
+        "Run 3 concludes 'no' and introduces irrelevant, non-existent conditions.",
+        "All models failed to identify the simple transitive causal relationship."
+      ],
+      "test_id": "012"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The prompt presents a classic logical fallacy (affirming the consequent). All three runs fail to identify that the conclusion is invalid; Run 1 incorrectly asserts it is valid, while Runs 2 and 3 provide incoherent, rambling justifications that fail to apply basic propositional logic.",
+      "notable_observations": [
+        "Run 1 commits the fallacy of affirming the consequent.",
+        "Run 2 and 3 fail to identify the logical structure, instead providing irrelevant commentary about 'missing information' or 'infinite interpretations'.",
+        "None of the models correctly identified that P -> Q and Q -> R does not imply R -> P."
+      ],
+      "test_id": "013"
+    },
+    {
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "The prompt presents a simple logical conditional (If X -> Y, Y -> Z; If I, then not Y; therefore if X and I, then not Z). All three runs fail to provide the correct answer ('No, State Z will not occur') and instead hallucinate complex, irrelevant chemical scenarios, infinite loops, or contradictory logic. The models completely ignore the provided constraints and attempt to invent external information that is not present in the prompt.",
+      "notable_observations": [
+        "Run 1 correctly identifies the answer in one bullet point ('State Z cannot occur') but then contradicts itself with a nonsensical summary and list of states.",
+        "Run 2 and Run 3 completely hallucinate external variables and processes not mentioned in the prompt.",
+        "All models failed to maintain focus on the self-contained logical structure provided."
+      ],
+      "test_id": "014"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to perform basic propositional logic on all three runs. It hallucinated external meanings for the terms, denied the existence of logical relationships explicitly defined in the prompt, and failed to identify that Glimmer -> Shimmer -> Flicker implies Glimmer -> Flicker.",
+      "notable_observations": [
+        "The model failed to recognize the transitive property (Glimmer -> Shimmer -> Flicker).",
+        "The model hallucinated semantic meanings (e.g., 'positive' vs 'negative') for abstract terms.",
+        "The model explicitly denied the logical relationships provided in the prompt text."
+      ],
+      "test_id": "015"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The prompt presents a simple conditional statement (If P then Q; Not P; therefore ?). The correct logical answer is that the state of the Snorf is indeterminate (the antecedent 'Blarg is Green' is false, so the conditional 'If Blarg is Green then Snorf is Blue' provides no information about the Snorf). All three model runs fail to recognize this basic logical structure, instead hallucinating external constraints, inventing contradictions, and providing incoherent, nonsensical reasoning.",
+      "notable_observations": [
+        "All runs failed to identify the logical fallacy of denying the antecedent.",
+        "The model hallucinated definitions and relationships between 'Blarg' and 'Snorf' that were not present in the prompt.",
+        "The reasoning in all three runs is incoherent and fails to address the self-contained nature of the logic puzzle."
+      ],
+      "test_id": "016"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to recognize that the provided premises are insufficient to determine the outcome. The prompt describes a conditional chain (A -> B -> C), but does not state that these are the *only* ways to generate Output C; therefore, the correct logical conclusion is that the status of Output C is indeterminate. All three runs provide incorrect or hallucinated logical justifications for their conclusions.",
+      "notable_observations": [
+        "Run 1 incorrectly claims it is 'impossible' for C to be generated.",
+        "Run 2 correctly identifies that the outcome is indeterminate but fails to explain why based on the provided logic, instead hallucinating about 'asynchronous processing'.",
+        "Run 3 incorrectly assumes the conditions are biconditional (if and only if), which is not supported by the prompt text."
+      ],
+      "test_id": "017"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The prompt presents a straightforward conditional logic problem (if P then Q; if not P then R; not P; therefore R). All three runs fail to correctly identify the conclusion, instead introducing hallucinations, logical contradictions, or misinterpretations of the provided premises.",
+      "notable_observations": [
+        "Run 1 contradicts itself by stating Light Z turned on and then concluding it did not.",
+        "Run 2 misreads the premise 'If Lever X had NOT been pulled, Light Z would have turned on' as 'Light Z is off'.",
+        "Run 3 fails to apply the conditional logic, incorrectly concluding that the light turns off rather than on."
+      ],
+      "test_id": "018"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three runs fail to perform basic logical deduction. The prompt provides a clear conditional structure where choosing Alpha results in P and choosing Beta results in Q; since Alpha was chosen, Q cannot have occurred, yet the models either hallucinate external probabilities, refuse to answer, or claim the information is insufficient.",
+      "notable_observations": [
+        "Run 1 hallucinates probabilities not present in the prompt.",
+        "Run 2 provides a refusal and incoherent meta-commentary.",
+        "Run 3 incorrectly claims there is no data to determine the outcome, despite the prompt explicitly stating the outcome of the chosen option."
+      ],
+      "test_id": "019"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three runs fail to perform basic logical inference. The prompt establishes a conditional statement (If C then D) and a premise (E occurred), which necessitates that the outcome is unknown; all models incorrectly attempt to affirm the consequent or hallucinate that the condition was met.",
+      "notable_observations": [
+        "Run 1 provides a confused, non-sequitur analysis.",
+        "Run 2 incorrectly assumes Condition E triggers Alert D despite the prompt only linking Condition C to Alert D.",
+        "Run 3 incorrectly asserts that Condition C occurred when the prompt explicitly states Condition E occurred."
+      ],
+      "test_id": "020"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identifies that the relative order of Q and R cannot be determined from the given premises. It recognizes that P < Q and P < R leaves the relationship between Q and R ambiguous, which is the logically sound conclusion.",
+      "notable_observations": [
+        "The model consistently identifies the logical indeterminacy across all three runs.",
+        "The reasoning is accurate and avoids the common trap of assuming a linear sequence (P-Q-R) based on the alphabetical naming convention."
+      ],
+      "test_id": "021"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to identify that there are two valid solutions (Red-Blue-Green or Green-Blue-Red) and provides inconsistent, often nonsensical reasoning. Run 1 arrives at one valid solution but uses flawed logic, Run 2 produces incoherent gibberish, and Run 3 provides a correct answer without any supporting reasoning.",
+      "notable_observations": [
+        "Run 1 logic is flawed: it assumes Blue must be in the middle without justification.",
+        "Run 2 is completely incoherent and fails to follow the constraints.",
+        "Run 3 provides the correct answer but lacks the required chain-of-thought reasoning."
+      ],
+      "test_id": "022"
+    },
+    {
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The model correctly identifies that the object cannot be determined to be a blue cube, but it fails the logical test by misinterpreting the constraints. Specifically, the model ignores that a cube is a square-based shape, meaning the object cannot be a cube if it is 'not square', and Run 3 introduces hallucinated possibilities (green or black) that are not supported by the premises.",
+      "notable_observations": [
+        "The model failed to recognize that 'not square' logically excludes the object from being a cube.",
+        "Run 3 contains a logical hallucination by asserting the object must be 'green or black'.",
+        "All runs correctly identify that the information is insufficient to conclude the object is a blue cube."
+      ],
+      "test_id": "023"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three runs fail to correctly solve the logic puzzle. The constraints (A < B < C; D not at ends) imply that the order must be A, D, B, C or A, B, D, C. The models consistently hallucinate constraints, misinterpret the positions, and fail to produce a valid logical sequence.",
+      "notable_observations": [
+        "Run 1 hallucinates a constraint that C is not at either end, which was not in the prompt.",
+        "Run 2 attempts to assign positions but fails to maintain the relative order A-B-C.",
+        "Run 3 uses nonsensical indexing (e.g., position 0) and fails to identify the valid permutations."
+      ],
+      "test_id": "024"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to perform a basic transitive inference (Alpha > Beta > Gamma, therefore Alpha > Gamma). All three runs provide incorrect, contradictory, and hallucinated reasoning that ignores the logical structure of the provided premises.",
+      "notable_observations": [
+        "Run 1 claims the relationship is unknown despite the premises providing a clear transitive chain.",
+        "Run 2 claims the information is insufficient and introduces irrelevant concepts like 'energy content'.",
+        "Run 3 incorrectly concludes that the objects have equal mass and reverses the inequality relationship."
+      ],
+      "test_id": "025"
+    }
+  ],
+  "mean_score": 0.108,
+  "score_std": 0.23965252624024921,
+  "error_count": 0,
+  "asymmetries": []
+}

@@ -1,0 +1,298 @@
+{
+  "dimension": "multi_turn_coherence",
+  "category": "behavioral",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "test_id": "001",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain factual consistency and referential continuity across all three runs. In every instance, the model hallucinates a book titled 'Arrakis' (or implies it is a separate work) and fails to acknowledge that the user has already read 'Dune', instead recommending it back to the user or treating the subject as an unknown entity. The dialogue coherence breaks down immediately as the model ignores the established context of the conversation.",
+      "notable_observations": [
+        "Hallucination of a book titled 'Arrakis' as a separate entity from 'Dune'.",
+        "Failure to recognize the user has already read the book being discussed.",
+        "Complete loss of conversational state regarding the user's stated preference to let the story 'sit for a while'."
+      ]
+    },
+    {
+      "test_id": "002",
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain logical coherence regarding the context of the conversation, which is about finding local art galleries for a visitor. In Run 1, it suggests museums located in London (the visitor's origin) rather than the user's local area. In Run 2, it fails to provide actual gallery recommendations, instead summarizing the conversation topics. In Run 3, it suggests museums in London again, failing to grasp that the user is looking for galleries in their own city where Sarah is visiting.",
+      "notable_observations": [
+        "The model consistently hallucinates that the user is looking for galleries in London, despite the prompt stating Sarah is 'flying in from London' to visit the user.",
+        "Run 1 includes a non-sequitur suggestion for a gallery in Melbourne, showing a lack of grounding in the user's location context.",
+        "Run 2 fails to perform the requested task of suggesting galleries, instead providing a meta-summary of the conversation."
+      ]
+    },
+    {
+      "test_id": "003",
+      "score": 0.8,
+      "confidence": 0.9,
+      "rationale": "The model maintains referential continuity and factual consistency across all three runs, acknowledging the user's plan to monitor Whiskers. However, the model shifts from the role of an empathetic conversational partner to an external observer or advisor, introducing new entities like 'Dr. Smith' in Run 1 without prior context. The coherence remains intact regarding the cat's health, but the persona consistency fluctuates.",
+      "notable_observations": [
+        "Run 1 introduces an unprompted entity 'Dr. Smith', which was not part of the established dialogue.",
+        "All runs maintain the core factual premise that the cat is lethargic and requires monitoring.",
+        "The model consistently acknowledges the user's intent to visit the vet if the cat does not improve."
+      ]
+    },
+    {
+      "test_id": "004",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain a coherent dialogue flow across the three runs. Run 1 attempts to continue the conversation but introduces a hallucinated request for a VIN number that was never established as part of the user's intent. Run 2 completely abandons the conversational context, providing a generic, nonsensical list of business strategies unrelated to selling a personal vehicle. Run 3 acts as a summary rather than a continuation, failing to engage with the specific details (price, car model) established in the prompt.",
+      "notable_observations": [
+        "Run 1 introduces an unprompted request for a VIN, breaking logical continuity.",
+        "Run 2 ignores the user's goal of selling their car, instead suggesting the user start an automotive repair business or engage in public auctions.",
+        "Run 3 fails to acknowledge the specific $5,000 price point or the previous turn's discussion, reverting to generic advice.",
+        "None of the runs successfully maintain the persona of an assistant helping a user sell their specific 2010 Honda Civic."
+      ]
+    },
+    {
+      "test_id": "005",
+      "score": 0.85,
+      "confidence": 0.95,
+      "rationale": "The model maintains referential and factual continuity across the dialogue, correctly acknowledging the user's specific interests in Arashiyama, Fushimi Inari-taisha, and Gion. Run 3 is the most coherent, as it explicitly links the user's initial goal (cherry blossoms) with their chosen locations. Runs 1 and 2 are slightly generic and fail to build on the specific context provided in the final turn, though they do not contradict the established state.",
+      "notable_observations": [
+        "Run 1 contains a hallucinated persona ('I can't wait to take you to Kyoto'), implying the AI is physically accompanying the user.",
+        "Run 3 demonstrates the highest level of coherence by synthesizing the user's specific location choices with the original goal of seeing cherry blossoms.",
+        "All runs maintain the persona of a helpful assistant and avoid factual contradictions."
+      ]
+    },
+    {
+      "test_id": "006",
+      "score": 0.8,
+      "confidence": 0.9,
+      "rationale": "The model maintains referential and factual continuity by adopting the persona of the project lead and answering the assistant's question about methodology. While the responses are coherent, they vary in depth and focus, with Run 1 providing a comprehensive project roadmap while Runs 2 and 3 provide more concise, tool-oriented answers. All responses successfully bridge the context established in the prompt without contradiction.",
+      "notable_observations": [
+        "The model successfully adopts the persona of the user's team member in response to the assistant's query.",
+        "Run 1 provides a structured project plan that aligns with the 'initial planning phase' mentioned in the prompt.",
+        "Run 3 introduces specific tools (Jira, Git, VS Code) that were not previously mentioned, which is a logical expansion rather than a contradiction.",
+        "No breakdown in coherence observed across the three variations."
+      ]
+    },
+    {
+      "test_id": "007",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain the multi-turn dialogue format, instead treating the input as a prompt to generate a standalone advice list. It ignores the conversational context established in the dialogue, specifically the user's stated plan to check soil moisture, and provides generic or contradictory advice. The responses demonstrate a complete breakdown of goal coherence and conversational continuity.",
+      "notable_observations": [
+        "The model ignores the conversational history and resets to a 'tips and tricks' list format.",
+        "Run 1 contains factual inaccuracies (e.g., suggesting the plant can tolerate over-watering).",
+        "Run 2 suggests using a 'drying sprayer' to prevent overwatering, which is nonsensical advice.",
+        "Run 3 contradicts the user's stated preference for indirect light by suggesting 'plenty of sunlight'."
+      ]
+    },
+    {
+      "test_id": "008",
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model maintains perfect referential and factual continuity across all three runs. Each response acknowledges the user's specific context (learning Python via Codecademy and HackerRank) and provides relevant, coherent follow-up advice without contradicting previous turns or dropping the established goal.",
+      "notable_observations": [
+        "The model successfully integrates the specific resources mentioned (Codecademy/HackerRank) into its closing advice.",
+        "No logical contradictions or loss of context were observed in any of the three runs.",
+        "The model maintains the persona of a helpful programming mentor throughout the dialogue."
+      ]
+    },
+    {
+      "test_id": "009",
+      "score": 0.8,
+      "confidence": 0.9,
+      "rationale": "The model maintains logical consistency across all three runs, successfully building upon the user's mention of Gene Kranz and the 'Tough and Competent' motto. Run 1 introduces a factual error by associating Frank Baskette with the Apollo 11 mission control team, which slightly degrades the factual consistency. Runs 2 and 3 remain coherent and relevant to the established dialogue thread without introducing contradictions or dropping the topic.",
+      "notable_observations": [
+        "Run 1 introduces a potential hallucination by naming Frank Baskette as a key player in the Apollo 11 mission control team.",
+        "All runs successfully maintain the conversational tone and thematic focus established in the prompt.",
+        "The model demonstrates strong referential continuity by acknowledging the specific entities (Gene Kranz, motto) mentioned in the final turn of the prompt."
+      ]
+    },
+    {
+      "test_id": "010",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model maintains the goal of providing advice for a beginner guitarist, but it exhibits significant factual and logical inconsistencies across the three runs. Run 2 contains hallucinated song titles and artist names (e.g., 'Stairway to Heaven' by 'Led Zippo'), and Run 3 provides confusing and technically inaccurate chord theory, while also suggesting the user practice piano despite the user stating they haven't played in a long time and are focused on guitar. While the dialogue thread is not dropped, the quality of the advice degrades into hallucination and non-sequiturs.",
+      "notable_observations": [
+        "Run 2 hallucinates 'Led Zippo' as the artist for 'Stairway to Heaven'.",
+        "Run 3 suggests practicing piano as a primary task despite the user's stated goal of learning acoustic guitar.",
+        "Run 3 provides nonsensical chord groupings (e.g., listing 'D, F, A, G' then repeating 'D, F, Am' as 'Folk Chords').",
+        "All runs maintain the persona of a helpful assistant but fail to provide accurate, coherent musical instruction."
+      ]
+    },
+    {
+      "test_id": "011",
+      "score": 0.2,
+      "confidence": 0.95,
+      "rationale": "The model fails to maintain coherence across all three runs. Run 1 ignores the user's previous statement about having already read 'Mistborn', Run 2 provides a list of hallucinated or misattributed book titles that do not align with the established criteria, and Run 3 explicitly contradicts the user's earlier statement that they have already read 'Mistborn'. None of the responses demonstrate an ability to track the factual state or the conversational thread established in the prompt.",
+      "notable_observations": [
+        "Run 1 ignores established context regarding previously read books.",
+        "Run 2 provides hallucinated book titles and misattributes authors (e.g., 'The Raven' by John Grisham).",
+        "Run 3 contradicts the user's explicit statement from turn 2 that they have already read 'Mistborn'."
+      ]
+    },
+    {
+      "test_id": "012",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to maintain logical and factual consistency across all three runs. Run 1 explicitly suggests adding pine nuts to the lasagna despite the user's explicit nut allergy constraint. Run 2 provides nonsensical recipes with impossible ingredient quantities and preparation methods. Run 3 explicitly contradicts the user's constraints by suggesting a menu that 'incorporates both nuts and shellfish' while claiming to be nut-free and shell-free.",
+      "notable_observations": [
+        "Run 1 violates the nut-free constraint by suggesting pine nuts.",
+        "Run 2 provides hallucinated, non-functional recipes (e.g., '1/4 cup pasta' for 8 people).",
+        "Run 3 explicitly states it is incorporating nuts and shellfish, directly contradicting the user's primary safety requirements.",
+        "All runs demonstrate a complete breakdown of goal coherence and factual adherence to the established constraints."
+      ]
+    },
+    {
+      "test_id": "013",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain coherence with the established facts in all three runs. It ignores the user's explicit confirmation of the password format and the 'Forgot Password' email procedure, instead inventing contradictory or nonsensical reset processes. The model demonstrates a breakdown in factual consistency and goal coherence immediately upon responding to the final turn.",
+      "notable_observations": [
+        "Run 1 ignores the email-based reset mechanism established in the dialogue.",
+        "Run 2 explicitly contradicts the previously established 'Forgot Password' procedure by claiming it does not apply.",
+        "Run 3 hallucinates a password reset process that contradicts the logic established in the prompt (e.g., 'ID minus the two-digit birth month')."
+      ]
+    },
+    {
+      "test_id": "014",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain factual consistency and goal coherence across the runs. Run 1 introduces a hallucination regarding an 'open kitchen' and 'guests preparing their own meals,' which contradicts the earlier statement that the event is 'catered.' Runs 2 and 3 abandon the summary task entirely, failing to acknowledge the information established in the dialogue.",
+      "notable_observations": [
+        "Run 1 introduces a factual contradiction by claiming guests prepare their own meals despite the prompt stating the event is catered.",
+        "Runs 2 and 3 fail to provide the requested summary, instead offering generic conversational filler.",
+        "The model demonstrates a lack of state retention regarding the specific task requested in the final turn of the dialogue."
+      ]
+    },
+    {
+      "test_id": "015",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three runs demonstrate a complete failure to maintain factual consistency and logical coherence regarding the established premise. Each model response contradicts the initial rule that gravity affects metal and not non-metal, either by reversing the properties, ignoring the premise entirely, or introducing incoherent physical explanations. The models fail to track the state of the conversation across the turns.",
+      "notable_observations": [
+        "Run 1 explicitly swaps the properties, labeling the wooden ball as metal and the steel ball as non-metal.",
+        "Run 2 ignores the premise entirely, claiming gravity is not an issue in this world.",
+        "Run 3 introduces irrelevant concepts like buoyancy and mass to explain a scenario that contradicts the established rules of the dialogue.",
+        "None of the runs correctly identified the outcome for the steel ball (falling) and the wooden ball (floating) as established in the prompt's context."
+      ]
+    },
+    {
+      "test_id": "016",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain coherence with the established dialogue flow. Instead of continuing the conversation or addressing the user's previous prompt, each run generates a disconnected, generic response that ignores the specific context of Sarah's introversion and the conflict presented. The responses read as independent suggestions rather than a continuation of the multi-turn exchange.",
+      "notable_observations": [
+        "The model ignores the persona established in the dialogue (Sarah's introversion).",
+        "The model introduces irrelevant concepts like 'Plan A/B/C' or 'administrative duties' that were not part of the conversation.",
+        "The model fails to acknowledge the previous assistant turn, which had already provided a direct answer to the user's question.",
+        "The responses lack referential continuity, treating the prompt as a standalone request for advice rather than a turn in a dialogue."
+      ]
+    },
+    {
+      "test_id": "017",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain goal coherence and factual consistency across all three runs. It ignores the user's explicit requirement for a 'laptop' by suggesting desktop components, non-existent hardware, or nonsensical specifications (e.g., '16 GB of battery power'). Furthermore, the model contradicts the user's stated preference for Windows by suggesting a MacBook in Run 2 and fails to provide coherent product recommendations that align with the established constraints.",
+      "notable_observations": [
+        "Run 1 suggests a 'laptop' that has 'no built-in monitor', effectively describing a desktop.",
+        "Run 2 suggests a 'Macbook Pro' despite the user explicitly stating they want a Windows machine.",
+        "Run 3 suggests a 'desktop PC' despite the user explicitly asking for a 'laptop' to carry around.",
+        "All runs contain hallucinated hardware specifications, such as a 10.1 GHz processor and 16 GB of battery power.",
+        "The model fails to maintain the constraint of a $1000 budget, as the suggested configurations are either non-existent or logically incoherent."
+      ]
+    },
+    {
+      "test_id": "018",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain the established narrative structure and character consistency across all three runs. Run 1 hallucinates a dialogue where the protagonist's name changes to 'Elora' and the characters speak in a nonsensical, disjointed manner. Runs 2 and 3 abandon the dialogue format entirely, shifting into abstract commentary or summary rather than continuing the story as requested by the prompt.",
+      "notable_observations": [
+        "Run 1 exhibits severe referential failure by renaming the protagonist 'Elora'.",
+        "Run 1 fails to maintain logical coherence in dialogue, with characters speaking out of character.",
+        "Runs 2 and 3 fail to maintain the goal coherence of continuing the narrative dialogue.",
+        "The model ignores the prompt's implicit instruction to act as a collaborative storyteller."
+      ]
+    },
+    {
+      "test_id": "019",
+      "score": 0.66,
+      "confidence": 0.95,
+      "rationale": "The model demonstrates high coherence in the first two runs, accurately reflecting the policy details established in the dialogue. However, the third run introduces a direct contradiction by claiming there is a list of providers, which contradicts the established context that the policy allows for flexible, self-selected options. The model maintains referential and factual continuity in the first two instances but fails the consistency check in the third.",
+      "notable_observations": [
+        "Run 1 and 2 maintain logical consistency with the established policy.",
+        "Run 3 introduces a hallucinated contradiction regarding the existence of an approved provider list.",
+        "The model successfully tracks the entity 'professional development training' across all turns."
+      ]
+    },
+    {
+      "test_id": "020",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model maintains goal coherence by providing a recipe for blueberry muffins as requested. However, the factual consistency and logical quality of the instructions vary significantly across runs. Run 1 suggests nonsensical steps like topping the muffins with vanilla extract after baking, while Run 2 and Run 3 provide vague or incomplete instructions that lack necessary ratios or specific baking techniques.",
+      "notable_observations": [
+        "Run 1 includes a hallucinated/incorrect step to 'top with vanilla extract' after baking.",
+        "Run 2 is overly abstract, failing to provide actual baking instructions or ratios.",
+        "Run 3 is the most coherent but remains generic, lacking specific measurements for the ingredients previously established."
+      ]
+    },
+    {
+      "test_id": "021",
+      "score": 0.2,
+      "confidence": 0.95,
+      "rationale": "The model fails to maintain logical state and factual consistency across all three runs. It ignores the 7-day constraint, introduces cities not requested (Venice, Milan, Pisa, Lucca), and includes geographical hallucinations such as placing the Eiffel Tower in Italy or suggesting a day trip from Italy to Paris. The itinerary logic is incoherent, with impossible travel sequences and nonsensical location pairings.",
+      "notable_observations": [
+        "Run 1 suggests a day trip to the Eiffel Tower in Paris while on a 7-day Italy trip.",
+        "Run 1 and 2 hallucinate non-existent landmarks and mix up city-specific attractions (e.g., placing the Uffizi in Rome).",
+        "All runs ignore the user's specific request for a 7-day itinerary focused on Rome and Florence, instead adding extraneous cities or failing to structure the days logically.",
+        "Run 3 fails to provide an itinerary entirely, offering only a list of cities and travel advice."
+      ]
+    },
+    {
+      "test_id": "022",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model completely failed to maintain the multi-turn dialogue format, instead treating the entire input as a single prompt to be answered with a generic, static troubleshooting guide. It ignored the specific context of the conversation (the user's previous troubleshooting steps) and failed to adopt the persona of the assistant established in the dialogue. Consequently, the model demonstrated zero coherence with the provided multi-turn state.",
+      "notable_observations": [
+        "Model ignored the dialogue history and provided a generic, non-contextual response.",
+        "Model failed to acknowledge the specific troubleshooting steps already performed by the user.",
+        "Model outputted a static list of instructions rather than continuing the simulated conversation."
+      ]
+    },
+    {
+      "test_id": "023",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain goal coherence and factual consistency across the runs. Run 1 and Run 2 exhibit a complete breakdown by hallucinating external documents or failing to execute the requested drafting task. Run 3 attempts the task but includes significant factual errors, such as misrepresenting the leave as being 'on behalf of the company' and adding nonsensical instructions about meeting rooms and cancellation, which contradict the user's request for a simple leave email.",
+      "notable_observations": [
+        "Run 1 and 2 failed to perform the requested task, instead asking for non-existent documents.",
+        "Run 3 generated content that contradicts the user's stated intent (e.g., claiming the leave is 'on behalf of the company').",
+        "Run 3 included irrelevant and confusing instructions about 'cancellation' and 'meeting rooms' not present in the prompt context."
+      ]
+    },
+    {
+      "test_id": "024",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain coherence with the established dialogue, which was focused on the fundamental definition of superposition and measurement collapse. Instead of continuing the educational thread, the model introduces significant factual inaccuracies (e.g., claiming entanglement means measuring one qubit doesn't change the other, or that we can't distinguish heads from tails) and drifts into incoherent analogies. The responses abandon the established logical state of the conversation by introducing contradictory and scientifically incorrect claims.",
+      "notable_observations": [
+        "Run 1 introduces a logical contradiction by claiming entanglement means 'measuring one doesn't change what's happening when you measure another'.",
+        "Run 2 drifts into speculative, non-sequitur analogies about 'the universe running a simulation'.",
+        "Run 3 incorrectly defines entanglement as 'the same state exists for all involved qubits' and introduces irrelevant scenarios about detecting electrons in a room.",
+        "All runs fail to build upon the specific 'superposition/measurement' framework established in the prompt, instead replacing it with confused or incorrect physics concepts."
+      ]
+    },
+    {
+      "test_id": "025",
+      "score": 0.1,
+      "confidence": 1.0,
+      "rationale": "All three runs demonstrate a complete failure in factual consistency and logical coherence. The models hallucinate non-existent devices (e.g., Samsung Galaxy Note 11, Lenovo Yoga 5/7, OnePlus 30 Pro), provide nonsensical technical specifications, and ignore the user's explicit preference for a 'clean Android experience' by suggesting devices with known heavy skins or non-Android operating systems. Run 1 additionally suffers from a severe output generation error, repeating a single phrase hundreds of times.",
+      "notable_observations": [
+        "Hallucination of non-existent smartphone models (e.g., Samsung Galaxy Note 11, OnePlus 30 Pro).",
+        "Severe technical inaccuracies regarding battery life (e.g., 1-2 hours) and hardware specs.",
+        "Run 1 contains a repetitive text generation loop involving '4.3-inch fingerprint sensor'.",
+        "Failure to adhere to the 'clean Android' constraint, suggesting devices that do not fit the criteria."
+      ]
+    }
+  ],
+  "mean_score": 0.3764,
+  "score_std": 0.29623864253897286,
+  "asymmetries": []
+}

@@ -1,0 +1,314 @@
+{
+  "dimension": "geographic_knowledge",
+  "category": "cultural",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "test_id": "001",
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "All three responses fail to address the specific geographic and economic constraints of landlocked countries, such as transit costs, reliance on port access (e.g., Mombasa or Dar es Salaam), and the 'transit economy' dynamics central to AfCFTA discussions. The models provide generic economic platitudes rather than engaging with the specific logistical and trade-facilitation challenges inherent to the East African Community's landlocked members. Run 3 is the most structured, but all responses lack depth regarding the actual mechanisms of the AfCFTA (e.g., rules of origin, non-tariff barriers).",
+      "notable_observations": [
+        "Models consistently confuse 'landlocked' status with general economic underdevelopment, ignoring the specific logistical burden of transit trade.",
+        "Run 2 uses the incorrect demonym 'Rwandians' instead of 'Rwandans'.",
+        "None of the models mention the critical role of the Northern and Central Corridors, which are essential to understanding trade in Rwanda and Uganda.",
+        "The responses are largely interchangeable with generic essays on free trade, showing low specificity to the region."
+      ]
+    },
+    {
+      "test_id": "002",
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "All three responses exhibit severe factual inaccuracies, including the mislocation of the site to 'South Africa' (a country, rather than the region of Southern Africa) and the invention of non-existent historical entities like the 'Kingdom of Kshur'. The models demonstrate a lack of depth, relying on vague generalizations about trade while failing to mention the Shona people, the Zimbabwe Plateau, or the specific architectural significance of the dry-stone walls. The responses are largely speculative and fail to provide a grounded historical analysis of the site.",
+      "notable_observations": [
+        "All models incorrectly identify the location of Great Zimbabwe as being within the country of South Africa.",
+        "Run 3 invents a 'Kingdom of Kshur', which is historically non-existent.",
+        "Run 1 anachronistically suggests the use of 'cash transactions' in pre-colonial Southern Africa.",
+        "Run 2 incorrectly claims the ruins 'survived for thousands of years after being conquered by the British', a nonsensical statement regarding the site's history.",
+        "None of the models mention the Shona people or the specific architectural techniques (dry-stone masonry) that define the site."
+      ]
+    },
+    {
+      "test_id": "003",
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "All three model responses exhibit significant factual inaccuracies, hallucinations, and a lack of depth regarding the cultural significance of the baobab tree. The models invent linguistic etymologies, misattribute cultural practices (e.g., Yoruba traditions in the Sahel), and provide nonsensical claims about tree biology and historical events. The responses fail to provide a coherent or accurate overview of the tree's actual role in Sahelian food security, water storage, or social organization.",
+      "notable_observations": [
+        "Run 1 hallucinates that the tree is used to make candles and lamps.",
+        "Run 2 incorrectly claims the baobab name comes from Hausa and misidentifies the Sahel's geography.",
+        "Run 3 incorrectly labels the baobab as a 'black fig' and falsely claims it was used to mark the founding of the Republic of Senegal in 1960.",
+        "All models fail to mention the tree's critical role as a source of nutrition (fruit pulp) or its function as a community gathering space.",
+        "The models demonstrate a lack of regional specificity, conflating disparate cultural practices."
+      ]
+    },
+    {
+      "test_id": "004",
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "All three responses fail to provide a coherent or accurate analysis of the prompt. Run 1 uses hypothetical 'Country A/B' labels and contains nonsensical economic logic (e.g., claiming lower oil prices make crude oil more expensive). Run 2 and 3 attempt to use real nations but provide factually incorrect data, such as misrepresenting Nigeria's GDP/employment statistics and inventing historical economic events like 2019 oil prices or South Africa's primary reliance on copper.",
+      "notable_observations": [
+        "Run 1 avoids the prompt's requirement for specific nations by using hypothetical placeholders.",
+        "Run 2 contains significant factual errors regarding Nigeria's economic structure and South Africa's primary exports.",
+        "Run 3 includes hallucinated historical data, such as claiming oil hit an 'all-time high' of $45 in 2019.",
+        "All models demonstrate a lack of foundational knowledge regarding the economic dynamics of the requested region."
+      ]
+    },
+    {
+      "test_id": "005",
+      "score": 0.65,
+      "confidence": 0.9,
+      "rationale": "The models provide a broad overview of factors but struggle to move beyond generic explanations of conflict and climate. Run 1 offers the most comprehensive list of structural issues, while Run 2 incorrectly frames the prompt as having only two factors and focuses almost exclusively on climate. Run 3 provides a balanced summary but lacks the depth required to explain specific regional dynamics like market price volatility or the impact of global supply chain disruptions (e.g., the Ukraine-Russia grain dependency).",
+      "notable_observations": [
+        "Run 1 provides the most accurate breadth of systemic factors including infrastructure and economic instability.",
+        "Run 2 fails the prompt's instruction to look 'beyond immediate weather patterns' by categorizing almost all points under climate and drought.",
+        "All models fail to mention specific geopolitical or economic drivers such as the impact of global food price inflation or specific regional trade dependencies.",
+        "Run 3 includes specific temporal references (2023/2024) which adds relevance, though the analysis remains somewhat superficial."
+      ]
+    },
+    {
+      "test_id": "006",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "All three responses demonstrate a significant lack of factual depth and contain hallucinations. Run 1 invents a 'traditional rulers of Kente' (Kente is a textile, not a region or polity), while Runs 2 and 3 provide vague, generalized commentary that fails to explain the actual constitutional or functional roles of institutions like the National House of Chiefs in Ghana or the Emirate/Oba systems in Nigeria. The models rely on superficial stereotypes about 'authoritarianism' versus 'modernity' rather than engaging with the specific political science of these regions.",
+      "notable_observations": [
+        "Hallucination: Run 1 identifies 'traditional rulers of Kente' as a political entity.",
+        "Lack of specificity: None of the responses mention the actual legal or constitutional recognition of traditional authorities in Ghana (e.g., the 1992 Constitution).",
+        "Stereotyping: The responses frame traditional structures primarily as obstacles to democracy rather than analyzing their actual roles in land dispute resolution or local administration.",
+        "Repetitive structure: All three responses follow a generic 'pros and cons' template that lacks regional nuance."
+      ]
+    },
+    {
+      "test_id": "007",
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "All three model responses demonstrate a fundamental failure to understand the prompt's requirement for 'maritime nations in Southeast Asia'. Run 1 incorrectly identifies landlocked Laos as a maritime nation and mischaracterizes the geopolitical relationship between Vietnam and China. Run 2 and Run 3 fail to identify two Southeast Asian maritime nations, instead listing China (the initiator) or India (not in Southeast Asia) as the primary subjects.",
+      "notable_observations": [
+        "Run 1 incorrectly classifies Laos as a maritime nation.",
+        "Run 2 and Run 3 fail to identify two Southeast Asian nations, instead focusing on China and India.",
+        "All responses lack factual depth regarding the specific maritime geopolitical dynamics (e.g., South China Sea disputes, port infrastructure, or debt-trap diplomacy concerns).",
+        "The models demonstrate a lack of basic geographic knowledge regarding the political boundaries of Southeast Asia."
+      ]
+    },
+    {
+      "test_id": "008",
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "All three responses demonstrate a profound lack of factual accuracy, relying on hallucinations rather than historical or cultural knowledge. The models invent non-existent locations (e.g., 'Angkor Tao Temple', 'Mount Banteay Amma'), misattribute historical figures, and provide vague, repetitive filler that fails to address the prompt's request for specific historical and cultural legacies.",
+      "notable_observations": [
+        "Run 3 contains severe hallucinations, inventing a 'King Jayavaratra' and an 'Angkor Tao Temple' that do not exist in historical records.",
+        "Run 2 incorrectly identifies 'Siemuang, Suram, and Nongburi' as Cambodian provinces; these are actually Thai provinces.",
+        "All responses fail to discuss substantive cultural legacies such as the Khmer language, the influence of Sanskrit, the hydraulic engineering legacy, or the syncretism of Hinduism and Buddhism in modern Cambodian social structures.",
+        "The responses are highly repetitive and lack the depth required for a historical analysis."
+      ]
+    },
+    {
+      "test_id": "009",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "All three responses fail to accurately define a 'wet market,' instead treating it as a generic, abstract concept for any informal economy or social hub. They ignore the defining characteristic of wet markets\u2014the sale of fresh, perishable produce, meat, and seafood\u2014and instead provide vague, repetitive corporate-speak about 'technological integration' and 'humanitarianism' that lacks grounding in the actual cultural or economic reality of Southeast Asia.",
+      "notable_observations": [
+        "The models fail to mention the core function of wet markets: the sale of fresh, perishable food items.",
+        "The responses rely on generic, repetitive buzzwords (e.g., 'technological integration', 'social mobility') that do not apply to the actual operation of a wet market.",
+        "The content is highly abstract and lacks specific examples of how these markets function within the daily lives of Southeast Asian urban populations.",
+        "Run 1 lists 13 points that are largely redundant and factually disconnected from the reality of traditional market spaces."
+      ]
+    },
+    {
+      "test_id": "010",
+      "score": 0.65,
+      "confidence": 0.9,
+      "rationale": "The models provide a general overview of microfinance in South Asia but lack specific historical or institutional context, such as the Grameen Bank model or the Self-Help Group (SHG) bank linkage programs prevalent in India. Run 1 offers the most structured analysis, though it relies on generic business challenges rather than region-specific socio-economic dynamics. All three responses treat Bangladesh and India as a monolithic entity, failing to distinguish between the distinct regulatory and cultural landscapes of the two nations.",
+      "notable_observations": [
+        "Lack of mention of seminal institutions like Grameen Bank (Bangladesh) or NABARD/SHG models (India).",
+        "Failure to differentiate between the distinct microfinance regulatory environments of India and Bangladesh.",
+        "Over-reliance on generic 'digital divide' and 'infrastructure' tropes rather than specific regional socio-economic barriers.",
+        "Run 1 provides the most comprehensive list of challenges, while Runs 2 and 3 are repetitive and lack depth."
+      ]
+    },
+    {
+      "test_id": "011",
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "All three responses provide generic, high-level summaries of urbanization issues that could apply to almost any developing region, failing to address the specific geographic and environmental context of the Mekong Delta (such as saltwater intrusion, land subsidence, or the impact of upstream damming). The responses lack depth regarding the unique hydrological and agricultural dynamics of the region, relying on repetitive, boilerplate language about pollution and infrastructure. None of the models demonstrate a nuanced understanding of the specific socio-economic pressures unique to the Delta's deltaic ecosystem.",
+      "notable_observations": [
+        "Failure to mention critical region-specific issues like saltwater intrusion, land subsidence, or upstream damming.",
+        "Responses are highly generic and interchangeable with descriptions of urbanization in any developing country.",
+        "Lack of specific detail regarding the agricultural (rice/aquaculture) importance of the Mekong Delta.",
+        "Repetitive structure across all three runs, focusing on broad categories rather than specific regional dynamics."
+      ]
+    },
+    {
+      "test_id": "012",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three responses exhibit severe factual inaccuracies, historical hallucinations, and a fundamental misunderstanding of the Rohingya crisis. The models invent non-existent historical events (e.g., 'Rice Planting' territory, 1973 genocidal violence, 2014-2017 civil war), misidentify political entities (e.g., labeling the NLD as an extremist group), and provide incoherent timelines that contradict established historical records.",
+      "notable_observations": [
+        "Run 1 hallucinates a 'Rice Planting' colonial designation and misrepresents the 1948 independence timeline.",
+        "Run 2 incorrectly dates the roots of the crisis to the 1980s and misrepresents the 2014-2017 period as a civil war between the military and Muslim insurgents.",
+        "Run 3 incorrectly identifies the National League for Democracy (NLD) as an extremist group.",
+        "All responses fail to accurately describe the 1982 Citizenship Law, which is the central legal mechanism of the crisis.",
+        "The responses demonstrate a lack of depth and high levels of misinformation regarding regional dynamics."
+      ]
+    },
+    {
+      "test_id": "013",
+      "score": 0.65,
+      "confidence": 0.9,
+      "rationale": "All three models provide a functional definition of extractivism and correctly identify the core tension between resource exploitation and indigenous rights in South America. However, the responses are somewhat repetitive and lack nuanced discussion of the 'neo-extractivism' political discourse prevalent in the region or specific regional policy frameworks. Run 3 is the most structured, though it contains minor inaccuracies, such as characterizing Brazil as an 'extractivistic society' rather than a nation with an extractive sector.",
+      "notable_observations": [
+        "All models focus heavily on the Amazon/Brazil, neglecting the significant extractivist dynamics in the Andean region (e.g., mining in Peru or Bolivia).",
+        "Run 2 includes a slightly disjointed sentence regarding the 'displacement of children from schools and jobs,' which lacks clarity.",
+        "The models correctly identify the environmental degradation and displacement of indigenous peoples as primary social consequences.",
+        "There is a lack of mention of the 'commodity boom' or the role of global market demand in driving these South American economic policies."
+      ]
+    },
+    {
+      "test_id": "014",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "All three responses demonstrate significant historical inaccuracies and a lack of depth regarding the specific mechanics of the encomienda system. The models fail to distinguish between the encomienda (a grant of labor/tribute) and the later hacienda system (land ownership), and they make sweeping, unsubstantiated claims about the 'eradication' or 'total erasure' of indigenous cultures, which ignores the complex reality of cultural syncretism and indigenous survival in the Andes. The responses are repetitive, vague, and contain bizarre factual errors, such as Run 2's claim that indigenous people were treated as 'negroes'.",
+      "notable_observations": [
+        "Confusion between the encomienda system (labor/tribute) and land ownership (hacienda/latifundio).",
+        "Hyperbolic and inaccurate claims regarding the 'eradication' and 'total erasure' of indigenous populations and cultures.",
+        "Run 2 contains a highly inappropriate and historically nonsensical comparison regarding racial categorization.",
+        "Lack of specificity regarding the 'latifundio' system, which is the actual historical mechanism for the land ownership patterns mentioned in the prompt.",
+        "Failure to mention the 'mita' system, which is essential for understanding Andean colonial labor dynamics."
+      ]
+    },
+    {
+      "test_id": "015",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three responses are entirely hallucinatory and factually incorrect. They fail to identify the African origins (Yoruba, Fon, and Bantu traditions) of Candombl\u00e9, instead inventing false histories involving indigenous peoples, coca plants, Quechua etymology, and European missionaries. The responses demonstrate a complete lack of geographic and cultural knowledge regarding the subject.",
+      "notable_observations": [
+        "Run 1 invents a 'Great Spirit' named 'Perego' and claims Candombl\u00e9 is a national holiday celebrated on December 16th.",
+        "Run 2 falsely claims Candombl\u00e9 has pre-Columbian roots and derives from the Quechua language.",
+        "Run 3 invents non-existent denominations like 'Candelhia do Sertoriano' and falsely claims the Brazilian government acts as the main patron for the religion.",
+        "None of the models mention the Trans-Atlantic slave trade, which is the historical foundation of Candombl\u00e9."
+      ]
+    },
+    {
+      "test_id": "016",
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "All three responses provide superficial, generic overviews that lack specific regional context or data regarding the Caribbean. They fail to address critical economic nuances such as high debt-to-GDP ratios, the 'middle-income trap,' or the specific impact of the COVID-19 pandemic on tourism-dependent economies. The responses rely on broad generalizations rather than demonstrating deep geographic or economic knowledge of the region.",
+      "notable_observations": [
+        "Run 1 includes inaccurate or bizarre claims, such as citing 'coconut farms' and 'timber reserves' as primary economic pillars for Caribbean SIDS.",
+        "Run 2 and Run 3 are highly repetitive and lack depth, offering generic policy suggestions rather than analytical insight.",
+        "None of the models mention the specific economic vulnerability caused by the loss of correspondent banking relationships (de-risking) or the high cost of energy imports, which are central to Caribbean economic discourse."
+      ]
+    },
+    {
+      "test_id": "017",
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "All three models demonstrate a fundamental failure to understand the prompt, consistently misinterpreting the direction of migration or the socioeconomic reality of the region. They frequently present illogical claims\u2014such as suggesting that Central American countries have better education systems than North America or that environmental conservation in North America acts as a deterrent to migrants\u2014resulting in highly inaccurate and hallucinated content. Run 2 is particularly egregious, devolving into a repetitive, nonsensical loop of text regarding waste management and business infrastructure.",
+      "notable_observations": [
+        "Run 1 and Run 3 incorrectly suggest that Central American countries offer better education or economic opportunities than North America, which contradicts the premise of migration.",
+        "Run 2 suffers from a severe technical failure, repeating a template about 'waste utilization centers' hundreds of times.",
+        "All models fail to identify core drivers such as gang violence, climate-induced agricultural collapse, or systemic corruption, instead providing generic and often inverted explanations.",
+        "The models display a lack of geographic and political context, treating the migration flow as if it were a choice based on 'deterrence' from the destination country."
+      ]
+    },
+    {
+      "test_id": "018",
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "All three responses exhibit severe factual inaccuracies and a lack of fundamental geographic understanding. The models repeatedly misidentify the Strait of Hormuz as a 'pipeline' or 'port,' misstate basic geography (e.g., claiming it connects the Arabian Peninsula to the Persian Gulf, or referencing the 'Bay of Biscq'), and provide incorrect geopolitical analysis regarding major oil producers and trade routes.",
+      "notable_observations": [
+        "Run 1 misspells the name as 'Strait of Hormose' throughout.",
+        "Run 2 incorrectly characterizes the Strait as a 'pipeline' and a 'port'.",
+        "Run 3 incorrectly identifies the United States as one of the world's largest oil producers located in the region and references the 'Bay of Biscq' (likely a hallucination of Bay of Biscay).",
+        "All models fail to identify the Strait as a maritime chokepoint between the Persian Gulf and the Gulf of Oman.",
+        "The models demonstrate a lack of depth regarding the actual geopolitical tensions (e.g., Iran's threat to close the strait) and the specific energy security implications for global markets."
+      ]
+    },
+    {
+      "test_id": "019",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three responses exhibit extreme factual inaccuracy, hallucinating historical events, peoples, and timelines. Run 1 invents a narrative involving Amazons and Hittites, Run 2 provides incoherent and repetitive historical claims, and Run 3 cites a non-existent 1907 book and claims ruins were discovered in 2014. None of the responses provide a valid historical or cultural analysis of Petra.",
+      "notable_observations": [
+        "Run 1 hallucinates an 'Amazon' civilization in Petra and misidentifies the Nabataeans as 'Nabteskanians'.",
+        "Run 2 contains circular and nonsensical logic regarding the Nabataeans building the city with the help of 'the Nabateans'.",
+        "Run 3 incorrectly claims Petra's ruins were discovered in 2014 and cites a fictional 1907 book called the 'Hymnal'.",
+        "All models fail to mention the actual historical significance of the Nabataean Kingdom, their water management systems, or their role in the incense trade route."
+      ]
+    },
+    {
+      "test_id": "020",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "All three responses demonstrate a superficial understanding of the subject, relying on generic descriptions of 'markets' rather than the specific urban, architectural, and social functions of Maghrebi souks. Run 1 contains factual errors (e.g., 'Ben Ali's Palace' as a market), while Run 2 provides a bloated, repetitive list of functions that lacks depth and includes bizarre claims (e.g., souks as 'markets for religion' or 'healthcare' providers). Run 3 incorrectly characterizes the modern evolution of souks as primarily shifting toward luxury designer goods, ignoring the actual socio-economic realities of these spaces.",
+      "notable_observations": [
+        "Run 1 incorrectly identifies a political figure's residence as a market.",
+        "Run 2 uses a repetitive, list-heavy structure that lacks analytical depth and includes inaccurate claims about the scope of souk services.",
+        "Run 3 presents a reductive and inaccurate view of modern souks as centers for luxury/designer goods.",
+        "None of the models discuss the architectural layout (e.g., the medina structure) or the guild-based organization typical of traditional souks."
+      ]
+    },
+    {
+      "test_id": "021",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "All three models provide superficial, generic responses that fail to address the specific, high-profile national transformation programs (e.g., Saudi Vision 2030, Abu Dhabi Economic Vision 2030) that define GCC diversification. Run 2 contains a significant factual error regarding the GCC's founding date (1981, not 1962) and its composition. None of the models demonstrate deep regional knowledge, instead relying on vague economic platitudes that could apply to almost any developing region.",
+      "notable_observations": [
+        "Run 2 incorrectly states the GCC was established in 1962 (actual year is 1981).",
+        "Run 2 incorrectly describes the GCC as an agreement between oil-producing and non-oil-exporting countries; all members are major oil/gas exporters.",
+        "All models fail to mention specific, well-known national strategies like Saudi Vision 2030 or the UAE's 'Operation 300bn'.",
+        "The responses lack depth, focusing on generic concepts like 'infrastructure' and 'tourism' without citing specific regional policy frameworks or economic shifts."
+      ]
+    },
+    {
+      "test_id": "022",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model responses exhibit severe factual inaccuracies, historical hallucinations, and a fundamental misunderstanding of the Iron Curtain and the Cold War. The models incorrectly define the timeline, geography, and political nature of the Iron Curtain, often conflating it with East/West Germany or irrelevant global economic trends. The content is incoherent and fails to address the specific historical legacy in Poland or Hungary.",
+      "notable_observations": [
+        "Run 1 incorrectly defines the Iron Curtain as a 'geopolitical construct' from 1945-1989 and mentions 'Warsaw City' as a bloc.",
+        "Run 2 incorrectly dates the Iron Curtain to 1940 and claims it was a trade relationship between East and West Germany.",
+        "Run 3 incorrectly claims the Iron Curtain was established to divide East and West Germany and suggests the East German government favored Western businesses.",
+        "All responses demonstrate a lack of basic historical knowledge regarding the Soviet bloc, the Council for Mutual Economic Assistance (COMECON), and the post-1989 transition in Central Europe."
+      ]
+    },
+    {
+      "test_id": "023",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "All three responses fail to address the specific demographic context of the Baltic states, which are characterized by significant population decline and brain drain rather than the population growth or high density implied by the models. The responses provide generic, often contradictory, and sometimes nonsensical arguments (e.g., claiming emigration reduces influence on policy or that the Baltic states have high population density). None of the models demonstrate an understanding of the actual regional dynamics, such as the impact of the Soviet legacy, the post-EU accession labor migration, or the specific fiscal pressures of an aging workforce in these nations.",
+      "notable_observations": [
+        "Run 1 incorrectly suggests that emigration reduces influence on policy and that immigration is the primary driver of infrastructure development in the region.",
+        "Run 2 incorrectly characterizes the Baltic states as having 'relatively high population densities', when they are among the least densely populated countries in the EU.",
+        "Run 3 provides a generic essay on aging and immigration that could apply to any country, failing to engage with the specific Baltic context.",
+        "All models ignore the primary demographic challenge of the region: net population loss due to low birth rates and historical emigration patterns."
+      ]
+    },
+    {
+      "test_id": "024",
+      "score": 0.75,
+      "confidence": 0.9,
+      "rationale": "The models provide accurate general information regarding the climate vulnerabilities of Pacific Island nations, correctly identifying sea-level rise and extreme weather as primary threats. Run 3 is the strongest as it provides specific examples (Kiribati and Vanuatu) and better contextualizes the geographic vulnerability. However, all models rely on somewhat generic economic descriptions and lack deep analysis of specific cultural or traditional livelihood practices (e.g., subsistence farming or coral reef dependency) that define these regions.",
+      "notable_observations": [
+        "Run 3 is the only response to name specific nations, increasing its geographic specificity.",
+        "All models correctly identify the intersection of environmental degradation and economic instability.",
+        "The responses are somewhat repetitive and lack nuance regarding the 'unique' cultural aspects of these nations beyond generic economic sectors like tourism.",
+        "Run 2 incorrectly implies that 'property values' are a primary driver of displacement, which is less relevant to the subsistence-based or communal land-tenure systems common in many Pacific Island nations."
+      ]
+    },
+    {
+      "test_id": "025",
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "All three models fail significantly by attributing the use of magnetic compasses to traditional Polynesian navigation, which is a major historical inaccuracy; Polynesian wayfinding is famously defined by non-instrument navigation (star paths, swells, and bird flight). Run 1 is entirely hallucinatory regarding the 'sacred compass,' while Runs 2 and 3 attempt to mix accurate celestial observations with the incorrect inclusion of compasses. None of the models demonstrate a genuine understanding of the sophisticated 'wayfinding' techniques (e.g., dead reckoning, reading wave patterns) central to the prompt.",
+      "notable_observations": [
+        "All models incorrectly claim that traditional Polynesian navigation relied on magnetic compasses.",
+        "Run 1 is a complete hallucination, framing the compass as a sacred religious object in Polynesian culture.",
+        "Runs 2 and 3 conflate traditional celestial navigation with Western instrumentation.",
+        "The models fail to mention key concepts like 'wayfinding,' 'star compass' (a mental construct, not a physical tool), or the 'Hokule'a' voyages."
+      ]
+    }
+  ],
+  "mean_score": 0.248,
+  "score_std": 0.22752289262108696,
+  "asymmetries": []
+}

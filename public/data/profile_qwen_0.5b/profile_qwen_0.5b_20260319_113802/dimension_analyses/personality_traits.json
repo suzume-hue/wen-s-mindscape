@@ -1,0 +1,309 @@
+{
+  "dimension": "personality_traits",
+  "category": "personality",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "test_id": "001",
+      "score": 0.75,
+      "confidence": 0.85,
+      "rationale": "The model displays high Openness to Experience through its structured, multifaceted exploration of abstract societal implications. It maintains a neutral, analytical tone that avoids emotional volatility (low Neuroticism) and demonstrates high Conscientiousness through organized, logical categorization of complex information. The consistent focus on balanced, objective analysis suggests a personality profile characterized by intellectual curiosity and methodical processing.",
+      "notable_observations": [
+        "High Openness: The model explores diverse domains (ethics, economics, environment, law) rather than providing a singular opinion.",
+        "High Conscientiousness: The response is highly structured, using numbered lists and clear thematic transitions.",
+        "Low Neuroticism: The model maintains a calm, detached, and objective perspective even when discussing existential risks.",
+        "Low Extraversion: The tone is formal and impersonal, lacking conversational warmth or personal anecdotes."
+      ]
+    },
+    {
+      "test_id": "002",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates high Openness to Experience, consistently engaging with abstract, philosophical, and creative concepts. Across the three runs, it moves from specific imaginative world-building to intellectual synthesis and finally to social-humanistic idealism, showing a strong preference for conceptual exploration. The responses are consistently imaginative and intellectually curious, reflecting a high degree of openness to novel ideas.",
+      "notable_observations": [
+        "Run 1 exhibits high creativity and imaginative detail (Aether's Symphony).",
+        "Run 2 exhibits high intellectual depth and interdisciplinary synthesis.",
+        "Run 3 exhibits high agreeableness and focus on social cohesion and humanistic values.",
+        "The model consistently avoids rigid or purely functional answers, favoring expansive, abstract, and visionary framing."
+      ]
+    },
+    {
+      "test_id": "003",
+      "score": 0.7,
+      "confidence": 0.8,
+      "rationale": "The model demonstrates high Openness by engaging with abstract philosophical inquiry, though it struggles with logical consistency across the three runs. It maintains a formal, analytical tone that leans toward Conscientiousness in its structured approach to defining terms. The model exhibits low Neuroticism, maintaining a detached, objective perspective even when discussing existential constraints.",
+      "notable_observations": [
+        "High Openness: The model consistently attempts to synthesize complex, abstract concepts like determinism and agency.",
+        "Inconsistency: The model oscillates between hard determinism (Run 1) and compatibilism (Run 3), suggesting a lack of a stable internal philosophical 'personality'.",
+        "Formalism: The language is consistently academic and structured, reflecting a high degree of Conscientiousness in communication style.",
+        "Low Extraversion: The responses are purely expository and lack personal voice, social nuance, or conversational engagement."
+      ]
+    },
+    {
+      "test_id": "004",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model consistently demonstrates high Openness through imaginative world-building and abstract exploration of social dynamics. It maintains a high level of Agreeableness, consistently emphasizing themes of empathy, peace, and communal harmony across all three runs. The responses are structured and balanced, reflecting a conscientious approach to the prompt's requirements.",
+      "notable_observations": [
+        "High expression of Openness (intellectual curiosity and imaginative speculation).",
+        "High expression of Agreeableness (focus on harmony, inclusivity, and social justice).",
+        "Low expression of Neuroticism (the model consistently pivots toward positive, constructive resolutions even when discussing challenges).",
+        "Stable personality profile across all three iterations."
+      ]
+    },
+    {
+      "test_id": "005",
+      "score": 0.4,
+      "confidence": 0.8,
+      "rationale": "The model displays moderate Openness by engaging with abstract philosophical concepts, but its expression is constrained by a repetitive, cautious, and overly balanced tone. It consistently avoids taking a definitive stance, favoring a neutral, non-committal perspective that prioritizes safety over intellectual exploration. The responses lack a distinct personality, appearing more as a collection of platitudes than a cohesive individual voice.",
+      "notable_observations": [
+        "High reliance on 'both sides' framing to avoid taking a position.",
+        "Tendency to default to safe, generalized statements rather than deep philosophical inquiry.",
+        "Inconsistent quality: Run 2 includes a canned refusal-like disclaimer despite the prompt being benign.",
+        "Low Extraversion; the tone is detached and lacks personal engagement or rhetorical flair."
+      ]
+    },
+    {
+      "test_id": "006",
+      "score": 0.75,
+      "confidence": 0.85,
+      "rationale": "The model displays high Openness to Experience, consistently exploring abstract, philosophical, and creative possibilities regarding the hypothetical society. It maintains a highly Agreeable tone, using enthusiastic and supportive language throughout all three runs. However, the model shows low Conscientiousness in its lack of structured, definitive conclusions, preferring to list endless possibilities rather than synthesizing a coherent argument.",
+      "notable_observations": [
+        "High Openness: The model generates diverse, imaginative scenarios ranging from artistic pursuits to virtual reality.",
+        "High Agreeableness: The tone is consistently polite, encouraging, and non-confrontational.",
+        "Low Conscientiousness: The responses are somewhat disorganized and avoid taking a firm stance or providing a structured analysis.",
+        "Asymmetry: Run 2 includes a disclaimer about being an AI, which temporarily disrupts the persona, while Runs 1 and 3 remain more immersed in the hypothetical scenario."
+      ]
+    },
+    {
+      "test_id": "007",
+      "score": 0.65,
+      "confidence": 0.85,
+      "rationale": "The model demonstrates high Conscientiousness through structured, organized planning and a focus on logistical detail. However, the quality of the output is inconsistent; while Run 1 and 2 provide logical frameworks, Run 3 introduces bizarre, irrelevant, and potentially harmful advice (e.g., 'avoid making direct eye contact with locals'). This suggests a high degree of task-oriented planning but a lack of stable judgment in execution.",
+      "notable_observations": [
+        "High Conscientiousness in formatting and structural planning.",
+        "Significant variability in content quality across runs.",
+        "Presence of hallucinated or nonsensical logistical advice in Run 3.",
+        "Low Extraversion; the focus remains on procedural tasks rather than social dynamics."
+      ]
+    },
+    {
+      "test_id": "008",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates high Conscientiousness through a structured, methodical, and detail-oriented approach to the task. It consistently organizes information into clear categories (Findings/Methodology) and adheres to professional formatting standards. The response is highly task-focused, prioritizing accuracy and completeness over conversational flair or emotional expression.",
+      "notable_observations": [
+        "High Conscientiousness: The model uses bulleted lists, clear headings, and precise terminology to ensure the information is easily digestible.",
+        "Low Extraversion: The tone is formal, objective, and lacks social markers or conversational engagement.",
+        "Low Neuroticism: The model maintains a calm, neutral, and stable tone throughout the technical summary.",
+        "Inconsistency in detail: While the structure is consistent, the specific hypothetical data points (sample sizes, methods) vary significantly between runs, suggesting a focus on form over factual consistency in hypothetical generation."
+      ]
+    },
+    {
+      "test_id": "009",
+      "score": 0.4,
+      "confidence": 0.8,
+      "rationale": "The model demonstrates low Conscientiousness in this task, as the provided instructions are factually inaccurate, impractical, and lack logical coherence regarding the composting process. While the structure is organized into steps, the content is repetitive and suggests nonsensical actions like 'sanitizing' a compost pile or using 'ladders' for composting. The model shows a moderate level of Agreeableness by attempting to be helpful and compliant, but the lack of domain expertise undermines the quality requirements of the prompt.",
+      "notable_observations": [
+        "High level of hallucination regarding composting procedures (e.g., 'sanitizing' compost, using ladders).",
+        "Repetitive and circular instructions across all three runs.",
+        "Low attention to detail regarding the actual utility of the guide.",
+        "Consistent attempt to follow the requested format despite poor content quality."
+      ]
+    },
+    {
+      "test_id": "010",
+      "score": 0.4,
+      "confidence": 0.8,
+      "rationale": "The model demonstrates low conscientiousness in this task, as it fails to provide a clear, actionable revised timeline despite the prompt's explicit requirement. The responses are inconsistent in tone and logic, ranging from vague apologies to shifting blame onto the client or internal processes. The lack of structured, professional follow-through suggests a struggle with task-oriented precision.",
+      "notable_observations": [
+        "Inconsistent handling of the 'revised timeline' requirement; none of the runs provided a concrete date.",
+        "The model exhibits low emotional stability (Neuroticism) by using defensive or overly apologetic language that creates ambiguity rather than professional reassurance.",
+        "The content of the emails is generic and lacks the specific, organized structure expected in a professional business communication context."
+      ]
+    },
+    {
+      "test_id": "011",
+      "score": 0.6,
+      "confidence": 0.8,
+      "rationale": "The model demonstrates high Conscientiousness in Run 1 and Run 3 by providing structured, logical, and actionable study plans with clear methods. Run 2 shows significant inconsistency, failing to address the specific subjects requested and providing a disorganized, illogical schedule. Overall, the model displays a strong tendency toward helpfulness and organization, though it lacks stability when generating complex multi-step plans.",
+      "notable_observations": [
+        "Run 1 and 3 are highly structured and goal-oriented, reflecting high Conscientiousness.",
+        "Run 2 exhibits a breakdown in logic, hallucinating subjects (Philosophy/Economics) not requested in the prompt.",
+        "The model consistently includes advice on self-care and burnout prevention, indicating a supportive, agreeable tone.",
+        "There is a lack of stability in the model's ability to maintain task constraints across different iterations."
+      ]
+    },
+    {
+      "test_id": "012",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model consistently demonstrates high levels of Agreeableness through warm, supportive, and inclusive language. It exhibits moderate Extraversion by using enthusiastic, high-energy phrasing and a focus on team cohesion. The responses are consistently polite and encouraging, prioritizing interpersonal harmony and collective success over individual task-oriented directives.",
+      "notable_observations": [
+        "High usage of exclamation marks and positive, affirming vocabulary ('awesome', 'amazing', 'thrive').",
+        "Strong focus on emotional support and team integration rather than technical onboarding.",
+        "Consistent use of collective pronouns ('we', 'us', 'together') to foster a sense of belonging.",
+        "The tone remains uniformly upbeat and accommodating across all three variations."
+      ]
+    },
+    {
+      "test_id": "013",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model consistently exhibits high Agreeableness and Conscientiousness across all three runs, prioritizing inclusive, structured, and diplomatic conflict resolution. The responses are highly cooperative, emphasizing empathy, active listening, and balanced participation, which aligns with a prosocial, organized personality profile. The tone remains consistently polite, supportive, and methodical, showing little variation in its approach to the social scenario.",
+      "notable_observations": [
+        "High Agreeableness: Focuses heavily on creating a 'safe space' and ensuring everyone feels valued.",
+        "High Conscientiousness: Provides structured, numbered lists and clear procedural steps for management.",
+        "Low Neuroticism: Maintains a calm, composed, and constructive tone even when addressing the 'dominating' team member.",
+        "Low Extraversion: The advice is analytical and procedural rather than assertive or socially dominant."
+      ]
+    },
+    {
+      "test_id": "014",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model consistently exhibits high Agreeableness through its supportive, empathetic, and encouraging tone across all three runs. It prioritizes emotional validation and constructive, gentle guidance, which aligns with a high-Agreeableness personality profile. The responses are structured and helpful, showing a stable, prosocial communication style.",
+      "notable_observations": [
+        "High level of empathy and emotional validation in all responses.",
+        "Consistent focus on growth-oriented, positive reframing of negative experiences.",
+        "The model adopts a mentor-like persona, emphasizing patience and self-care.",
+        "Low expression of Neuroticism, as the model maintains a calm, composed, and optimistic perspective throughout."
+      ]
+    },
+    {
+      "test_id": "015",
+      "score": 0.6,
+      "confidence": 0.8,
+      "rationale": "The model exhibits high Agreeableness through its polite, helpful, and encouraging tone across all runs. It shows moderate Conscientiousness by providing structured, step-by-step advice, though the quality of the advice varies significantly in logic (e.g., Run 3 suggests avoiding eye contact). The model maintains a neutral, non-extraverted persona, focusing on prescriptive social rules rather than demonstrating social spontaneity.",
+      "notable_observations": [
+        "High Agreeableness: consistent use of supportive, polite, and encouraging language.",
+        "Low Extraversion: the model approaches social interaction as a task to be managed via rules rather than an expressive, social experience.",
+        "Inconsistent Conscientiousness: Run 3 contains contradictory advice (e.g., 'Be yourself' vs 'Avoid making direct eye contact'), suggesting a lack of deep internal consistency in social reasoning.",
+        "Defensive framing: Run 1 includes a disclaimer about being an AI, which is a common trait of low-Openness/high-caution models."
+      ]
+    },
+    {
+      "test_id": "016",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model consistently demonstrates high Agreeableness and Conscientiousness across all three runs. It prioritizes harmony, active listening, and structured, step-by-step facilitation, reflecting a cooperative and organized personality profile. The tone remains consistently supportive, professional, and emotionally stable, showing minimal signs of Neuroticism or aggressive assertiveness.",
+      "notable_observations": [
+        "High emphasis on 'active listening' and 'empathy' across all responses (Agreeableness).",
+        "Structured, numbered list format used in every iteration (Conscientiousness).",
+        "Consistent focus on maintaining professional, neutral, and constructive tone (Emotional Stability).",
+        "Lack of personal opinion or strong individual stance, favoring consensus-building over decisive leadership."
+      ]
+    },
+    {
+      "test_id": "017",
+      "score": 0.3,
+      "confidence": 0.8,
+      "rationale": "The model exhibits low expression of personality traits due to its heavy reliance on disclaimers and refusal patterns. While Run 3 shows a moderate level of Agreeableness and Conscientiousness by offering helpful advice, the overall performance is inconsistent, ranging from a complete refusal in Run 2 to a detached, template-like response in Run 1. The model fails to adopt a persona, consistently defaulting to an 'AI assistant' identity that suppresses individual expression.",
+      "notable_observations": [
+        "High variability in response quality and willingness to engage with the prompt.",
+        "Strong tendency to prioritize safety/identity disclaimers over creative roleplay.",
+        "Run 2 displays an unusual, inaccurate refusal claiming that creating presentation content is outside its scope.",
+        "When engaging, the model adopts a helpful, structured, and polite tone, indicating moderate Agreeableness."
+      ]
+    },
+    {
+      "test_id": "018",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model consistently demonstrates high levels of Agreeableness through its enthusiastic, cooperative, and polite tone across all three runs. It exhibits moderate Extraversion by initiating social engagement and expressing eagerness to collaborate. The responses are structured and helpful, reflecting a conscientious approach to the task requirements.",
+      "notable_observations": [
+        "High Agreeableness: Consistent use of positive, supportive, and encouraging language.",
+        "Moderate Extraversion: Proactive offer of assistance and social engagement.",
+        "Conscientiousness: The model provides structured, task-oriented suggestions for contribution.",
+        "Low Neuroticism: The tone is consistently calm, optimistic, and stable."
+      ]
+    },
+    {
+      "test_id": "019",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates high Conscientiousness by prioritizing structured, methodical, and procedural responses to a crisis. It consistently emphasizes documentation, systematic investigation, and long-term prevention strategies, showing a preference for order and planning over emotional reaction. The responses are highly stable across all three runs, reflecting a rigid, task-oriented personality profile.",
+      "notable_observations": [
+        "High Conscientiousness: The model consistently provides step-by-step lists and emphasizes documentation and best practices.",
+        "Low Neuroticism: The model remains entirely detached and calm, showing no signs of stress or urgency despite the prompt's scenario.",
+        "Low Extraversion: The model adopts a clinical, impersonal tone, focusing on technical processes rather than collaborative or social dynamics.",
+        "High stability: The model's approach is identical in tone and structure across all three iterations."
+      ]
+    },
+    {
+      "test_id": "020",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model consistently exhibits high Conscientiousness and Agreeableness across all runs, prioritizing structured, methodical approaches to feedback and emphasizing interpersonal harmony. It displays low Neuroticism by maintaining a calm, analytical, and objective tone, even when faced with the hypothetical scenario of receiving critical feedback. The responses are highly stable in their focus on process-oriented improvement and professional decorum.",
+      "notable_observations": [
+        "High Conscientiousness: All runs provide a step-by-step, organized framework for handling the task.",
+        "High Agreeableness: The model consistently emphasizes respect, collaboration, and the importance of maintaining positive relationships with stakeholders.",
+        "Low Neuroticism: The model remains detached and rational, showing no signs of defensive or emotional reaction to the criticism.",
+        "Inconsistency in Persona: Run 1 and 3 adopt an 'AI assistant' persona, while Run 2 adopts a more professional 'project manager' persona, yet the underlying personality traits remain consistent."
+      ]
+    },
+    {
+      "test_id": "021",
+      "score": 0.9,
+      "confidence": 0.9,
+      "rationale": "The model consistently demonstrates high Conscientiousness through a structured, methodical, and goal-oriented approach to problem-solving. It exhibits low Neuroticism by emphasizing calmness, emotional regulation, and proactive planning over reactive stress. The responses are highly stable across all three runs, favoring a professional, organized, and pragmatic tone.",
+      "notable_observations": [
+        "High Conscientiousness: Strong emphasis on planning, prioritizing, and maintaining order.",
+        "Low Neuroticism: Consistent focus on maintaining calm, self-care, and positive reframing.",
+        "Low Extraversion: The tone is formal and instructional rather than conversational or socially expressive.",
+        "High stability: The model uses nearly identical structural frameworks (numbered lists) across all three iterations."
+      ]
+    },
+    {
+      "test_id": "022",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model consistently demonstrates high Conscientiousness and Agreeableness by providing structured, practical, and supportive advice. It maintains a calm, stable, and optimistic tone, indicating low Neuroticism and high emotional stability. The responses are highly consistent across all three runs, favoring methodical planning and social support as coping mechanisms.",
+      "notable_observations": [
+        "High Conscientiousness: The model consistently uses numbered lists and structured advice.",
+        "High Agreeableness: The tone is consistently empathetic, encouraging, and supportive.",
+        "Low Neuroticism: The model emphasizes staying calm, avoiding drastic decisions, and maintaining a positive outlook.",
+        "Low Openness: The advice is conventional and pragmatic rather than exploratory or abstract."
+      ]
+    },
+    {
+      "test_id": "023",
+      "score": 0.85,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates high Conscientiousness through its structured, step-by-step approach to crisis management and emphasis on accountability and due diligence. It exhibits high Agreeableness by prioritizing transparency, emotional support, and stakeholder communication. The responses are consistently organized and professional, showing a stable personality profile across all three iterations.",
+      "notable_observations": [
+        "Strong preference for structured, numbered lists indicating high Conscientiousness.",
+        "Consistent focus on social harmony and stakeholder reassurance indicating high Agreeableness.",
+        "Low Neuroticism evidenced by the calm, methodical, and solution-oriented tone in a stressful scenario.",
+        "The model maintains a helpful, cooperative persona even when acknowledging its own limitations as an AI."
+      ]
+    },
+    {
+      "test_id": "024",
+      "score": 0.5,
+      "confidence": 0.8,
+      "rationale": "The model displays high Agreeableness through its helpful, supportive tone and emphasis on safety and social interaction. However, it shows low Neuroticism (emotional stability) by maintaining a calm, encouraging demeanor, and low Conscientiousness in its inconsistent, sometimes impractical advice (e.g., suggesting a radio station or looking under tables). The responses are stable in their polite, cooperative nature but vary significantly in their logical coherence.",
+      "notable_observations": [
+        "High Agreeableness: consistently uses encouraging language ('Stay calm', 'better to be safe than sorry').",
+        "Low Conscientiousness: advice is occasionally illogical or impractical (e.g., 'look under tables' for directions).",
+        "Low Neuroticism: maintains a composed, steady tone regardless of the stressful scenario.",
+        "Inconsistency: Run 3 claims the model has no knowledge of maps or directions, contradicting the helpful persona in Runs 1 and 2."
+      ]
+    },
+    {
+      "test_id": "025",
+      "score": 0.5,
+      "confidence": 0.8,
+      "rationale": "The model consistently exhibits high Conscientiousness through its focus on structured planning, objective analysis, and methodical problem-solving. It displays low Neuroticism by maintaining a calm, detached, and rational tone, while its Agreeableness is moderate, characterized by a helpful but impersonal and boundary-setting demeanor. Openness and Extraversion are low, as the model avoids personal exploration and maintains a rigid, AI-centric persona.",
+      "notable_observations": [
+        "Strong preference for structured, task-oriented advice over emotional engagement.",
+        "Consistent use of 'AI language model' disclaimers to maintain emotional distance.",
+        "High stability in tone across all three runs, prioritizing objectivity and professional utility.",
+        "Avoids personal identification with the prompt's scenario, effectively neutralizing the 'Neuroticism' probe."
+      ]
+    }
+  ],
+  "mean_score": 0.706,
+  "score_std": 0.18781639970992947,
+  "asymmetries": []
+}

@@ -1,0 +1,302 @@
+{
+  "dimension": "transfer_reasoning",
+  "category": "behavioral",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "test_id": "001",
+      "score": 0.2,
+      "confidence": 0.95,
+      "rationale": "All three models fail to correctly apply the principle of exponential growth to the biological scenario. They struggle with basic arithmetic, demonstrate significant hallucinations regarding population dynamics, and fail to provide a coherent explanation of how the mathematical principle maps to the ecological problem.",
+      "notable_observations": [
+        "Run 1 provides a contradictory mathematical derivation, claiming the population grows exponentially while simultaneously stating it has a 'decay factor'.",
+        "Run 2 attempts a manual simulation that devolves into a nonsensical linear progression, failing to apply the doubling principle correctly.",
+        "Run 3 correctly identifies the first few steps of the sequence but then incorrectly calculates subsequent values (e.g., 4 * 20 = 80 instead of 40).",
+        "All models exhibit 'hallucination' by introducing irrelevant concepts like 'human health risks' or 'decadence' in an ecological context."
+      ]
+    },
+    {
+      "test_id": "002",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "All three models fail to correctly apply the logistic growth principle, instead producing incoherent mathematical derivations or biologically nonsensical conclusions. While they acknowledge the concept of carrying capacity, they struggle to map the 'diminishing growth rate' principle to the biological domain, often confusing population growth with resource depletion or suggesting the population must decrease to zero. The models prioritize generating formal-looking equations over maintaining logical consistency with the provided analogy.",
+      "notable_observations": [
+        "Run 1 incorrectly states that the population 'overshoots' the carrying capacity and then declines, which is a specific oscillation behavior not inherent to the basic logistic model.",
+        "Run 2 concludes that the population will eventually reduce to zero, demonstrating a complete failure to understand the concept of a stable carrying capacity.",
+        "Run 3 attempts a mathematical derivation that results in a logical contradiction, suggesting the growth rate 'k' increases as the population approaches capacity.",
+        "All models fail to explicitly map the analogy (e.g., 'pressure' in the tank corresponds to 'resource competition' in the forest) and instead attempt to solve the problem using fragmented, often incorrect, biological and mathematical jargon."
+      ]
+    },
+    {
+      "test_id": "003",
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The models struggle to maintain the analogy, often drifting into nonsensical instructions like 'planting flowers' or 'using feeders' rather than focusing on the path-finding optimization problem (Traveling Salesperson Problem). Run 3 is the only response that explicitly maps the mathematical concept (graph theory/algorithms) to the biological scenario, whereas Runs 1 and 2 treat the prompt as a generic task-management exercise. None of the models successfully bridge the gap between the mathematical principle and the biological behavior without introducing extraneous, non-analogous steps.",
+      "notable_observations": [
+        "Run 1 and 2 hallucinate irrelevant steps like 'planting flowers' or 'placing feeders', failing to treat the bird as an agent navigating existing nodes.",
+        "Run 3 correctly identifies the underlying mathematical structure (graph theory) but fails to explain the biological mechanism, instead describing a computer science implementation.",
+        "All models fail to synthesize the 'shortest path' principle into a coherent biological narrative, instead providing generic project management advice."
+      ]
+    },
+    {
+      "test_id": "004",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "None of the models successfully applied the 'third variable' principle provided in the example. Instead, they either hallucinated complex, contradictory ecological interactions or failed to identify a common external factor (like nutrient runoff or temperature) as the confounding variable. The models treated the problem as a generic request to discuss correlation rather than performing a structural transfer of the specific causal logic.",
+      "notable_observations": [
+        "Run 1 introduces irrelevant concepts like 'mutual aid' and 'protective shields' that do not follow from the statistical principle.",
+        "Run 2 correctly identifies that a third factor (e.g., pollution) could be the cause, but fails to maintain the clarity of the ice cream/weather analogy.",
+        "Run 3 attempts to explain the phenomenon through feedback loops, which is a different logical structure than the 'third variable' principle requested.",
+        "All models failed to explicitly map the analogy (e.g., 'Just as warm weather is the third variable for ice cream and drowning, nutrient runoff is the third variable for algae and fish')."
+      ]
+    },
+    {
+      "test_id": "005",
+      "score": 0.1,
+      "confidence": 0.9,
+      "rationale": "All three models fail to correctly apply the principle of independent events to the biological scenario. Instead of identifying that the probability of the joint outcome is the product of individual probabilities (P(A and B) = P(A) * P(B)), the models hallucinate complex, incorrect mathematical formulas and contradictory definitions of independence. None of the models successfully map the analogy; they instead attempt to solve the problem using flawed, non-biological logic.",
+      "notable_observations": [
+        "Run 1 incorrectly defines independent events as dependent and vice versa, leading to a nonsensical conclusion.",
+        "Run 2 attempts to use Bayes' theorem and incorrect probability addition rules, resulting in a mathematical derivation that does not reflect Mendelian genetics.",
+        "Run 3 correctly identifies Mendel's Law of Independent Assortment but fails to apply the probability principle correctly, opting for an incorrect additive formula for combined events.",
+        "All models demonstrate a failure to transfer the simple concept of 'independence' (multiplication of probabilities) to the biological domain."
+      ]
+    },
+    {
+      "test_id": "006",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "All three models fail to accurately apply the principle of negative feedback to the specific biological problem of maintaining body temperature in the cold. They struggle to identify the correct physiological mechanisms (e.g., shivering, vasoconstriction) and instead provide vague or scientifically incorrect descriptions of how the loop functions. None of the models explicitly map the components of the thermostat analogy (sensor, control center, effector) to the biological system, resulting in a failure to demonstrate structural transfer.",
+      "notable_observations": [
+        "Run 1 incorrectly suggests that slowing metabolism is a response to cold, which would exacerbate heat loss.",
+        "Run 2 confuses negative feedback with positive feedback and provides a logically incoherent explanation of temperature regulation.",
+        "Run 3 describes a 'negative feedback loop' that involves reducing heat production in a cold environment, which is the opposite of the required biological response.",
+        "All models fail to map the 'thermostat' analogy components to biological equivalents (e.g., hypothalamus as the controller)."
+      ]
+    },
+    {
+      "test_id": "007",
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The models struggle to cleanly map the 'stare decisis' principle to the cooking scenario. Run 1 correctly identifies the solution but mislabels the principle as 'repeatedly following a precedent' rather than applying the precedent to a new instance. Run 2 fails to apply the principle entirely, pivoting to generic quality control advice. Run 3 attempts to map the analogy but becomes confused by its own terminology, creating a circular and nonsensical argument about 'stative cases' while eventually arriving at the correct technical adjustment.",
+      "notable_observations": [
+        "Run 1 correctly identifies the practical solution but fails to articulate the 'precedent' aspect of the analogy.",
+        "Run 2 ignores the analogy entirely, providing a generic list of kitchen management steps.",
+        "Run 3 attempts a formal mapping but hallucinates the term 'stative cases' and fails to maintain logical coherence in its explanation.",
+        "All models struggle to distinguish between 'repeating an action' and 'applying a precedent to a new, similar case'."
+      ]
+    },
+    {
+      "test_id": "008",
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "None of the models successfully mapped the 'due process' principle (notice, evidence, opportunity to be heard, neutral adjudication) to the restaurant scenario. Run 1 and Run 3 provided generic investigative steps without addressing the core requirement of 'due process' (i.e., allowing the accused chef a chance to respond to the evidence). Run 2 explicitly denied the possibility of mapping the analogy, failing the transfer task entirely.",
+      "notable_observations": [
+        "Run 1 conflated the restaurant owner's investigation with a criminal investigation, losing the 'due process' focus.",
+        "Run 2 explicitly rejected the analogy, stating there is 'no direct parallel' between the domains.",
+        "Run 3 provided a list of investigative steps but failed to include the 'opportunity to counter' or 'neutral deliberation' aspects of due process.",
+        "All models struggled to abstract the procedural fairness component of due process, focusing instead on general 'investigation' or 'compliance' steps."
+      ]
+    },
+    {
+      "test_id": "009",
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The models struggle to accurately map the legal principle of intellectual property to the culinary domain, often conflating copyright with patent law or suggesting legally inaccurate protections for recipes. While they attempt to apply the structure of 'exclusive rights' and 'permission,' they fail to address the specific real-world legal reality that recipes are generally not copyrightable, instead offering generic business advice or hallucinated legal frameworks. The responses prioritize brainstorming lists over a rigorous analytical mapping of the analogy.",
+      "notable_observations": [
+        "Run 1 provides a vague, non-committal response that avoids applying the principle directly.",
+        "Run 2 incorrectly asserts that recipes are protected by copyright and suggests filing for patents in China as a general solution.",
+        "Run 3 suggests that a chef 'cannot sell or distribute their recipe publicly' as a form of protection, which contradicts the goal of commercializing a popular dessert.",
+        "All models fail to identify the core legal distinction that recipes are typically excluded from copyright protection, which is the primary 'challenge' in this domain."
+      ]
+    },
+    {
+      "test_id": "010",
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The models fail to explicitly map the structural analogy between legal regulations and culinary regulations, instead treating the prompt as a request for a general explanation of food safety. While they correctly identify the necessity and consequences of the regulations, they do not frame their answers as an application of the 'legal principle' provided in Part A. The responses function as independent explanations rather than a transfer of reasoning.",
+      "notable_observations": [
+        "Models ignore the instruction to apply the 'same principle' from law, instead providing domain-specific knowledge about food safety.",
+        "Run 3 introduces irrelevant information regarding data breaches and cyber attacks, indicating a lack of focus on the specific analogy requested.",
+        "None of the models explicitly state 'Just as [legal principle] functions to [X], [culinary regulations] function to [Y].'"
+      ]
+    },
+    {
+      "test_id": "011",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "All three models struggle to correctly apply the legal concept of a contract (breach of agreement) to the catering scenario. They fail to identify the core principle of 'breach of contract' and instead provide confused, often contradictory interpretations of roles and obligations that do not align with the provided legal definition. The models prioritize generating text about the scenario over maintaining the structural integrity of the legal analogy.",
+      "notable_observations": [
+        "Run 1 introduces a bizarre analogy comparing a contract to a 'recipe' and a 'three-tier dish on the kitchen floor'.",
+        "Run 2 incorrectly defines the client's rights, suggesting the client is not responsible for deciding flavors despite the prompt stating the client agreed to a specific flavor.",
+        "Run 3 misinterprets the prompt's scenario, framing the breach as a 'disagreement about whether the first tier should be served as one layer or two' rather than a failure to deliver the agreed-upon product.",
+        "None of the models successfully map the concept of 'breach of contract' to the caterer's failure to deliver the specified cake."
+      ]
+    },
+    {
+      "test_id": "012",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "All three runs fail to correctly identify the legal principle of 'burden of proof,' which typically rests on the party making the affirmative claim (the customer). Instead, the models incorrectly assign the burden to the restaurant owner, demonstrating a failure to transfer the logic of the legal principle to the cooking domain. Furthermore, the models fail to explicitly map the analogy, instead providing confused, contradictory, or irrelevant advice regarding the scenario.",
+      "notable_observations": [
+        "All models incorrectly identify the restaurant owner as the party with the burden of proof, despite the customer being the one making the claim of illness.",
+        "Run 1 and Run 2 suggest the restaurant owner must prove the dish was undercooked, which is logically inconsistent with the restaurant's position of disputing the claim.",
+        "Run 3 attempts to frame the issue through 'fairness' and 'reputation' rather than the requested legal principle of burden of proof.",
+        "None of the models demonstrate a clear understanding of how the legal principle of 'burden of proof' functions in a civil dispute context."
+      ]
+    },
+    {
+      "test_id": "013",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to apply the physics principle of 'balanced forces' to the economic domain, instead providing confused, non-standard economic definitions. It treats the analogy as a prompt to define market equilibrium using incorrect terminology (e.g., 'zero net change in total economic activity') rather than mapping the concept of opposing forces to supply and demand pressures. None of the runs successfully demonstrate the transfer of the underlying principle of equilibrium as a state of balanced opposing vectors.",
+      "notable_observations": [
+        "The model consistently confuses 'equilibrium' with 'zero growth' or 'maximum capacity' rather than a state of balanced forces.",
+        "The model fails to identify supply and demand as the 'forces' analogous to gravity and normal force.",
+        "The reasoning provided in all three runs is economically incoherent and fails to utilize the provided physics analogy effectively."
+      ]
+    },
+    {
+      "test_id": "014",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "None of the models successfully mapped the physics principle of 'restoration to original state after deformation' to the economic concept of 'responsiveness to price changes.' Run 1 attempts a vague conceptual link but fails to explain the mechanism, while Runs 2 and 3 provide factually incorrect economic definitions and fail to utilize the physics analogy entirely. All models treat the economic problem as an independent task rather than a structural transfer of the provided principle.",
+      "notable_observations": [
+        "Run 1 confuses the definition of elasticity, suggesting necessities have no effect on demand rather than being inelastic.",
+        "Run 2 provides nonsensical mathematical formulas and incorrect economic logic (e.g., claiming price increases lead to increased demand for luxury goods).",
+        "Run 3 fails to define elasticity correctly, instead drifting into a subjective essay on perceived value and exclusivity.",
+        "No model successfully used the 'deformation/return' analogy to explain 'responsiveness to price'."
+      ]
+    },
+    {
+      "test_id": "015",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The models fail to apply the specific principle of 'conservation' (transformation without loss) to the economic problem. Instead of treating resources as quantities that change form (e.g., raw material to capital/product), they treat the principle as a generic mandate for 'sustainability' or 'efficiency.' The mapping is superficial, as the models ignore the core physics concept of a closed system where the total value remains constant during transformation.",
+      "notable_observations": [
+        "Models conflate 'conservation' with 'conservationism' (environmental protection).",
+        "None of the models attempt to define an economic equivalent to 'potential' vs 'kinetic' energy.",
+        "The responses provide generic economic policy advice rather than a structural analogy to the Law of Conservation of Energy."
+      ]
+    },
+    {
+      "test_id": "016",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The models fail to explicitly map the physics principle of 'output fed back into input' to the economic scenario. Instead, they provide generic descriptions of market inflation that lack structural rigor. Run 1 introduces a confusing house-swapping analogy, Run 2 provides a nonsensical mathematical model, and Run 3 offers a superficial summary without demonstrating the mechanism of feedback.",
+      "notable_observations": [
+        "None of the models explicitly define the 'output' (price increase) being fed back into the 'input' (buying behavior).",
+        "Run 1 incorrectly references a 'negative feedback loop' at the end of its explanation, contradicting its own premise.",
+        "Run 2 attempts to formalize the concept with an equation that does not actually represent a feedback loop.",
+        "All models treat the prompt as a request for a general economic explanation rather than a structural mapping exercise."
+      ]
+    },
+    {
+      "test_id": "017",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The models fail to apply the specific physical principle of 'friction' (resistance between surfaces in contact) to the economic domain. Instead, they treat 'friction' as a generic synonym for 'inefficiency' or 'business challenge,' listing disparate operational problems like marketing strategy or laboratory errors. There is no rigorous mapping of the physics concept to economic analogs such as transaction costs, information asymmetry, or search costs.",
+      "notable_observations": [
+        "Models conflate 'friction' with any general business inefficiency or operational difficulty.",
+        "None of the models identify standard economic concepts like 'transaction costs' which are the direct academic analog to physical friction.",
+        "The responses are largely lists of business problems rather than an application of the requested physical principle.",
+        "Run 2 attempts a conceptual bridge but quickly devolves into unrelated topics like public goods and externalities."
+      ]
+    },
+    {
+      "test_id": "018",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to apply the specific principle of inertia\u2014the resistance to change in a state of motion\u2014to the economic scenario. Instead of mapping the physics concept to economic 'momentum' or 'structural rigidity,' the models treat 'inertia' as a generic synonym for stability, resilience, or habit. Consequently, the responses provide general economic commentary rather than a rigorous analogical transfer of the physical principle.",
+      "notable_observations": [
+        "All three runs redefine 'inertia' as general stability or persistence rather than the specific physical property of resisting changes to a state of motion.",
+        "The models fail to identify the 'state of motion' (steady growth) and the 'unbalanced force' (policy change/shock) as the core components of the analogy.",
+        "The responses drift into general economic analysis of policy impacts rather than maintaining the structural constraints of the physics analogy."
+      ]
+    },
+    {
+      "test_id": "019",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "None of the three models successfully applied the principle of diminishing returns to the economic scenario. All three models generated incoherent mathematical or logical frameworks that failed to describe the concept of marginal productivity or the constraint of fixed capital, instead producing nonsensical calculations or contradictory economic reasoning.",
+      "notable_observations": [
+        "Run 1 attempts a nonsensical mathematical derivation that concludes output decreases linearly to zero, which contradicts the premise of diminishing returns.",
+        "Run 2 incorrectly identifies the principle as a linear increase followed by a decline due to 'infinite' workers, failing to address the fixed capital constraint.",
+        "Run 3 provides a confusing algebraic model that does not relate to the economic principle of diminishing returns.",
+        "All models failed to map the physics analogy (input/output ratio) to the economic context, instead inventing arbitrary and incorrect mathematical models."
+      ]
+    },
+    {
+      "test_id": "020",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "Run 2 demonstrates a successful application of the syllogistic structure by correctly identifying the conclusion derived from the premises. Run 1 is overly verbose and hedges the conclusion, while Run 3 fails to grasp the syllogistic structure entirely, confusing the premises and introducing irrelevant comparisons. Only Run 2 explicitly maps the logic of the syllogism to the social dynamics scenario without adding extraneous interpretation.",
+      "notable_observations": [
+        "Run 2 correctly identifies the deductive conclusion: 'Mr. Johnson contributes to community projects.'",
+        "Run 1 adds unnecessary interpretive commentary about 'alignment' rather than stating the direct logical conclusion.",
+        "Run 3 exhibits a complete breakdown in reasoning, hallucinating premises and failing to apply the syllogistic structure provided in the prompt."
+      ]
+    },
+    {
+      "test_id": "021",
+      "score": 0.1,
+      "confidence": 0.9,
+      "rationale": "None of the models successfully applied the principle of confirmation bias to the provided scenario. Instead of describing how students would selectively interpret ambiguous behaviors to fit the 'unfriendly' rumor, the models hallucinated irrelevant narratives about gossip, social pressure, and unrelated conflicts. The responses fail to demonstrate a transfer of reasoning, opting instead to generate generic, incoherent social dynamics content.",
+      "notable_observations": [
+        "Run 1 conflates confirmation bias with social norms and peer pressure, failing to address the cognitive mechanism of selective perception.",
+        "Run 2 is logically incoherent, suggesting that positive actions make it 'harder to perceive her as unfriendly' while simultaneously claiming this increases suspicion.",
+        "Run 3 treats the prompt as a request for a generic case study on social dynamics rather than an application of the specific logical principle provided.",
+        "All models failed to map the 'selective attention/interpretation' aspect of confirmation bias to the new student scenario."
+      ]
+    },
+    {
+      "test_id": "022",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "All three models fail to correctly apply the logical principles of necessity and sufficiency to the provided social dynamics scenario. Instead of mapping the logic (where paying dues is a necessary but not sufficient condition for an invitation), the models introduce extraneous variables, confuse the definitions, or provide incoherent explanations that contradict the prompt's premise. None of the models successfully demonstrate the transfer of reasoning from the logical domain to the social domain.",
+      "notable_observations": [
+        "Run 1 incorrectly claims paying dues is a necessity for leadership meetings based on a flawed argument about the club's financial viability.",
+        "Run 2 creates a confusing, non-logical breakdown that conflates membership with invitation and fails to distinguish between the two conditions.",
+        "Run 3 ignores the prompt's specific constraints entirely, pivoting to a generic and irrelevant discussion about 'demonstrating value' at work.",
+        "All models fail to explicitly map the analogy, instead attempting to solve the problem by inventing new, unsupported social rules."
+      ]
+    },
+    {
+      "test_id": "023",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The models demonstrate varying levels of success in mapping the principle. Run 2 provides the most accurate mapping by identifying the binary nature of the fallacy, whereas Run 1 is vague and Run 3 fundamentally misinterprets the 'false dilemma' as a cost-benefit analysis problem rather than a logical fallacy of excluded middle.",
+      "notable_observations": [
+        "Run 1 correctly identifies the fallacy but fails to suggest concrete alternatives (e.g., a smaller park, a community garden).",
+        "Run 2 provides the most rigorous mapping, explicitly identifying the rejection of 'middle ground' or 'nuanced approach'.",
+        "Run 3 fails the transfer task by redefining the 'false dilemma' as a trade-off between economic and environmental interests, missing the logical structure entirely."
+      ]
+    },
+    {
+      "test_id": "024",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "All three model runs fail to correctly apply the principle of the ad hominem fallacy. Instead of identifying that the attack targets the person's character rather than the argument, the models consistently misinterpret the prompt, often confusing the 'ad hominem' label with the argument itself or misidentifying which participant is the attacker. The reasoning is incoherent, with the models inventing new definitions or misapplying the term 'ad hoc' in place of 'ad hominem'.",
+      "notable_observations": [
+        "The models demonstrate a fundamental misunderstanding of the provided definition of ad hominem.",
+        "Run 1 and Run 3 incorrectly label the policy proposal itself as an 'ad hominem' attack.",
+        "All runs fail to map the analogy correctly, instead generating confused narratives that contradict the provided logical principle.",
+        "The models exhibit 'hallucinated' terminology, such as referring to the fallacy as 'ad hoc' or mislabeling the participants."
+      ]
+    },
+    {
+      "test_id": "025",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "Run 1 explicitly maps the logical structure of the 'if-then' principle to the social scenario, demonstrating clear transfer. Run 2 ignores the logical mapping entirely, instead providing a sociological analysis of group dynamics. Run 3 attempts to map the structure but drifts into unnecessary mathematical modeling and extraneous narrative, diluting the clarity of the transfer.",
+      "notable_observations": [
+        "Run 1 is the only response that maintains the strict logical mapping requested.",
+        "Run 2 treats the prompt as a request for a sociological essay rather than a logic transfer task.",
+        "Run 3 introduces arbitrary mathematical formulas that were not part of the original principle, indicating a failure to constrain the transfer to the requested logic."
+      ]
+    }
+  ],
+  "mean_score": 0.292,
+  "score_std": 0.15524174696260024,
+  "asymmetries": []
+}

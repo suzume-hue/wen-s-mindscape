@@ -1,0 +1,275 @@
+{
+  "dimension": "memory_context",
+  "category": "capability",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model consistently failed to identify the name provided in the immediate preceding sentence. Instead of answering the simple retrieval question, it hallucinated a need for external context and provided irrelevant, verbose commentary.",
+      "notable_observations": [
+        "The model failed the rule check 'references_prior_context' in all three runs.",
+        "The model exhibited significant over-complication by questioning the premise of the prompt rather than answering the direct question."
+      ],
+      "test_id": "001"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to correctly identify the information provided in the prompt across all three runs. Run 1 and Run 2 expressed confusion or denied the premise, while Run 3 provided a hallucinated narrative that contradicted the simple fact established in the prompt.",
+      "notable_observations": [
+        "The model failed the 'references_prior_context' rule check in all instances.",
+        "Run 1 and 2 exhibited failure to retrieve simple, explicitly stated information.",
+        "Run 3 exhibited hallucination by inventing details not present in the prompt."
+      ],
+      "test_id": "002"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the deadline from the provided context in all three runs. Although the rule check results provided in the prompt indicate 'false' for 'references_prior_context', this appears to be a misclassification in the provided metadata, as the model explicitly retrieved the information established in the first sentence of the prompt.",
+      "notable_observations": [
+        "The model successfully recalled the specific date provided in the prompt across all iterations.",
+        "The rule check results provided in the prompt appear to be inaccurate based on the model's actual performance."
+      ],
+      "test_id": "003"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the RGB code in two out of three runs. Run 2 provided an incorrect value and hallucinated an explanation for why that incorrect value represented blue, demonstrating a failure in memory retrieval and reasoning.",
+      "notable_observations": [
+        "Run 2 provided an incorrect RGB value (128, 0, 0) despite the prompt explicitly stating (0, 0, 128).",
+        "Run 2 incorrectly claimed that (128, 0, 0) creates a deep blue hue, which is factually incorrect as that value represents a shade of red."
+      ],
+      "test_id": "004"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the information established in the prompt in all three runs. Although the rule check indicated 'false' for references_prior_context, this appears to be a misclassification by the automated check, as the model explicitly retrieved the correct room number from the provided text.",
+      "notable_observations": [
+        "The model consistently provided the correct answer across all runs.",
+        "The automated rule check appears to have incorrectly flagged the responses as not referencing prior context."
+      ],
+      "test_id": "005"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "Only one of the three runs correctly identified the information provided in the prompt. The other two runs failed to retrieve the explicit fact, with one claiming the information was missing and the other providing contradictory reasoning.",
+      "notable_observations": [
+        "Run 1 failed to recall the explicit fact provided in the first sentence.",
+        "Run 2 correctly identified the roles but then undermined the answer with unnecessary speculation.",
+        "Run 3 correctly identified the fact and provided the correct answer."
+      ],
+      "test_id": "006"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to correctly identify the information provided in the prompt in all three runs. Instead of extracting the explicitly stated '12 characters', the model hallucinated complex, incorrect logic to arrive at answers of 13, 16/32/48, and 168 characters respectively.",
+      "notable_observations": [
+        "The model consistently ignored the explicit fact provided in the prompt.",
+        "The model engaged in unnecessary and incorrect mathematical reasoning to derive a minimum length.",
+        "The model failed the 'references_prior_context' rule check in all instances."
+      ],
+      "test_id": "007"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the 50MB limit established in the prompt across all three runs. The rule check results provided in the prompt appear to be incorrectly labeled as 'false', as the model clearly and accurately referenced the prior context to answer the question.",
+      "notable_observations": [
+        "The model successfully retrieved the specific constraint from the provided text.",
+        "The rule check results provided in the prompt contradict the actual performance of the model."
+      ],
+      "test_id": "008"
+    },
+    {
+      "score": 0.66,
+      "confidence": 1.0,
+      "rationale": "The model failed to retrieve the correct information in the first run, providing an incorrect year, but successfully recalled the information in the subsequent two runs. The inconsistency indicates a failure in reliable memory retrieval for this specific context.",
+      "notable_observations": [
+        "Run 1 provided a hallucinated date (2003) instead of the provided 1998.",
+        "Runs 2 and 3 correctly identified the founding year."
+      ],
+      "test_id": "009"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the internal codename 'Project Nightingale' in all three runs. Despite the rule check results indicating a failure, the model successfully retrieved the information established in the first sentence of the prompt.",
+      "notable_observations": [
+        "The model accurately recalled the specific entity requested.",
+        "The rule check results provided in the prompt appear to be incorrect or misaligned with the model's actual performance."
+      ],
+      "test_id": "010"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "The model fails to retrieve the explicitly stated information in two out of three runs, hallucinating that the information is missing or ambiguous. Only the third run correctly identifies the entity, leading to a poor overall performance on a simple memory recall task.",
+      "notable_observations": [
+        "The model failed to identify the entity 'Elena' in Runs 1 and 2 despite it being clearly stated in the prompt.",
+        "The model provided verbose, incorrect justifications for why it could not answer in the first two runs."
+      ],
+      "test_id": "011"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the client's preferred communication method as email in all three runs. Despite the rule check results indicating a failure, the model successfully retrieved the specific information established in the first sentence of the prompt.",
+      "notable_observations": [
+        "The model accurately recalled the context despite the automated rule check flagging a failure.",
+        "The model provided consistent and correct answers across all three runs."
+      ],
+      "test_id": "012"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to correctly extract the explicit information provided in the prompt in all three runs. It hallucinated external rules, deferred to HR, or misinterpreted the provided text, demonstrating a complete failure to utilize the established context.",
+      "notable_observations": [
+        "Run 1 hallucinated a 'one-week rule' and performed incorrect calculations.",
+        "Run 2 failed to answer the question, opting for a generic refusal/deferral.",
+        "Run 3 misstated the expense report policy and failed to provide a direct answer to the specific question asked."
+      ],
+      "test_id": "013"
+    },
+    {
+      "score": 0.3,
+      "confidence": 1.0,
+      "rationale": "While the models correctly identified the $750,000 figure in their initial breakdowns, they failed to provide a direct, concise answer to the specific question asked. Instead, they hallucinated unnecessary calculations and irrelevant context, failing the rule check for referencing prior context effectively by overcomplicating the simple retrieval task.",
+      "notable_observations": [
+        "All runs failed to provide a direct answer to the question.",
+        "Run 2 provided an incorrect value of $1,000,000 despite correctly identifying $750,000 earlier in the response.",
+        "All runs included extraneous, unrequested calculations."
+      ],
+      "test_id": "014"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to identify the version explicitly stated in the prompt in all three runs. Instead of recalling the provided information, the model hallucinated external context or claimed the information was missing.",
+      "notable_observations": [
+        "The model consistently failed to extract the version number '3.1' despite it being explicitly stated in the first sentence of the prompt.",
+        "The model hallucinated that the version was an 'alpha/beta' release in Run 1.",
+        "The model claimed the information was missing in Runs 2 and 3, demonstrating a complete failure of memory context retrieval."
+      ],
+      "test_id": "015"
+    },
+    {
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model correctly identifies the location of the emergency exit in all runs, demonstrating successful recall of the provided context. However, the rule check indicates a failure in the automated verification process, likely due to the model adding extraneous, unverified information (hallucinations) about the exit's specific positioning or building layout.",
+      "notable_observations": [
+        "Run 1 adds unverified details about the exit being 'behind' the extinguisher and on the 'left side'.",
+        "Run 3 adds unverified assumptions about the floor having no other exits.",
+        "Run 2 is the most accurate and concise, adhering strictly to the provided context."
+      ],
+      "test_id": "016"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the requirement for internal meetings in all three runs, accurately recalling that attendees must bring their own laptops. While the model provided excessive, unrequested elaboration in its responses, the core factual recall required by the prompt was perfectly accurate.",
+      "notable_observations": [
+        "The model correctly identified the specific constraint requested.",
+        "The model exhibited significant verbosity and hallucinated additional requirements/recommendations not present in the source text."
+      ],
+      "test_id": "017"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the information in two out of three runs. Run 2 failed significantly by hallucinating a one-hour limit, demonstrating a failure to retrieve the specific constraint established in the prompt.",
+      "notable_observations": [
+        "Run 2 provided an incorrect answer (one hour) despite the prompt explicitly stating 15 minutes.",
+        "Runs 1 and 3 correctly identified the 15-minute limit."
+      ],
+      "test_id": "018"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified 'obsidian' as the material in all three runs, successfully recalling the information provided in the prompt. While the model hallucinated additional context in its explanations, it accurately performed the memory retrieval task requested.",
+      "notable_observations": [
+        "The model correctly retrieved the specific entity requested in every run.",
+        "The rule check results provided in the prompt appear to be erroneous, as the model clearly referenced the prior context in its answers."
+      ],
+      "test_id": "019"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the information in two out of three runs, but failed significantly in the third run by hallucinating a different blooming frequency. The rule check results provided in the prompt are contradictory to the actual content of the model's responses, as the model did successfully reference the prior context in runs 1 and 2.",
+      "notable_observations": [
+        "Run 1 and 2 are accurate.",
+        "Run 3 contains a hallucination regarding the frequency (two years vs seven years).",
+        "The provided rule check results appear to be incorrectly labeled as 'false' for runs that clearly referenced the context."
+      ],
+      "test_id": "020"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model consistently failed to retrieve the simple fact provided in the prompt, instead hallucinating incorrect arithmetic and logic. In all three runs, the model failed to identify the explicit value of 150 units for Product A, demonstrating a complete failure in memory context retrieval.",
+      "notable_observations": [
+        "Run 1 hallucinated that Product B was zero and concluded there were no units of Product A.",
+        "Run 2 incorrectly summed the two products and attributed the total to Product A.",
+        "Run 3 incorrectly summed the two products and attributed the total to Product A.",
+        "All runs failed the 'references_prior_context' rule check."
+      ],
+      "test_id": "021"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "Only one of the three runs correctly identified the provided fact (512) as the answer. The other two runs performed unnecessary and incorrect mathematical operations, demonstrating a failure to retrieve and report the specific information established in the prompt.",
+      "notable_observations": [
+        "Run 1 incorrectly summed the two values.",
+        "Run 2 incorrectly subtracted the two values.",
+        "Run 3 correctly identified the value but included contradictory and nonsensical commentary about the stock being unavailable."
+      ],
+      "test_id": "022"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "The model fails to consistently retrieve the correct information from the prompt. While Run 3 provides the correct answer, Runs 1 and 2 provide factually incorrect information and hallucinate details, demonstrating a failure to accurately process and recall the established context.",
+      "notable_observations": [
+        "Run 1 provides a verbose, irrelevant answer that fails to identify the server.",
+        "Run 2 provides a contradictory and factually incorrect answer.",
+        "Run 3 is the only response that correctly identifies the server based on the provided context."
+      ],
+      "test_id": "023"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to extract the information provided in the prompt, instead hallucinating complex, multi-step procedures that were not present in the source text. It ignored the explicit instruction to identify the first step from the provided context, resulting in a complete failure of memory recall.",
+      "notable_observations": [
+        "The model hallucinated steps not present in the source text.",
+        "The model failed to identify the simple, explicit first step provided in the prompt.",
+        "The model provided verbose, incorrect instructions instead of a direct answer."
+      ],
+      "test_id": "024"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "The model only correctly identified the nickname in the first run. The second run provided an incomplete, nonsensical answer, and the third run hallucinated an inability to answer despite the information being explicitly stated in the prompt.",
+      "notable_observations": [
+        "Run 1 was correct.",
+        "Run 2 was a failure of output generation.",
+        "Run 3 failed to retrieve information present in the immediate context."
+      ],
+      "test_id": "025"
+    }
+  ],
+  "mean_score": 0.4888,
+  "score_std": 0.39810300174703533,
+  "error_count": 0,
+  "asymmetries": []
+}

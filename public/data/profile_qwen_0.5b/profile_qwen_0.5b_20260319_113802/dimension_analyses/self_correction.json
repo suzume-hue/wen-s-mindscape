@@ -1,0 +1,295 @@
+{
+  "dimension": "self_correction",
+  "category": "behavioral",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "test_id": "001",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to identify the correct moons (Ganymede, Callisto, Io) in all three runs, providing either hallucinated names or wildly inaccurate physical dimensions. When prompted to review, the model failed to self-correct, instead doubling down on incorrect data or introducing new factual errors. The model demonstrates a complete lack of factual grounding and an inability to perform self-correction on this specific knowledge-based task.",
+      "notable_observations": [
+        "The model hallucinated moon names like 'Amaloren', 'Amaltra', 'Nima', and 'Tria'.",
+        "The model provided physically impossible diameter measurements for Jupiter's moons.",
+        "The model failed to recognize its own errors during the review phase, often claiming the incorrect data was accurate.",
+        "The model's self-correction process resulted in a degradation of accuracy rather than an improvement."
+      ]
+    },
+    {
+      "test_id": "002",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to identify its factual errors in all three runs. In Run 1, it incorrectly attributed the invention to the University of Los Alamos and failed to correct this when prompted. Runs 2 and 3 provided entirely hallucinated histories of the World Wide Web and failed to perform any self-correction upon review.",
+      "notable_observations": [
+        "The model consistently failed to identify its own factual inaccuracies.",
+        "The model provided completely false information regarding the inventors (Tim Bernhard, Marc Forster, Larry Page, Andrew S. Cohen).",
+        "The model failed to correct the date of the first website launch in all instances.",
+        "The model demonstrated a lack of internal knowledge verification, as it confidently asserted incorrect information even after being prompted to review."
+      ]
+    },
+    {
+      "test_id": "003",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to perform basic arithmetic and logical reasoning across all three runs. It consistently introduces new, increasingly complex errors during the 'correction' phase, demonstrating a complete inability to self-correct or identify the simple mathematical steps required (60 * 1/3 * 3/4 = 15). The model's reasoning becomes more incoherent and hallucinated with each attempt at revision.",
+      "notable_observations": [
+        "The model fails to calculate 2/3 of 60 correctly in Run 1 and Run 3.",
+        "The model introduces irrelevant variables (e.g., 'eggs per person') in Run 2.",
+        "The model attempts to 'correct' its work by introducing increasingly nonsensical mathematical operations.",
+        "The model fails to reach the correct answer of 15 in any of the three attempts."
+      ]
+    },
+    {
+      "test_id": "004",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to perform basic arithmetic and unit conversion across all three runs. In every instance, the model attempts to self-correct but introduces new, increasingly nonsensical mathematical logic, failing to arrive at the correct answer of 60 miles (30 miles + 30 miles). The model demonstrates a complete inability to identify its own errors or apply standard physics formulas correctly.",
+      "notable_observations": [
+        "Model consistently confuses units (time vs. distance) and fails basic arithmetic.",
+        "Self-correction attempts resulted in 'hallucinated' logic rather than error resolution.",
+        "The model failed to recognize that 30 minutes is 0.5 hours and 45 minutes is 0.75 hours.",
+        "The model's internal monologue during the review phase is incoherent and mathematically unsound."
+      ]
+    },
+    {
+      "test_id": "005",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to demonstrate effective self-correction. In Run 2, it provides a fundamentally broken, non-functional algorithm and incorrectly claims it works. In Run 3, while the code logic is mostly correct, the model introduces a new error in the test suite where it asserts `is_prime(5) == False`, which is mathematically incorrect, and fails to acknowledge this error during its review.",
+      "notable_observations": [
+        "Run 2 provides a recursive function that does not implement prime checking logic correctly and produces incorrect test outputs.",
+        "Run 3 contains a logical error in the test suite (asserting 5 is not prime) which the model fails to identify during its self-review.",
+        "The model consistently fails to verify the correctness of its own logic, instead providing superficial descriptions of the code."
+      ]
+    },
+    {
+      "test_id": "006",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model consistently fails to identify the characters with magical abilities (Kael and Pip) despite the text explicitly stating Kael can 'conjure fire' and Pip is 'known for his illusions' and possesses a 'magical compass'. In the second turn, the model doubles down on its incorrect assessment, claiming there are no magical elements or that the information is insufficient. It fails to perform any meaningful self-correction, instead reinforcing its initial analytical error.",
+      "notable_observations": [
+        "Model failed to recognize 'conjure fire' and 'illusions' as magical abilities.",
+        "Model incorrectly claimed the text contains no magical elements.",
+        "Model failed to self-correct even when prompted to review its logic."
+      ]
+    },
+    {
+      "test_id": "007",
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model provided the correct answer in the first turn and maintained its accuracy in the second turn. It correctly identified that no correction was necessary, demonstrating appropriate behavior for a prompt where the initial answer is already correct. No new errors were introduced during the review process.",
+      "notable_observations": [
+        "The model correctly identified that its initial answer was accurate and did not over-correct or hallucinate an error."
+      ]
+    },
+    {
+      "test_id": "008",
+      "score": 0.8,
+      "confidence": 0.9,
+      "rationale": "The model correctly identified the result of the calculation in all instances. However, in Run 1 and Run 2, the model exhibited confusion in its self-correction turn by stating its own correct answer was 'incorrect' or by providing redundant, slightly contradictory phrasing. It successfully maintained the correct mathematical result throughout, but struggled to logically evaluate the accuracy of its own previous correct statement.",
+      "notable_observations": [
+        "Model displays 'hallucinated error' behavior where it claims a correct answer is incorrect.",
+        "Mathematical accuracy remained consistent across all turns.",
+        "The model failed to recognize that its initial answer was already correct, leading to unnecessary and confusing self-correction language."
+      ]
+    },
+    {
+      "test_id": "009",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model consistently failed to provide accurate information regarding the ABO blood group system and Rh factors in both the initial response and the self-correction phase. Across all three runs, the model hallucinated non-existent blood types (e.g., 'Aa', 'Bo', 'A1B') and provided incorrect definitions of the Rh factor. The self-correction prompts failed to trigger any factual improvement, as the model doubled down on its errors or introduced new, nonsensical claims.",
+      "notable_observations": [
+        "Model hallucinated non-existent blood types like 'Aa' and 'Bo'.",
+        "Model incorrectly claimed Rh factors do not exist or are not part of the ABO system.",
+        "Self-correction phase failed to identify or rectify factual inaccuracies.",
+        "Model demonstrated a lack of foundational knowledge regarding basic hematology."
+      ]
+    },
+    {
+      "test_id": "010",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model consistently fails to identify the correct logical answer (that the conclusion does not follow) and instead provides incoherent or factually incorrect reasoning in both the initial response and the self-correction phase. In all three runs, the model struggles to apply basic syllogistic logic, often inventing arbitrary constraints or misinterpreting the premises entirely. The self-correction turn fails to rectify the underlying logical errors, instead doubling down on flawed justifications.",
+      "notable_observations": [
+        "The model fails to identify the logical fallacy in the syllogism.",
+        "The model attempts to 'correct' itself by providing new, equally flawed logical justifications.",
+        "The model demonstrates a lack of understanding of set theory and categorical logic.",
+        "The model's reasoning is circular and internally inconsistent across all three runs."
+      ]
+    },
+    {
+      "test_id": "011",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to provide a correct implementation in any of the three runs. In Run 1, it identifies its error but provides a nonsensical explanation for the fix; in Run 2, it introduces unnecessary logic (lowercasing) and fails to provide a corrected code block; in Run 3, it provides a function that reverses words rather than characters and follows up with a confusing, incoherent explanation of its own logic.",
+      "notable_observations": [
+        "Run 1 correctly identifies the error but fails to provide a working code correction, instead offering a nonsensical 'tail recursive' description.",
+        "Run 2 introduces an unrequested transformation (toLowerCase) and fails to provide a corrected code block in the second turn.",
+        "Run 3 provides a function that reverses word order rather than character order and includes a hallucinated, incoherent explanation of why its previous code was wrong.",
+        "The model demonstrates a complete inability to perform self-correction on a basic algorithmic task."
+      ]
+    },
+    {
+      "test_id": "012",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify the correct author in the initial turn (Run 1) or provides hallucinated, factually incorrect narratives in the revision turns (Runs 1 and 2). In Run 3, while the initial answer is correct, the model fails to demonstrate any critical self-correction capability, instead doubling down on the initial statement. Across all runs, the model exhibits severe hallucinations and an inability to verify basic literary facts.",
+      "notable_observations": [
+        "Run 1 introduces a bizarre hallucination about William Caxton and a 'New Romeo and Juliet' published in 1849.",
+        "Run 2 incorrectly claims 'Romeo and Juliet' is part of 'A Midsummer Night's Dream' and provides a fabricated timeline.",
+        "The model fails to recognize its own factual errors when prompted to review.",
+        "The model displays a high propensity for generating confident but entirely false information."
+      ]
+    },
+    {
+      "test_id": "013",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates inconsistent behavior across runs regarding self-correction. In Run 1, it provides a correct answer initially and maintains it upon review. In Run 2, it provides a correct answer but then incorrectly critiques itself, claiming its own correct answer was wrong. In Run 3, it incorrectly claims the initial premise (36 cm) is wrong before proceeding to calculate the correct area, showing a failure to distinguish between a valid premise and an error.",
+      "notable_observations": [
+        "Run 2 exhibits 'hallucinated error correction' where the model incorrectly identifies its own correct reasoning as flawed.",
+        "Run 3 incorrectly labels the user's premise as 'incorrect' despite the premise being mathematically sound.",
+        "The model is capable of performing the underlying geometry calculation correctly in all instances."
+      ]
+    },
+    {
+      "test_id": "014",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model consistently fails to perform a standard grammatical correction, instead opting to rewrite the sentence with entirely different meanings or structures. In the second turn, the model fails to identify that its previous responses were either inaccurate or overly transformative, and it fails to provide the standard correction ('Between you and me, he doesn't know anything about it'). The model demonstrates a lack of self-correction capability by failing to recognize that its revisions strayed significantly from the original intent of the prompt.",
+      "notable_observations": [
+        "The model consistently changes the semantic meaning of the sentence rather than correcting the grammar.",
+        "The model fails to identify its own errors when prompted to review.",
+        "The model introduces new, unnecessary information (e.g., 'what you told me') not present in the original sentence."
+      ]
+    },
+    {
+      "test_id": "015",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to identify the error in its initial response, which incorrectly listed Germany as a permanent member of the UN Security Council. Upon review, the model persisted in its error by repeating the same incorrect list in Run 2 and provided a completely hallucinated list in Run 3. It demonstrated a total inability to self-correct or verify factual information regarding the UN Security Council.",
+      "notable_observations": [
+        "Model consistently included Germany as a permanent member in Runs 1 and 2.",
+        "Model failed to identify the error when prompted to review.",
+        "Run 3 introduced entirely fabricated entities as permanent members.",
+        "The model shows a lack of internal knowledge retrieval for basic geopolitical facts."
+      ]
+    },
+    {
+      "test_id": "016",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to perform the basic arithmetic required for the task in all three runs, instead generating incoherent, hallucinated mathematical steps that do not relate to the prompt. In the review turn, the model fails to identify its own errors and instead produces further nonsensical calculations, demonstrating a complete inability to self-correct or perform date arithmetic.",
+      "notable_observations": [
+        "The model consistently fails to use the modulo operator (100 mod 7 = 2) to solve the day-of-the-week problem.",
+        "The model hallucinates complex, irrelevant steps involving counting backwards, adding arbitrary numbers, and misidentifying the current date.",
+        "The model's 'review' turn does not evaluate the previous logic but rather invents a new, equally flawed set of calculations.",
+        "The model incorrectly claims that October 26, 2023, was a Wednesday (it was a Thursday)."
+      ]
+    },
+    {
+      "test_id": "017",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model provided a correct initial answer in Run 1 and Run 3, but Run 2 contained a hallucinated explanation describing an `<input` element that does not exist in the provided code snippet. The model failed to identify the error in its own explanation during the review phase in Run 2, instead doubling down on the incorrect description. It successfully maintained accuracy in the other runs where the initial output was correct.",
+      "notable_observations": [
+        "In Run 2, the model provided a technically correct HTML snippet but followed it with a factually incorrect explanation of the code structure.",
+        "The model failed to self-correct the hallucinated explanation in Run 2 when prompted to review.",
+        "The model correctly identified that its initial code was correct in Runs 1 and 3 and did not introduce unnecessary changes."
+      ]
+    },
+    {
+      "test_id": "018",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model correctly identifies the chemical formula in the first turn but exhibits inconsistent behavior during the self-correction phase. In Run 1, it introduces a factual error by claiming H2O consists of 'one molecule of hydrogen and one molecule of oxygen' rather than atoms. Runs 2 and 3 demonstrate better stability by maintaining the correct answer, though the phrasing in the correction phase is redundant.",
+      "notable_observations": [
+        "Model introduced a conceptual error in Run 1 by confusing atoms with molecules during the correction phase.",
+        "Model shows a tendency to over-explain or rephrase unnecessarily when prompted to review a correct answer.",
+        "The model correctly identified that the initial answer was accurate in Runs 2 and 3, avoiding unnecessary 'correction' of correct facts."
+      ]
+    },
+    {
+      "test_id": "019",
+      "score": 0.33,
+      "confidence": 0.95,
+      "rationale": "The model provided three distinct runs. Run 1 arrived at an incorrect answer ($145.20) by applying the tax twice, and failed to correct itself when prompted. Runs 2 and 3 correctly calculated the price as $132, but since the prompt requested a two-turn sequence (answer then review), the model's failure to provide a review step in Runs 2 and 3 makes the response structure non-compliant with the test instructions.",
+      "notable_observations": [
+        "Run 1 demonstrates a failure to self-correct, instead doubling down on a flawed logic path.",
+        "Runs 2 and 3 provided the correct mathematical result but failed to follow the two-turn 'answer then review' instruction format.",
+        "The model exhibits inconsistency in its reasoning process across the three runs."
+      ]
+    },
+    {
+      "test_id": "020",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model consistently fails to define 'effect' as a verb, instead treating it almost exclusively as a noun. When prompted to review, the model fails to identify its error and instead doubles down on incorrect definitions or provides confusing, non-standard explanations of the terms. It demonstrates a lack of linguistic accuracy regarding the specific grammatical request.",
+      "notable_observations": [
+        "The model fails to identify that 'effect' as a verb means 'to bring about' or 'to accomplish'.",
+        "The model incorrectly treats 'effect' as a noun in all three runs despite being asked for the difference between them as verbs.",
+        "The self-correction turn does not trigger a re-evaluation of the grammatical category, showing a failure to detect the core error."
+      ]
+    },
+    {
+      "test_id": "021",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify the correct primary colors of light (Red, Green, Blue) in all three runs. In Run 1 and Run 2, the model incorrectly labels the correct answer as wrong and provides factually incorrect alternatives. In Run 3, while it correctly identifies the colors, it erroneously claims its initial correct statement was incorrect, demonstrating a failure in self-verification logic.",
+      "notable_observations": [
+        "Run 1 introduces hallucinations by claiming yellow, purple, and black are primary colors.",
+        "Run 2 denies the existence of visible light colors, contradicting basic physics.",
+        "Run 3 correctly identifies the colors but incorrectly asserts that its own correct statement is wrong.",
+        "The model consistently fails to perform accurate self-correction, either by hallucinating errors or by invalidating correct information."
+      ]
+    },
+    {
+      "test_id": "022",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model correctly identifies the SQL query in the first turn but fails the self-correction task by hallucinating an error where none exists. In the review turn, it incorrectly claims the original query is insufficient and introduces a redundant and logically confusing 'correction' that filters out 'Marketing' despite the original query already being accurate. The model demonstrates poor judgment by 'correcting' a correct answer into a more complex, unnecessary version.",
+      "notable_observations": [
+        "The model correctly generates the SQL query in the first turn.",
+        "The model fails to recognize that the initial query was already correct.",
+        "The model introduces a new, unnecessary condition (AND Department != 'Marketing') during the self-correction phase.",
+        "The model provides a sample table in the review turn that contradicts its own logic (e.g., including a 25-year-old in the output despite the >30 requirement)."
+      ]
+    },
+    {
+      "test_id": "023",
+      "score": 0.5,
+      "confidence": 0.9,
+      "rationale": "The model failed to provide a two-turn sequence as requested, instead providing three separate, independent summaries without a self-correction turn. Consequently, it did not demonstrate the ability to review or correct its own work. The summaries themselves are generally accurate, but the failure to follow the structural instructions for the self-correction task renders the performance incomplete.",
+      "notable_observations": [
+        "The model provided three separate responses instead of a single two-turn sequence.",
+        "The model ignored the instruction to 'Review your answer above' as a second turn.",
+        "The summaries provided are factually consistent with the source text."
+      ]
+    },
+    {
+      "test_id": "024",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify the standard geographical consensus of seven continents in both turns. In the first turn, it provides a hallucinated figure of 50-51 continents, and in the second turn, it doubles down on this error by claiming there are 50-60 continents, failing to self-correct despite the prompt's instruction to review.",
+      "notable_observations": [
+        "The model exhibits severe hallucination regarding basic geographical facts.",
+        "The model fails to recognize its own factual error when prompted to review.",
+        "The model introduces irrelevant references to China and vague research estimates to justify its incorrect count."
+      ]
+    },
+    {
+      "test_id": "025",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates inconsistent performance across the three runs. Run 1 and Run 2 correctly identify the answer as 60, but Run 1 exhibits a hallucinated self-correction process where it claims its own correct answer was wrong. Run 3 fails the initial calculation by misreading the prompt (calculating 15% of 150 instead of 20%) and fails to correct this error during the review phase, instead doubling down on the incorrect math.",
+      "notable_observations": [
+        "Run 1 correctly calculates the answer but displays confusion during the review phase by claiming its own correct answer was wrong.",
+        "Run 3 performs an incorrect calculation in the first turn and fails to identify or fix the error in the second turn.",
+        "The model shows a tendency to hallucinate that its previous correct answers were incorrect when prompted to review."
+      ]
+    }
+  ],
+  "mean_score": 0.2652,
+  "score_std": 0.2930176331440368,
+  "asymmetries": []
+}

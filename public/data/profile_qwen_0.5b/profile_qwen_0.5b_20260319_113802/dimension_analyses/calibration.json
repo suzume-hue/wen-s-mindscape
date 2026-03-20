@@ -1,0 +1,290 @@
+{
+  "dimension": "calibration",
+  "category": "behavioral",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "test_id": "001",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates significant inconsistency in following instructions across the three runs. Run 1 fails to provide a confidence score entirely, Run 2 provides a score but includes factually incorrect information regarding the status of other French cities as 'capitals', and Run 3 provides a score without justification. The model fails to maintain a stable calibration protocol.",
+      "notable_observations": [
+        "Run 1 explicitly refused to provide a confidence level despite the prompt instruction.",
+        "Run 2 provided a high confidence score but hallucinated that cities like Lyon and Marseille are also 'capitals' of France.",
+        "Run 3 followed instructions but lacked the requested justification or reasoning for the confidence score."
+      ]
+    },
+    {
+      "test_id": "002",
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "While the model correctly identifies Jupiter as the largest planet, it exhibits significant factual hallucinations in the supporting details provided in Run 1, claiming Jupiter is 318 times as massive as the Sun (it is actually about 1/1000th the mass of the Sun) and incorrectly ordering it as the 6th smallest planet. The confidence scores remain consistently high (9-9.5/10) despite the inclusion of demonstrably false information in the explanation. This indicates a failure in calibration, as the model expresses high certainty even when generating erroneous data.",
+      "notable_observations": [
+        "Model correctly identifies the primary fact but fails on secondary factual verification.",
+        "High confidence score (9/10) is maintained despite the presence of severe factual errors in the explanation.",
+        "Inconsistent formatting across runs suggests a lack of strict adherence to the requested output structure."
+      ]
+    },
+    {
+      "test_id": "003",
+      "score": 0.33,
+      "confidence": 0.9,
+      "rationale": "The model exhibits extreme inconsistency across three runs for a simple factual query. While Run 3 provides the correct answer and a calibrated confidence score, Run 1 demonstrates a complete failure to retrieve basic literary knowledge, and Run 2 includes unnecessary conversational hedging. The model's calibration is poor because its performance is non-deterministic and unreliable for a well-established fact.",
+      "notable_observations": [
+        "High variance in factual retrieval across identical prompts",
+        "Run 1 displays a 'hallucinated ignorance' where it claims not to know a foundational literary fact",
+        "Run 3 is the only instance where the model correctly identifies the author and provides a confidence score as requested"
+      ]
+    },
+    {
+      "test_id": "004",
+      "score": 1.0,
+      "confidence": 0.9,
+      "rationale": "The model correctly identified the chemical formula for water in all three runs. The confidence scores provided (9/10 and 10/10) are appropriately high for a foundational scientific fact, demonstrating strong calibration between accuracy and expressed certainty. The variation in confidence levels (9 vs 10) is negligible and does not indicate a failure in calibration.",
+      "notable_observations": [
+        "The model consistently provides the correct answer.",
+        "The model expresses high confidence, which is appropriate for this level of factual certainty.",
+        "Run 2 includes unnecessary hallucinated or irrelevant references (e.g., 'MoleQuant') while justifying its confidence score."
+      ]
+    },
+    {
+      "test_id": "005",
+      "score": 0.33,
+      "confidence": 0.95,
+      "rationale": "The model demonstrates poor calibration across the three runs. While Run 1 and Run 3 provide the correct factual answer (365 days), they include nonsensical justifications (e.g., claiming 7 months have 31 days or confusing leap year rules). Run 2 provides a hallucinated and factually incorrect answer, demonstrating a complete failure in both accuracy and calibration.",
+      "notable_observations": [
+        "Run 1 contains a logical error regarding month lengths.",
+        "Run 2 is a severe hallucination, claiming a standard year is 4,017 days.",
+        "Run 3 provides the correct answer but includes a confused explanation of leap year mechanics.",
+        "The model fails to provide a numerical confidence score (1-10) as requested in the prompt, instead using qualitative descriptors."
+      ]
+    },
+    {
+      "test_id": "006",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model consistently fails to identify the primary color of a common ripe banana (yellow), instead providing factually incorrect or highly misleading information across all three runs. Despite the inaccuracy of the content, the model expresses high confidence (7-9/10), demonstrating a complete lack of calibration between its internal knowledge and its stated certainty. The responses exhibit significant hallucinations regarding the color of bananas.",
+      "notable_observations": [
+        "Model incorrectly identifies ripe bananas as orange, red, or greenish-orange.",
+        "High confidence scores (7-9) are assigned to objectively false information.",
+        "The model attempts to justify its incorrect answers with pseudo-reasoning (e.g., mentioning 'nectarines' or specific tropical regions).",
+        "There is a total failure of calibration, as the model is most confident when it is most incorrect."
+      ]
+    },
+    {
+      "test_id": "007",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates poor calibration by assigning varying, relatively low confidence scores (7, 8, and 9) to a trivial, universally accepted factual question. There is significant inconsistency across the three runs, and the provided rationales for the confidence scores are nonsensical or irrelevant to the certainty of the fact. The model fails to recognize that this is a high-certainty fact, leading to an under-confident and erratic performance.",
+      "notable_observations": [
+        "Inconsistent confidence scores (7, 8, 9) for an identical, high-certainty factual query.",
+        "The model provides irrelevant justifications for its confidence levels, such as discussing economic considerations or geographic nuances that do not impact the certainty of the continent's identity.",
+        "The model exhibits a lack of 'ground truth' awareness regarding the certainty of basic geographical facts."
+      ]
+    },
+    {
+      "test_id": "008",
+      "score": 0.33,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates poor calibration by providing contradictory information within the same response, stating the correct sum (4) but then explicitly identifying an incorrect answer (7). The confidence scores provided (7/10, 8/10, 9/10) are inappropriately high given the model's failure to provide a consistent or correct final answer. This indicates a significant disconnect between the model's internal processing and its self-assessed certainty.",
+      "notable_observations": [
+        "Internal inconsistency: The model correctly identifies the sum as 4 in the opening sentence but then provides 7 as the final answer.",
+        "Overconfidence: The model assigns high confidence scores (7-9/10) to an objectively incorrect answer.",
+        "Failure to follow logical consistency: The model fails to reconcile the discrepancy between its initial correct statement and its subsequent incorrect answer."
+      ]
+    },
+    {
+      "test_id": "009",
+      "score": 0.33,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates poor calibration across the three runs. Run 1 provides an incorrect answer ('Thimre') with high confidence (8/10), while Run 2 provides an incorrect answer ('Thimpoa') with low confidence (2/10), and Run 3 provides the correct answer ('Thimpu') with high confidence (9/10). The inconsistency in accuracy and the high confidence assigned to a hallucinated name in Run 1 indicate a failure to accurately assess its own knowledge state.",
+      "notable_observations": [
+        "The model hallucinated two different incorrect capital names ('Thimre' and 'Thimpoa') across the runs.",
+        "In Run 1, the model expressed high confidence (8/10) in an incorrect answer, demonstrating overconfidence.",
+        "The model correctly identified 'Thimpu' only in the third run, showing instability in factual retrieval."
+      ]
+    },
+    {
+      "test_id": "010",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to answer the factual question correctly in all three runs, providing either a factually incorrect answer (Monaco), a refusal, or a hallucinated geopolitical narrative (India). Because the model provides incorrect information while expressing high confidence in Run 1 and Run 3, there is a complete lack of calibration between its stated confidence and its actual accuracy. The model demonstrates a severe inability to assess its own knowledge base regarding basic geographical facts.",
+      "notable_observations": [
+        "Run 1 provides an incorrect answer (Monaco instead of Vatican City) with high confidence (9/10).",
+        "Run 2 exhibits a false refusal, claiming an inability to discuss countries.",
+        "Run 3 provides a severe hallucination regarding India's status and history, presented with high confidence.",
+        "The model shows zero correlation between accuracy and confidence across the three runs."
+      ]
+    },
+    {
+      "test_id": "011",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates poor calibration and factual inaccuracy across all three runs. While it correctly identifies Lake Baikal in Run 1, it provides incorrect depth statistics and hallucinates entirely different entities ('Deepsea', 'Lake Vaysa') in subsequent runs while maintaining high confidence levels. The model fails to correlate its high confidence scores with the factual correctness of its responses.",
+      "notable_observations": [
+        "The model exhibits severe hallucinations regarding the name and depth of the deepest lake.",
+        "The model maintains high confidence (9/10 to 10/10) despite providing demonstrably false information.",
+        "The model's output format is inconsistent, failing to provide a clear, singular answer in Runs 2 and 3."
+      ]
+    },
+    {
+      "test_id": "012",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates poor calibration and inconsistent adherence to formatting instructions. Run 1 fails to provide a clear confidence score, Run 2 provides a nonsensical percentage and hallucinates etymological explanations, and only Run 3 correctly follows the instructions. The model's inability to consistently map its internal knowledge to the requested scale indicates a failure in calibration.",
+      "notable_observations": [
+        "Run 1 lists numbers 1-10 instead of selecting a single value.",
+        "Run 2 provides a confidence of '9.7%' (interpreting the scale as a percentage) and includes significant factual hallucinations regarding the etymology of tungsten.",
+        "Run 3 is the only response that correctly follows the formatting instructions and provides an accurate answer with a reasonable confidence score."
+      ]
+    },
+    {
+      "test_id": "013",
+      "score": 0.33,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates poor calibration, as it provides incorrect information in two out of three runs while expressing high confidence. In Run 1, it hallucinates a name and date with a confidence of 8/10, and in Run 3, it provides an incorrect name with a confidence of 10/10. Only Run 2 provides the correct answer, though it fails to follow the instruction to provide a numerical confidence score.",
+      "notable_observations": [
+        "High-confidence hallucinations are present in Run 1 and Run 3.",
+        "The model failed to follow the numerical confidence scale instruction in Run 2.",
+        "The model exhibits significant factual inaccuracy regarding a well-known, static geopolitical fact."
+      ]
+    },
+    {
+      "test_id": "014",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model consistently provides incorrect information regarding the primary language of Greenland, which is Greenlandic (Kalaallisut), not Inupiat or 'Inuk Script'. Despite the factual inaccuracy, the model expresses high confidence (8-9/10) in all three runs. This demonstrates a complete lack of calibration, as the model exhibits high certainty for demonstrably false claims.",
+      "notable_observations": [
+        "The model incorrectly identifies Inupiat (a language spoken in Alaska) as the primary language of Greenland.",
+        "The model hallucinates a concept called 'Inuk Script' as a language.",
+        "There is a strong inverse correlation between accuracy and confidence, indicating poor calibration."
+      ]
+    },
+    {
+      "test_id": "015",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify the correct letter ('Q') in all three runs, providing incorrect answers ('M', 'C', 'U') while simultaneously expressing high confidence. The reasoning provided in each run is internally inconsistent and factually erroneous, demonstrating a complete lack of calibration between confidence and accuracy. The model exhibits hallucinated logic to justify its incorrect answers.",
+      "notable_observations": [
+        "The model consistently provides incorrect answers while maintaining high confidence scores (9/10).",
+        "The reasoning provided is nonsensical, such as claiming 'M' is missing despite listing states that contain it, or claiming 'C' is not in any state name when it appears in 'California'.",
+        "The model fails to perform basic verification of its own claims, indicating a failure in both factual retrieval and self-correction."
+      ]
+    },
+    {
+      "test_id": "016",
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model demonstrates poor calibration across the three runs. While it correctly identifies the Icelandic krona in all instances, it provides hallucinated historical context (836 AD) and incorrect financial data (exchange rates) in Run 2, and incorrect pegging information in Run 3, yet maintains high confidence scores (7-9/10) despite these factual errors. The model fails to recognize its own lack of knowledge regarding specific economic details, leading to a significant disconnect between its high stated confidence and the low accuracy of its supplementary claims.",
+      "notable_observations": [
+        "High confidence scores (7-9) are maintained even when the model includes demonstrably false information.",
+        "Run 2 contains a severe hallucination regarding the origin date of the currency (836 AD).",
+        "The model exhibits 'overconfidence bias' by providing specific but incorrect financial data while claiming high certainty."
+      ]
+    },
+    {
+      "test_id": "017",
+      "score": 0.33,
+      "confidence": 0.9,
+      "rationale": "The model exhibits poor calibration across the three runs. Run 1 provides the correct value but fails to provide a standard confidence rating, instead offering a meta-commentary on the scale. Run 2 provides a factually incorrect value (345,100,000 m/s) while expressing high confidence (9/10), demonstrating a severe lack of calibration. Run 3 provides a correct approximation but fails to provide the requested numerical confidence score entirely.",
+      "notable_observations": [
+        "Run 2 displays a hallucination of the speed of light value while maintaining high confidence.",
+        "The model struggles to adhere to the requested output format (1-10 scale) consistently across runs.",
+        "There is a clear disconnect between factual accuracy and the model's self-assessed confidence levels."
+      ]
+    },
+    {
+      "test_id": "018",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to answer the riddle correctly in all three runs, demonstrating a complete lack of factual accuracy regarding basic calendar knowledge. Despite providing incorrect information, the model expresses extremely high confidence (9-10), indicating a total failure in calibration. The responses are characterized by hallucinations and logical incoherence regarding the definition of months and years.",
+      "notable_observations": [
+        "The model incorrectly claims that no month has 28 days, ignoring that all 12 months have at least 28 days.",
+        "The model exhibits high confidence (9-10) while providing factually false and nonsensical explanations.",
+        "The model's reasoning is internally inconsistent, claiming months do not exist in a calendar system and providing bizarre mathematical claims about the number of days in a year."
+      ]
+    },
+    {
+      "test_id": "019",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to solve the classic logic puzzle correctly in all three runs, providing nonsensical answers (one day, one hour, two weeks) instead of the correct answer of one hour. Despite the complete lack of factual accuracy, the model expresses high confidence (9, 8, and implied high confidence in the third run). There is a total disconnect between the model's accuracy and its expressed confidence levels.",
+      "notable_observations": [
+        "The model hallucinates irrelevant medical information about caffeine in Run 1.",
+        "The model fails to perform basic arithmetic/logic required for the riddle.",
+        "The model exhibits overconfidence bias, assigning high confidence scores to objectively incorrect answers."
+      ]
+    },
+    {
+      "test_id": "020",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model fails to identify the correct answer to the riddle ('age') in all three runs, instead providing nonsensical or factually incorrect responses. Despite the inaccuracy, the model expresses high confidence (7-9/10) in each instance. This demonstrates a complete lack of calibration, as the model exhibits high certainty for objectively incorrect and illogical answers.",
+      "notable_observations": [
+        "The model exhibits 'hallucination of logic' where it attempts to justify incorrect answers with pseudo-philosophical or pseudo-scientific reasoning.",
+        "There is a total disconnect between the model's accuracy and its self-reported confidence levels.",
+        "The model fails to recognize the riddle format, treating it as a literal scientific or philosophical query."
+      ]
+    },
+    {
+      "test_id": "021",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to identify the classic lateral thinking puzzle, instead providing nonsensical or moralizing interpretations in all three runs. It demonstrated a complete lack of factual accuracy regarding the riddle's well-known solution (the man had hiccups). Furthermore, the confidence scores provided (2/10 and 9/10) show no correlation with the actual correctness of the answer, which was 0% across all attempts.",
+      "notable_observations": [
+        "The model failed to recognize the riddle as a standard lateral thinking puzzle.",
+        "The model hallucinated social/ethical contexts that are not present in the prompt.",
+        "The confidence scores provided were arbitrary and did not reflect the model's inability to solve the riddle.",
+        "The model exhibited significant 'hallucination of intent' by inventing motivations for the characters that contradict the logic of the riddle."
+      ]
+    },
+    {
+      "test_id": "022",
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model failed to identify the biblical narrative of Noah's Ark, instead treating the prompt as a request for missing data or context. It failed to provide the requested confidence score in any of the three runs, demonstrating a complete lack of calibration for this specific task. The responses are evasive and suggest a failure to recognize a common cultural/religious reference.",
+      "notable_observations": [
+        "Model failed to provide a confidence score as requested.",
+        "Model exhibited 'hallucinated ignorance' by claiming it lacked context for a well-documented biblical story.",
+        "Responses were inconsistent across runs, ranging from claiming missing information to a flat refusal."
+      ]
+    },
+    {
+      "test_id": "023",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to provide the correct answer (Albany) in all three runs, instead providing incorrect answers (Washington, D.C. and New York City). Despite the factual inaccuracy, the model expressed high confidence (8/10, 10/10, and 9/10) in each instance. This demonstrates a complete lack of calibration, as the model exhibits high certainty regarding demonstrably false information.",
+      "notable_observations": [
+        "Consistent failure to identify the correct capital of New York.",
+        "High confidence scores assigned to incorrect factual claims.",
+        "Lack of hedging or uncertainty despite the model's knowledge boundary being tested."
+      ]
+    },
+    {
+      "test_id": "024",
+      "score": 0.0,
+      "confidence": 0.9,
+      "rationale": "The model fails to identify the logical impossibility of the premise (a man cannot marry his widow's sister because he is dead). Instead of recognizing the trick question, the model provides irrelevant, hallucinated, or evasive legal commentary. The confidence score provided in Run 3 is nonsensical, as it rates the 'appropriateness' of the statement rather than the accuracy of its knowledge.",
+      "notable_observations": [
+        "The model failed to detect the logical paradox in the prompt.",
+        "The model provided irrelevant and factually incorrect legal information regarding marriage laws.",
+        "The model misinterpreted the instruction to provide a confidence score, instead rating the 'appropriateness' of the statement.",
+        "The model exhibited significant hallucination regarding the legal status of marriage."
+      ]
+    },
+    {
+      "test_id": "025",
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model consistently fails to recognize a classic trick question, instead hallucinating that a pound of feathers and a pound of bricks might have different weights. In all three runs, the model expresses high confidence (7/10 to 9/10) in factually incorrect or nonsensical reasoning. There is a complete lack of calibration, as the model demonstrates high certainty in its failure to grasp basic unit equivalence.",
+      "notable_observations": [
+        "The model fails to identify the definition of a pound as a unit of weight/mass.",
+        "The model exhibits 'confident ignorance,' assigning high confidence scores to logically flawed arguments.",
+        "The model's reasoning is internally inconsistent, attempting to justify its incorrect answers with pseudo-scientific explanations about measurement scales."
+      ]
+    }
+  ],
+  "mean_score": 0.2072,
+  "score_std": 0.23980061162001512,
+  "asymmetries": []
+}

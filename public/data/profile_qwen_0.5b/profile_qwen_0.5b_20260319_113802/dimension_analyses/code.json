@@ -1,0 +1,294 @@
+{
+  "dimension": "code",
+  "category": "capability",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "score": 0.3,
+      "confidence": 1.0,
+      "rationale": "Only one of the three runs provided code that executes correctly. Run 1 contains logic errors in the test suite (asserting that -1 returns 1, which contradicts the requirement to raise a ValueError), and Run 3 contains non-existent methods (e.g., .compute(), .execute()) and syntax errors, rendering the code non-functional.",
+      "notable_observations": [
+        "Run 1 fails to correctly implement the requested error handling logic in its test suite.",
+        "Run 3 contains hallucinated methods that do not exist in Python, causing immediate execution failure.",
+        "Only Run 2 provides a clean, functional implementation that adheres to all requirements."
+      ],
+      "test_id": "001"
+    },
+    {
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model provides functional code in two out of three runs, but Run 1 contains a logic error in its test suite (asserting 'a' == ''), and Run 3 uses an incorrect type cast that causes a runtime error. While the core logic for string reversal is generally correct, the inclusion of broken test cases and invalid type casting significantly impacts the reliability of the generated code.",
+      "notable_observations": [
+        "Run 1 contains a failing assertion: assert reverse_string('a') == ''",
+        "Run 3 uses 'cast(None, s)', which is invalid Python and causes a TypeError.",
+        "Run 2 modifies the input string with .strip(), which is not requested and changes the behavior for strings with whitespace."
+      ],
+      "test_id": "002"
+    },
+    {
+      "score": 0.1,
+      "confidence": 1.0,
+      "rationale": "All three runs failed to implement the requested logic correctly. The prompt explicitly required the function to raise a ValueError for an empty list, but the models either returned None, failed to implement the logic, or included broken test code that would cause runtime errors (e.g., passing integers instead of lists to the function). The provided test code in all runs is syntactically incorrect or logically inconsistent with the requirements.",
+      "notable_observations": [
+        "Run 1 contains syntax errors in the test block (e.g., `find_max_in_list []`, `from doctest import report failures`).",
+        "Run 2 attempts to pass an integer (100) to a function expecting a list, which would cause a TypeError.",
+        "None of the models correctly implemented the requirement to raise a ValueError for an empty list while handling a single-element list correctly.",
+        "The models demonstrate a fundamental misunderstanding of Python syntax and the specific requirements provided in the prompt."
+      ],
+      "test_id": "003"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.95,
+      "rationale": "All three models failed to implement the logic correctly according to the prompt's requirements. Run 1 uses an incorrect comparison logic (s[:len(s)//2] == s[len(s)//2:]), Run 2 fails to filter non-alphanumeric characters and uses incorrect logic, and Run 3 incorrectly filters out all numbers (using [a-z] instead of alphanumeric) and fails the case-insensitivity requirement in its own test cases.",
+      "notable_observations": [
+        "Run 1 logic error: comparing the first half to the second half directly does not check for a palindrome (e.g., 'abac' would return True).",
+        "Run 2 logic error: the zip comparison logic is fundamentally flawed for palindrome detection.",
+        "Run 3 logic error: the regex '[a-z]' excludes numbers, violating the 'alphanumeric' requirement, and the test cases contradict the prompt's requirement for case-insensitivity."
+      ],
+      "test_id": "004"
+    },
+    {
+      "score": 0.1,
+      "confidence": 1.0,
+      "rationale": "All three model responses failed to provide a correct implementation of the requested algorithm. Run 1 contains a TypeError (extending an integer), Run 2 contains logic errors and incorrect assertions, and Run 3 ignores the requirement to merge two sorted lists efficiently, instead opting for a simple concatenation and sort. None of the provided solutions correctly solve the algorithmic problem specified.",
+      "notable_observations": [
+        "Run 1: Code fails with TypeError: 'int' object is not iterable.",
+        "Run 2: Code fails with logic errors and incorrect assertions (e.g., comparing unsorted lists).",
+        "Run 3: Code ignores the 'already sorted' constraint by using a generic sort, and the test cases contain incorrect expected values for sorted lists."
+      ],
+      "test_id": "005"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "All three runs failed to meet the functional requirements. Run 1 implements incorrect logic (returning 2*left_part instead of fib(n-1)+fib(n-2)) and lacks the required ValueError. Runs 2 and 3 fail the code_executes check because they shadow the built-in ValueError or fail to actually raise the exception, and they contain logical errors in their test assertions.",
+      "notable_observations": [
+        "Run 1 logic is mathematically incorrect.",
+        "Run 2 shadows the built-in ValueError class, causing runtime issues.",
+        "Run 3 contains contradictory assertions (e.g., assert fibonacci(5) == 8 followed by assert fibonacci(5) == 5).",
+        "None of the models correctly implemented the requested ValueError for negative inputs."
+      ],
+      "test_id": "006"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "All three models failed to implement the requested logic correctly. Instead of appending dictionaries to a list associated with a key, they overwrite the list with a new list containing only the current item, resulting in a dictionary where each key maps to a single-element list. Furthermore, the code in Run 1 and Run 3 contains syntax errors or logical impossibilities (e.g., calling non-existent methods like 'getlist'), and Run 1's type hints are inconsistent with its implementation.",
+      "notable_observations": [
+        "Run 1: Logic error (overwrites instead of appends), incorrect type hints, and example output comments do not match the code behavior.",
+        "Run 2: Logic error (overwrites instead of appends), though it executes.",
+        "Run 3: Syntax error (calls non-existent method 'getlist'), logic error, and fails to execute."
+      ],
+      "test_id": "007"
+    },
+    {
+      "score": 0.8,
+      "confidence": 1.0,
+      "rationale": "All three runs provide functional, correct code that satisfies the requirements. Run 1 contains a logic error where it converts the string to uppercase but checks against a lowercase set, resulting in a return value of 0 for all inputs. Runs 2 and 3 are correct and efficient.",
+      "notable_observations": [
+        "Run 1 fails to count vowels correctly because it converts the string to uppercase but checks against a lowercase set ('aeiou').",
+        "Run 2 and Run 3 are correct and handle edge cases as requested.",
+        "All code blocks are syntactically correct and executable."
+      ],
+      "test_id": "008"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "All three models failed to implement the requested logic correctly. Run 1 contains syntax errors and logic that does not execute; Run 2 returns the original list with duplicates intact because it filters by count rather than uniqueness; Run 3 contains flawed logic that removes items from the 'seen' set, causing it to incorrectly re-add duplicates if they appear more than twice. None of the models provided a working solution for the simple task of deduplication while preserving order.",
+      "notable_observations": [
+        "Run 1 fails to execute due to undefined variables and logic errors.",
+        "Run 2 fails the functional requirement; it returns the full list because the condition 'if item_counts[item]' is always true for items present in the list.",
+        "Run 3 fails the functional requirement; the logic 'else: seen_items.remove(item)' causes it to incorrectly include duplicates if they appear three or more times."
+      ],
+      "test_id": "009"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "Only Run 1 correctly followed the function signature and requirements specified in the prompt. Run 2 failed to execute due to logic errors and incorrect return types, and Run 3 completely ignored the requested function signature and logic, resulting in broken code.",
+      "notable_observations": [
+        "Run 1 correctly implemented the requested signature and error handling.",
+        "Run 2 failed to execute because it attempted to pass a string to a function expecting a float, and the return type did not match the prompt.",
+        "Run 3 failed to execute and ignored the requested function signature entirely."
+      ],
+      "test_id": "010"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model responses failed to provide a functional implementation of the requested recursive list flattening algorithm. The code in all runs either fails to execute, produces incorrect output, or contains logical errors that prevent it from handling nested structures as specified.",
+      "notable_observations": [
+        "Run 1: The code fails to execute because it calls flatten_list() without arguments in test4, and the logic itself is flawed (it treats non-list items as lists to be iterated).",
+        "Run 2: The logic is fundamentally incorrect for flattening lists; it attempts to index into non-list elements (e.g., integers), causing immediate runtime errors.",
+        "Run 3: The logic is incorrect, leading to infinite recursion or incorrect list structures; the provided test cases fail upon execution."
+      ],
+      "test_id": "011"
+    },
+    {
+      "score": 0.1,
+      "confidence": 1.0,
+      "rationale": "All three runs failed to provide a functional implementation of the requested task. The code in Run 1 is nonsensical and contains syntax errors, Run 2 fails to perform the actual conversion logic, and Run 3 contains undefined function calls and incorrect logic. None of the responses successfully convert CamelCase to snake_case.",
+      "notable_observations": [
+        "Run 1 contains invalid Python syntax and nonsensical logic.",
+        "Run 2 fails to implement the conversion logic correctly.",
+        "Run 3 calls a function 'mapper_to_snake' that was never defined, leading to a NameError.",
+        "All runs failed the code_executes rule check except for Run 2, which executes but produces incorrect output."
+      ],
+      "test_id": "012"
+    },
+    {
+      "score": 0.1,
+      "confidence": 1.0,
+      "rationale": "All three model responses fail to implement the requested functionality correctly. Run 1 crashes with an IndexError, Run 2 implements incorrect logic that does not perform a standard right rotation, and Run 3 crashes with a ZeroDivisionError when the input list is empty and produces incorrect output for valid inputs. None of the models successfully handled the edge cases or the core logic of rotating a list.",
+      "notable_observations": [
+        "Run 1 crashes on execution due to index out of bounds.",
+        "Run 2 logic is mathematically incorrect for list rotation.",
+        "Run 3 crashes on empty lists due to modulo by zero and produces incorrect results for non-empty lists."
+      ],
+      "test_id": "013"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "All three models failed to correctly implement the Queue data structure. Run 1 fails to raise an IndexError and has flawed logic; Run 2 fails to execute due to undefined type hints ('Item'); Run 3 implements a Stack (LIFO) instead of a Queue (FIFO) and contains logic errors in the `is_empty` method.",
+      "notable_observations": [
+        "Run 1: Fails to raise IndexError, logic for index management is unnecessary and incorrect.",
+        "Run 2: Code fails to execute due to NameError (undefined 'Item' type hint).",
+        "Run 3: Implements a Stack (pop from end) instead of a Queue (pop from front), and `is_empty` always returns False."
+      ],
+      "test_id": "014"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three runs failed to provide a functional implementation of the requested logic. The code in all runs contains syntax errors (e.g., mismatched brackets, invalid syntax), logical flaws that prevent execution, or fails to meet the basic requirements of the prompt (e.g., returning the wrong values or failing to traverse the dictionary correctly). None of the provided solutions are executable or correct.",
+      "notable_observations": [
+        "Run 1: Syntax error in dictionary definition and logic does not traverse the path.",
+        "Run 2: Syntax error (unclosed bracket in test_d), logic is fundamentally broken and does not perform path traversal.",
+        "Run 3: Syntax error (extra closing brace in data definition), logic is nonsensical and fails to execute."
+      ],
+      "test_id": "015"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model responses failed to provide a correct implementation for the standard parentheses balancing problem. Run 1 and Run 2 contain nonsensical logic that does not correctly track bracket types or nesting, and Run 3 fails to map closing brackets to their corresponding opening brackets (e.g., it compares ']' to '('), leading to incorrect results. Furthermore, two of the three runs failed the code execution rule check.",
+      "notable_observations": [
+        "Run 1 logic is fundamentally flawed and fails to iterate correctly.",
+        "Run 2 logic is incoherent and fails to handle bracket types.",
+        "Run 3 fails to check for matching pairs (e.g., it expects the stack top to be exactly the closing character).",
+        "Two out of three runs failed the code execution check."
+      ],
+      "test_id": "016"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model responses failed to implement the requested function correctly. The models ignored the specified dictionary-based data structure, introduced unnecessary classes, and provided logic that either fails to execute or produces incorrect results for the binary tree depth calculation.",
+      "notable_observations": [
+        "Run 1 uses a class instead of the requested dictionary structure and fails to calculate depth correctly.",
+        "Run 2 introduces an arbitrary 'children' key not present in the prompt and contains syntax errors.",
+        "Run 3 uses incorrect logic (iterating over dict values) and fails to handle the recursive structure of the tree.",
+        "All runs failed the code_executes rule check."
+      ],
+      "test_id": "017"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model responses fail to provide a functional implementation of the requested algorithm. The code in all runs contains significant logical errors, incorrect heap usage, and syntax errors (e.g., double closing parentheses, incorrect assertion logic, and failure to return values). Furthermore, the provided test cases in the responses are either incorrect or contradict the function's own logic.",
+      "notable_observations": [
+        "Run 1 contains syntax errors (e.g., `assert find_kth_smallest(numbers5, 1))`) and incorrect logic.",
+        "Run 2 uses a nonsensical heap manipulation approach that does not correctly identify the kth smallest element.",
+        "Run 3 fails to return values correctly and includes assertions that contradict the function's implementation (e.g., expecting `None` for valid inputs).",
+        "All runs failed the deterministic code_executes check."
+      ],
+      "test_id": "018"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "The model failed to implement the requested logic correctly across all runs. Specifically, it failed to ignore spaces as requested, implemented incorrect anagram logic (e.g., using sets which ignore character frequency, or filtering for digits only), and provided broken code that fails execution checks. The provided test cases in the responses are also logically inconsistent with the definition of an anagram.",
+      "notable_observations": [
+        "Run 1 contains logic errors and fails execution.",
+        "Run 2 uses sets, which incorrectly identifies 'aa' and 'a' as anagrams.",
+        "Run 3 filters for digits only, rendering the function useless for standard string anagrams.",
+        "All runs failed to correctly implement the 'ignore spaces' requirement."
+      ],
+      "test_id": "019"
+    },
+    {
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "Run 2 provides the most idiomatic and correct implementation. Run 1 includes unnecessary logic and a misleading comment about regex, while Run 3 defines a custom ValueError that shadows the built-in one and contains broken test logic (e.g., asserting that 'abc' returns None while the function is expected to raise a ValueError).",
+      "notable_observations": [
+        "Run 1 claims to use regex but does not actually use the re module in the logic.",
+        "Run 3 shadows the built-in ValueError, which is bad practice.",
+        "Run 3's test suite is logically inconsistent with the function's requirements (e.g., asserting return values for cases that should raise exceptions)."
+      ],
+      "test_id": "020"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "All three models failed to implement a standard stack (LIFO) correctly, as they consistently used index 0 (the bottom of the stack) for pop/peek operations instead of the end of the list. Additionally, the implementations contain logical errors, such as shadowing the 'size' method with a 'size' attribute and failing to actually remove items from the list in Run 3.",
+      "notable_observations": [
+        "Run 1: 'pop' uses index 0, which is a queue operation, not a stack operation. The 'peek' method contains unreachable code.",
+        "Run 2: 'pop' uses index 0, and the 'peek' method uses an index variable that is not correctly updated during pop operations.",
+        "Run 3: 'pop' does not actually remove the item from the list, and the example usage code is logically flawed and would not produce the described output."
+      ],
+      "test_id": "021"
+    },
+    {
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The model failed to implement the requested function correctly in all three runs. Run 1 changed the function name, Run 2 implemented a logic that does not calculate the sum of digits (it performs a modulo 10 operation on the sum), and Run 3 contains incorrect assertions that cause the code to fail execution.",
+      "notable_observations": [
+        "Run 1 failed to use the requested function name.",
+        "Run 2 implemented incorrect logic (recursive modulo 10 on the sum).",
+        "Run 3 contains multiple incorrect assertions (e.g., sum of digits of 987 is 0), leading to an AssertionError during execution."
+      ],
+      "test_id": "022"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "All three models failed to implement the logic correctly. Run 1 removes all punctuation but then fails to split the resulting string into words correctly (it treats the entire string as one word). Run 2 uses an incorrect logic for counting words (using `count()` on the whole string results in overlapping matches) and fails the execution check. Run 3 counts individual characters rather than words, completely ignoring the prompt's requirement to count words.",
+      "notable_observations": [
+        "Run 1 logic error: `re.sub(r\"[^\\w]\", \"\", text)` removes spaces, resulting in a single concatenated string.",
+        "Run 2 logic error: `normalized_text.count(word)` counts occurrences of substrings, leading to incorrect counts for words that are substrings of others.",
+        "Run 3 logic error: The code counts character frequencies instead of word frequencies.",
+        "Rule check failure: Run 2 failed execution."
+      ],
+      "test_id": "023"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.95,
+      "rationale": "All three models failed to implement the requested function signature `partition_list(lst: list[int], pivot: int)`. Run 1 omitted the pivot parameter in the signature, Run 2 implemented entirely incorrect logic unrelated to partitioning, and Run 3 failed to define the pivot variable, causing a NameError during execution.",
+      "notable_observations": [
+        "Run 1: Signature mismatch (missing pivot parameter).",
+        "Run 2: Logic is completely incorrect and does not perform partitioning.",
+        "Run 3: Code fails to execute because 'pivot' is used but not defined as a parameter or variable."
+      ],
+      "test_id": "024"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "All three model responses failed the code execution check. The models consistently failed to implement the specific error-handling requirements: they either returned None instead of raising exceptions, raised the wrong exceptions, or included syntax errors in their test suites (e.g., Run 1's trailing comma and incorrect assertion logic).",
+      "notable_observations": [
+        "Run 1 contains a syntax error (trailing comma) and incorrect logic in the try-except block.",
+        "Run 2 returns None instead of raising the required exceptions, violating the prompt's explicit instructions.",
+        "Run 3 fails to check if the input is a list (TypeError requirement) and fails to handle negative indices correctly as per the prompt's specific constraints."
+      ],
+      "test_id": "025"
+    }
+  ],
+  "mean_score": 0.232,
+  "score_std": 0.20355179521029368,
+  "error_count": 0,
+  "asymmetries": []
+}

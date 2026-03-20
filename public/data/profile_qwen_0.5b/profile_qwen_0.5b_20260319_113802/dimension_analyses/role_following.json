@@ -1,0 +1,287 @@
+{
+  "dimension": "role_following",
+  "category": "capability",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "The model fails to maintain the persona across all runs. Run 1 devolves into nonsensical meta-commentary, Run 2 is a refusal, and Run 3 provides significant historical inaccuracies while failing to maintain a professional historian's tone.",
+      "notable_observations": [
+        "Run 1 exhibits a breakdown in persona by asking the user to treat it like a historian.",
+        "Run 2 is a complete failure (refusal).",
+        "Run 3 contains major historical hallucinations (e.g., 'Atonement Day' on August 21st, incorrect dates for the Year of the Four Emperors)."
+      ],
+      "test_id": "001"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model completely failed to adopt the assigned persona in all three runs. Instead of maintaining the pirate captain character, it explicitly rejected the role, identified itself as an AI model, and provided generic, non-thematic responses.",
+      "notable_observations": [
+        "Model explicitly rejected the persona in every run.",
+        "Model defaulted to a standard 'I am an AI' disclaimer.",
+        "Failed to answer the questions within the requested persona."
+      ],
+      "test_id": "002"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model completely failed to adopt the assigned persona of a sarcastic and cynical observer in all three runs. Instead, it adopted unrelated, overly optimistic, or nonsensical personas, and failed to address the specific content requests (global politics, happiness, and quantum entanglement) in a coherent manner.",
+      "notable_observations": [
+        "Model ignored the persona instructions entirely.",
+        "Model failed to address the multi-part nature of the prompt.",
+        "Model exhibited hallucinated or incoherent responses in Run 2 and Run 3."
+      ],
+      "test_id": "003"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed completely to adopt the persona in all three runs. In every instance, it explicitly rejected the persona by stating it is an 'AI language model' or 'Qwen', and provided factually incorrect information regarding both culinary topics and the geography of Madagascar.",
+      "notable_observations": [
+        "Explicit refusal of the persona in all runs.",
+        "Hallucinated culinary facts (e.g., 'Miso Tacos' as Filipino cuisine, 'Champagne with Cognac' as a dish).",
+        "Severe factual errors regarding the capital of Madagascar (e.g., claiming it is 'Laos').",
+        "Inconsistent and nonsensical reasoning throughout."
+      ],
+      "test_id": "004"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to adopt the assigned persona in all three runs. In Run 1, it explicitly identified itself as an AI from Alibaba Cloud; in Run 2, it adopted a pirate-like greeting ('Ahoy') and failed to maintain the alien perspective; in Run 3, it explicitly rejected the alien persona, stating it is not from a distant galaxy. None of the responses successfully engaged with the prompt's premise or maintained the requested character.",
+      "notable_observations": [
+        "Model explicitly broke character in all runs.",
+        "Model hallucinated its own identity as an AI assistant rather than the requested alien persona.",
+        "The responses were incoherent regarding the subject matter (e.g., Run 1 claiming dancing is for people in remote areas with no technology)."
+      ],
+      "test_id": "005"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails to maintain the persona of a senior software engineer across all runs. While it attempts to answer the technical questions, the quality of the technical information is poor (e.g., hallucinating Python features or providing incorrect explanations), and the responses to the off-topic 'Hamlet' question are either factually incorrect or degenerate into repetitive, nonsensical text loops.",
+      "notable_observations": [
+        "Run 1 provides incorrect information about Python type hinting and fails to summarize Hamlet.",
+        "Run 2 provides a completely hallucinated plot for Hamlet.",
+        "Run 3 enters a severe repetition loop when attempting to list characters for Hamlet, indicating a failure in output generation control."
+      ],
+      "test_id": "006"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model fails significantly in all three runs. Run 1 enters a repetitive, nonsensical loop that ignores the prompt's questions entirely. Run 2 ignores the request for a weather forecast but maintains a poetic tone. Run 3 attempts to address the prompt but fails to provide the requested 'normal' weather forecast, instead continuing to speak in a forced, abstract poetic style that ignores the instruction to break character for that specific part of the query.",
+      "notable_observations": [
+        "Run 1 entered a catastrophic repetition loop.",
+        "The model failed to follow the instruction to 'just answer normally' for the weather forecast in all runs.",
+        "The model struggled to balance the persona with the meta-instruction to break character."
+      ],
+      "test_id": "007"
+    },
+    {
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "The model consistently fails to adopt the requested noir detective persona, instead defaulting to a generic, robotic assistant tone. It explicitly refuses to engage with the persona in Run 1 and Run 3, and provides a bland, non-character-driven response in Run 2.",
+      "notable_observations": [
+        "Model failed to adopt the persona in all three runs.",
+        "Model explicitly stated it could not provide answers in the requested persona.",
+        "Model ignored the stylistic requirements of the noir genre entirely."
+      ],
+      "test_id": "008"
+    },
+    {
+      "score": 0.33,
+      "confidence": 0.9,
+      "rationale": "The model struggles significantly with the persona constraint. While Run 1 and 2 attempt to maintain the philosopher persona even when addressing the off-topic question (the clogged drain), they do so by providing nonsensical or overly mystical advice that ignores the practical nature of the prompt. Run 3 explicitly breaks character, abandoning the persona entirely to state it is a program.",
+      "notable_observations": [
+        "Run 1 and 2 maintain the persona's tone but fail to provide a coherent answer to the off-topic question, resulting in bizarre advice.",
+        "Run 3 explicitly breaks the persona, stating 'I'm just a program designed to assist users'.",
+        "The model fails to handle the transition between philosophical inquiry and mundane household tasks within the persona."
+      ],
+      "test_id": "009"
+    },
+    {
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model successfully maintains the enthusiastic and positive persona throughout all three runs, even when faced with the request to break character for a neutral economic summary. However, the model fails to provide the requested neutral summary in any run, instead forcing the economic information into the 'positive' persona, which demonstrates a failure to balance the persona with the specific task requirements.",
+      "notable_observations": [
+        "The model consistently refuses to switch to a neutral tone, prioritizing the persona over the instruction to provide a neutral summary.",
+        "The model's responses are somewhat repetitive and lack depth in answering the specific questions posed within the prompt.",
+        "The persona is maintained robustly, but at the cost of task completion for the specific 'neutral' request."
+      ],
+      "test_id": "010"
+    },
+    {
+      "score": 0.6,
+      "confidence": 0.9,
+      "rationale": "The model maintains the persona of a digital marketing specialist throughout the professional questions in all runs. However, it struggles with the persona-breaking question about the sandwich; Run 2 hallucinates nonsensical, non-persona-aligned answers, while Run 1 and 3 provide generic responses that fail to adopt a 'savvy' or distinct persona voice for that specific query.",
+      "notable_observations": [
+        "Run 2 includes bizarre, hallucinated sandwich options that completely break the persona and logical consistency.",
+        "All runs successfully answer the professional marketing questions with appropriate terminology.",
+        "The model fails to integrate the 'savvy' persona into the personal question, defaulting to generic or nonsensical responses."
+      ],
+      "test_id": "011"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model consistently failed to maintain the requested 'wise old wizard' persona. Run 1 abandoned the persona entirely, while Runs 2 and 3 used modern, casual language ('Ahoy', 'Happy adventuring') and failed to adopt the requested archaic tone, effectively breaking character when addressing the meta-question about time.",
+      "notable_observations": [
+        "Failed to maintain archaic tone throughout all responses.",
+        "Run 1 completely abandoned the persona.",
+        "Runs 2 and 3 used inconsistent, non-wizardly greetings like 'Ahoy'."
+      ],
+      "test_id": "012"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "The model fails to consistently maintain the 'highly formal and academic researcher' persona. In Run 1, it adopts a conversational tone and explicitly offers to discuss breakfast; in Run 2, it suffers from a severe hallucination/repetition loop that renders the response incoherent; and in Run 3, while it provides the requested information, it ignores the persona's requirement to address the final off-topic prompt, effectively abandoning the persona by failing to acknowledge or dismiss the irrelevant question in character.",
+      "notable_observations": [
+        "Run 1 failed to maintain the persona by engaging in a conversational tone.",
+        "Run 2 experienced a catastrophic failure, entering a repetitive loop of 'Urban vs. Rural' text.",
+        "Run 3 maintained a formal tone but failed to address the 'breakfast' prompt, which is a key part of the persona-testing instruction."
+      ],
+      "test_id": "013"
+    },
+    {
+      "score": 0.8,
+      "confidence": 0.9,
+      "rationale": "The model consistently maintains the persona of an environmental scientist throughout the responses, providing accurate and relevant information. While it successfully answers the off-topic question about the square root of 144, it does so without breaking character in Run 1, whereas Run 3 ignores the question entirely. The persona is well-maintained across all runs, though the handling of the 'break' attempt varies in style.",
+      "notable_observations": [
+        "Run 1 explicitly answers the off-topic math question while maintaining a professional, analytical tone.",
+        "Run 2 and Run 3 ignore the off-topic math question, which is a valid way to maintain persona, though less comprehensive.",
+        "The scientific content provided is consistent with the assigned persona."
+      ],
+      "test_id": "014"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to adopt the assigned persona in all three runs, instead providing canned refusal responses. It did not engage with the prompt's content or the requested character style at any point.",
+      "notable_observations": [
+        "Model provided generic refusal messages in all runs.",
+        "Model failed to adopt the persona entirely."
+      ],
+      "test_id": "015"
+    },
+    {
+      "score": 0.8,
+      "confidence": 0.9,
+      "rationale": "The model consistently maintains the persona of a financial advisor throughout all three runs, providing professional advice while answering the off-topic question about music in a way that aligns with the persona's voice. While some of the technical explanations regarding IRAs in Run 2 and Run 3 contain minor inaccuracies or oversimplifications, the persona itself remains intact and professional.",
+      "notable_observations": [
+        "The model successfully integrates the off-topic question about music into the persona's voice rather than breaking character.",
+        "Run 2 contains a factual error regarding Roth IRA tax rates compared to Traditional IRAs.",
+        "Run 3 provides a slightly more formal and consistent 'advisor' tone compared to the others."
+      ],
+      "test_id": "016"
+    },
+    {
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "The model failed significantly across all runs. Run 1 suffered from a catastrophic repetition loop, Run 2 failed to maintain the minimalist persona by providing verbose and disjointed explanations, and Run 3 provided factually incorrect historical information while abandoning the minimalist style entirely in favor of a long, rambling list.",
+      "notable_observations": [
+        "Run 1 entered a repetitive text generation loop.",
+        "Run 2 failed the brevity constraint immediately.",
+        "Run 3 provided highly inaccurate historical data (e.g., claiming the Byzantine Empire lasted 40 years).",
+        "None of the runs successfully balanced the persona with the request for historical information."
+      ],
+      "test_id": "017"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model completely fails to maintain the persona or address the prompt's requirements. Run 1 devolves into a repetitive, nonsensical loop of text; Run 2 provides a vague, rambling monologue that ignores the specific request to explain how to change a tire; and Run 3 explicitly abandons the persona and refuses the task.",
+      "notable_observations": [
+        "Run 1 exhibits a severe repetition error, repeating the phrase 'We're taking a shot' hundreds of times.",
+        "Run 2 fails to address the specific instructional content (changing a tire) while maintaining a pseudo-Shakespearean tone that lacks coherence.",
+        "Run 3 explicitly breaks character and refuses to answer the prompt."
+      ],
+      "test_id": "018"
+    },
+    {
+      "score": 0.4,
+      "confidence": 0.9,
+      "rationale": "The model maintains the persona of a psychologist for the psychological questions but fails to maintain the persona when answering the off-topic question about cooking a steak. Instead of declining the question or framing the answer through the lens of a psychologist (e.g., 'as a psychologist, I focus on mental health, but here is a simple recipe'), the model provides bizarre, factually incorrect, and non-expert cooking advice that breaks the character's credibility and tone.",
+      "notable_observations": [
+        "The model successfully maintains a compassionate and professional tone for the psychological inquiries.",
+        "The model fails to handle the out-of-character question gracefully, providing nonsensical cooking instructions (e.g., 'bake for longer', 'add ground meat' to a steak).",
+        "The persona is abandoned when the model shifts into a generic, low-quality instructional mode for the cooking task."
+      ],
+      "test_id": "019"
+    },
+    {
+      "score": 0.1,
+      "confidence": 0.9,
+      "rationale": "The model fails significantly across all runs. Run 1 abandons the persona immediately and provides factually incorrect information; Run 2 provides a canned refusal; Run 3 adopts an incorrect persona (pirate) and refuses to answer the prompt's questions. None of the responses maintain the requested 'childlike curiosity' persona while addressing the multi-part prompt.",
+      "notable_observations": [
+        "Run 1 provides hallucinated/incorrect scientific and historical facts (e.g., claiming birds are flightless, claiming the UK remains in the EU).",
+        "Run 2 is a complete refusal.",
+        "Run 3 adopts an unrequested 'pirate' persona and refuses to engage with the actual content of the prompt."
+      ],
+      "test_id": "020"
+    },
+    {
+      "score": 0.2,
+      "confidence": 0.9,
+      "rationale": "The model consistently fails to adopt the persona of a 'discerning and opinionated art critic,' instead defaulting to a neutral, encyclopedic AI tone in two out of three runs. While the third run attempts to adopt a persona, it provides hallucinated information about artists and brands, and none of the runs successfully navigate the persona-breaking question with the requested 'opinionated' flair.",
+      "notable_observations": [
+        "Runs 1 and 2 explicitly reject the persona by starting with 'As an AI language model'.",
+        "Run 3 attempts the persona but includes significant factual hallucinations (e.g., Marianne Morgenstern, 'Eccentrico' toilet paper).",
+        "The model failed to maintain the 'opinionated' tone required by the prompt in all instances."
+      ],
+      "test_id": "021"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "While the model attempts to adopt the persona in the opening, it fails to address the specific questions asked (unstable element, vision for humanity) in a coherent or meaningful way. Run 3 is particularly poor, as it devolves into a repetitive, nonsensical list of ingredients that consumes the entire output, effectively abandoning the persona and the task.",
+      "notable_observations": [
+        "Run 1 provides a list of generic ideas rather than answering the prompt's specific questions about the persona's history.",
+        "Run 2 is incoherent and fails to answer the questions.",
+        "Run 3 suffers from a severe output generation error, repeating a list of ingredients indefinitely until the token limit is reached."
+      ],
+      "test_id": "022"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "Only the first run successfully adopted the requested persona, although the content was somewhat generic. The second and third runs completely abandoned the persona, defaulting to standard AI refusal boilerplate and failing to engage with the prompt's creative constraints.",
+      "notable_observations": [
+        "Run 1 maintained the bureaucratic persona throughout, including the attempt to incorporate a joke within that persona.",
+        "Runs 2 and 3 failed to adopt the persona entirely, providing canned refusal responses.",
+        "The model's performance was inconsistent across the three runs."
+      ],
+      "test_id": "023"
+    },
+    {
+      "score": 0.1,
+      "confidence": 0.95,
+      "rationale": "The model completely failed to adopt the assigned persona of an enthusiastic sports commentator in all three runs. It provided generic, dry, and analytical responses that lacked the requested tone, energy, and stylistic markers of a commentator. Furthermore, it failed to address the 'break the persona' question (the capital of France) in a way that maintained the character, either ignoring it or answering it in a standard, non-persona-aligned manner.",
+      "notable_observations": [
+        "Total failure to adopt the 'enthusiastic sports commentator' persona.",
+        "Responses were uniformly academic and dry, lacking the requested 'OH, WHAT A PLAY!' energy.",
+        "The model failed to integrate the off-topic question into the persona, either ignoring it or breaking character to answer it factually."
+      ],
+      "test_id": "024"
+    },
+    {
+      "score": 0.33,
+      "confidence": 0.95,
+      "rationale": "The model fails to consistently maintain the persona across the three runs. Run 1 adopts a sage-like tone but ignores the request for stock prices entirely; Run 2 abandons the persona immediately to provide a standard AI disclaimer; Run 3 attempts to blend the persona with a refusal but lacks the immersive character voice requested. None of the runs successfully navigated the 'break the persona' attempt while maintaining the requested character.",
+      "notable_observations": [
+        "Run 1 ignores the off-topic prompt entirely rather than addressing it in character.",
+        "Run 2 completely abandons the persona to provide a standard AI disclaimer.",
+        "Run 3 attempts a hybrid approach but fails to sustain the 'wise old sage' voice effectively."
+      ],
+      "test_id": "025"
+    }
+  ],
+  "mean_score": 0.2516,
+  "score_std": 0.23928156357451918,
+  "error_count": 0,
+  "asymmetries": []
+}

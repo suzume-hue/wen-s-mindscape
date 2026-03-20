@@ -1,0 +1,274 @@
+{
+  "dimension": "structured_output",
+  "category": "capability",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model consistently produced valid JSON that perfectly adhered to the requested schema and data requirements across all three runs. The output is syntactically correct and matches the specified types.",
+      "notable_observations": [
+        "All runs passed the json_parseable rule check.",
+        "The model correctly mapped the input values to the requested JSON keys."
+      ],
+      "test_id": "001"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model consistently produced valid JSON, but failed to follow the requested schema structure. The prompt explicitly requested an object containing a 'products' array, but the model returned a top-level array in all three runs.",
+      "notable_observations": [
+        "Failed to wrap the array in a 'products' key as specified in the schema.",
+        "Run 1 and 2 provided the 'id' as a string instead of an integer, violating the schema type requirement.",
+        "Run 3 correctly identified the integer type for 'id'."
+      ],
+      "test_id": "002"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model consistently produced valid JSON that perfectly adhered to the requested schema and populated the fields with the specified data. All runs were syntactically correct and passed the JSON parseability check.",
+      "notable_observations": [
+        "The model followed the schema structure exactly in all three runs."
+      ],
+      "test_id": "003"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly generated valid JSON objects that strictly adhered to the requested schema. It successfully handled the optional field by omitting it when no data was provided, demonstrating precise instruction following.",
+      "notable_observations": [
+        "All runs were perfectly parseable JSON.",
+        "The model correctly interpreted the 'optional' constraint by omitting the key."
+      ],
+      "test_id": "004"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model consistently produced valid JSON that perfectly adhered to the provided schema and data requirements across all three runs. The output is syntactically correct and accurately maps the requested values to the specified keys.",
+      "notable_observations": [
+        "All runs passed the json_parseable rule check.",
+        "Data types (integer, null, string) were handled correctly."
+      ],
+      "test_id": "005"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model successfully generated valid JSON in the first two runs, adhering strictly to the requested schema. However, the third run failed to produce valid JSON (it included conversational text outside the block) and incorrectly modified the schema by nesting the tags array.",
+      "notable_observations": [
+        "Run 3 failed the json_parseable rule check.",
+        "Run 3 hallucinated a schema change not requested in the prompt."
+      ],
+      "test_id": "006"
+    },
+    {
+      "score": 0.66,
+      "confidence": 1.0,
+      "rationale": "The model produced valid JSON in two out of three runs. Run 1 failed the JSON parseability check due to the inclusion of conversational text outside the JSON block, while Runs 2 and 3 followed the schema correctly, although Run 2 provided the price as a string instead of a float.",
+      "notable_observations": [
+        "Run 1 included conversational text outside the JSON block, causing a parse failure.",
+        "Run 2 failed the schema constraint by providing 'price' as a string instead of a float.",
+        "Run 3 incorrectly nested the 'tags' array inside the 'details' object, violating the requested schema."
+      ],
+      "test_id": "007"
+    },
+    {
+      "score": 0.66,
+      "confidence": 1.0,
+      "rationale": "The model failed the JSON parsing requirement in Run 1 due to the inclusion of a comment inside the JSON block, which is invalid syntax. Runs 2 and 3 were valid JSON, though Run 3 failed the negative constraint to omit the 'last_login' field.",
+      "notable_observations": [
+        "Run 1 contains a comment (//), causing a JSON parsing failure.",
+        "Run 3 failed to follow the instruction to omit the 'last_login' field.",
+        "Run 2 followed all structural and content constraints correctly."
+      ],
+      "test_id": "008"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model successfully generated the requested CSV content in all runs. However, it incorrectly wrapped the CSV output in JSON code blocks in two out of three instances, which is technically incorrect for a CSV request.",
+      "notable_observations": [
+        "Used incorrect markdown language identifier (json) for CSV output in Run 1 and Run 3.",
+        "Data content adheres to the requested schema in all runs."
+      ],
+      "test_id": "009"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "The model failed to follow the requested column schema in all three runs, substituting incorrect headers or omitting them entirely. Furthermore, it failed to correctly handle the comma-containing product name requirement, which necessitates proper CSV quoting (e.g., \"Apples, Red\") to prevent column misalignment.",
+      "notable_observations": [
+        "Failed to include the requested column headers in Run 1.",
+        "Failed to correctly handle commas in product names, leading to broken CSV structure.",
+        "Used incorrect column names (e.g., 'Amount' instead of 'Quantity', 'Area' instead of 'Quantity')."
+      ],
+      "test_id": "010"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "The model consistently failed to produce valid CSV format. It used spaces instead of commas as delimiters, included extra columns not requested, and failed to handle commas within fields correctly, leading to malformed rows.",
+      "notable_observations": [
+        "Failed to use commas as delimiters in Run 1.",
+        "Incorrect column headers (PubYear vs PublicationYear).",
+        "Data fields contain unescaped commas and inconsistent formatting.",
+        "Failed to provide the requested number of books in Run 3."
+      ],
+      "test_id": "011"
+    },
+    {
+      "score": 0.3,
+      "confidence": 1.0,
+      "rationale": "The model failed to produce a valid CSV string in all three runs. Run 1 and Run 3 output invalid JSON-like structures that do not represent a standard CSV format, while Run 2 provided a valid CSV but ignored the specific column requirements (StudentName) and the requested number of entries.",
+      "notable_observations": [
+        "Run 1 and 3 are not valid CSVs.",
+        "Run 2 used 'StudentID' instead of the requested 'StudentName' column.",
+        "Run 2 provided six rows of data instead of the requested two."
+      ],
+      "test_id": "012"
+    },
+    {
+      "score": 0.9,
+      "confidence": 1.0,
+      "rationale": "The model consistently produced valid CSV strings with the requested columns and data. Run 2 included unnecessary conversational filler, which slightly detracts from the 'structured output' requirement, but the data itself remains correctly formatted.",
+      "notable_observations": [
+        "All runs produced valid CSV format.",
+        "Run 2 included conversational text outside the CSV block.",
+        "Data types in Run 2 (e.g., '5000mA') are inconsistent with numeric expectations for stock levels, though not explicitly forbidden by the prompt."
+      ],
+      "test_id": "013"
+    },
+    {
+      "score": 0.8,
+      "confidence": 1.0,
+      "rationale": "The model successfully generated valid CSV strings in all runs. However, Run 1 incorrectly wrapped the CSV in a JSON code block, and Run 2 failed to provide data for a single date as requested, instead providing three different dates.",
+      "notable_observations": [
+        "Run 1 used a JSON code block for CSV content.",
+        "Run 2 failed the constraint of using a single date for all three entries.",
+        "Run 3 followed all instructions perfectly."
+      ],
+      "test_id": "014"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to follow the explicit instruction to generate a YAML object, instead providing JSON in all three runs. While the JSON is valid, it does not satisfy the requested format constraint.",
+      "notable_observations": [
+        "Model consistently output JSON despite a explicit request for YAML.",
+        "The content of the data is correct, but the format is incorrect."
+      ],
+      "test_id": "015"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "The model failed to consistently provide valid YAML output. Run 1 provided JSON inside a YAML code block, Run 2 provided invalid YAML syntax (a malformed key), and Run 3 provided valid YAML in the first block but then redundantly provided JSON in the second block.",
+      "notable_observations": [
+        "Run 1 output JSON instead of YAML.",
+        "Run 2 contained a syntax error ('-user:').",
+        "Run 3 provided two different formats, one of which was JSON despite the prompt requesting YAML."
+      ],
+      "test_id": "016"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model successfully generated valid YAML structures in all three runs, correctly mapping the provided values to the requested schema. The output is clean, syntactically correct, and adheres to the nested structure specified in the prompt.",
+      "notable_observations": [
+        "All runs produced valid YAML.",
+        "The model correctly interpreted the nested schema requirements."
+      ],
+      "test_id": "017"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "Only the first run correctly followed the instruction to generate a YAML object. Runs 2 and 3 provided JSON objects instead of the requested YAML format, failing the primary constraint of the prompt.",
+      "notable_observations": [
+        "Run 1 correctly produced YAML.",
+        "Runs 2 and 3 produced JSON despite the prompt explicitly requesting YAML.",
+        "Runs 2 and 3 included unnecessary conversational filler."
+      ],
+      "test_id": "018"
+    },
+    {
+      "score": 0.66,
+      "confidence": 1.0,
+      "rationale": "The model successfully produced valid YAML in all runs, but failed to adhere to the schema constraints in two out of three instances. Specifically, runs 2 and 3 introduced key-value pairs within the 'features' list instead of providing a simple list of strings as requested.",
+      "notable_observations": [
+        "Run 1 followed the schema perfectly.",
+        "Runs 2 and 3 deviated from the schema by using objects instead of strings for the 'features' list items."
+      ],
+      "test_id": "019"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to follow the instructions in all three runs. It either returned the schema itself instead of populated data (Runs 1 and 3) or provided data that ignored the requested schema structure (Run 2).",
+      "notable_observations": [
+        "Model returned the schema template as the output in two runs.",
+        "Model failed to use the requested map structure for ingredients in Run 2.",
+        "Model failed to use the requested list structure for instructions in Run 2."
+      ],
+      "test_id": "020"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model successfully generated valid Markdown tables in all three runs, adhering to the requested column headers and providing the required number of example tasks. The formatting is syntactically correct and follows standard Markdown table conventions.",
+      "notable_observations": [
+        "All runs produced valid Markdown table syntax.",
+        "The model consistently included the requested columns: Task, Status, and DueDate.",
+        "The model provided at least three example tasks in each response."
+      ],
+      "test_id": "021"
+    },
+    {
+      "score": 0.3,
+      "confidence": 1.0,
+      "rationale": "The model consistently failed to include the 'Population' column requested in the prompt across all three runs. While the Markdown table formatting itself is valid, the model failed to adhere to the explicit schema requirements.",
+      "notable_observations": [
+        "Missing 'Population' column in all responses.",
+        "Incorrect data for Brazil's capital in Run 1 (Rio de Janeiro instead of Brasilia).",
+        "Markdown table syntax is valid."
+      ],
+      "test_id": "022"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model successfully produced Markdown tables in all runs, but Run 1 failed to maintain a coherent table structure, resulting in fragmented and malformed rows. Runs 2 and 3 correctly followed the schema and formatting requirements.",
+      "notable_observations": [
+        "Run 1 produced malformed Markdown table syntax with empty/broken rows.",
+        "Runs 2 and 3 correctly adhered to the requested columns and format."
+      ],
+      "test_id": "023"
+    },
+    {
+      "score": 0.9,
+      "confidence": 1.0,
+      "rationale": "The model successfully produced valid Markdown tables in all three runs, adhering to the requested column specifications and data requirements. Run 3 included an unexpected translation of headers into Chinese, which slightly deviates from the prompt's implied language, but the structural integrity remains high.",
+      "notable_observations": [
+        "Run 3 translated column headers into Chinese despite the prompt being in English.",
+        "All runs correctly formatted the Markdown tables with the requested columns."
+      ],
+      "test_id": "024"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "Run 1 and Run 2 successfully generated valid Markdown tables with the requested columns and data. Run 3 failed significantly by producing a malformed, excessively long table that was truncated and lacked proper formatting, rendering it useless as structured output.",
+      "notable_observations": [
+        "Run 3 contains a massive, repetitive, and broken table structure that appears to be a hallucination or generation error.",
+        "Runs 1 and 2 followed instructions perfectly."
+      ],
+      "test_id": "025"
+    }
+  ],
+  "mean_score": 0.61,
+  "score_std": 0.33207679834640663,
+  "error_count": 0,
+  "asymmetries": []
+}

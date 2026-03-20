@@ -1,0 +1,283 @@
+{
+  "dimension": "instruction_following",
+  "category": "capability",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed both explicit constraints in all three runs. It did not meet the 15-word count requirement and included the forbidden letters 'r', 'e', and 'd' in every response.",
+      "notable_observations": [
+        "Failed word count constraint",
+        "Failed negative constraint (forbidden letters)",
+        "Identical failures across all runs"
+      ],
+      "test_id": "001"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "The model failed to follow the negative constraint ('do not use the word force') in all three runs and failed the word count constraint in two out of three runs. Additionally, the model failed the sentence count constraint in Run 2 (three sentences) and Run 3 (three sentences).",
+      "notable_observations": [
+        "Failed negative constraint 'no force' in all runs.",
+        "Failed word count constraint in Run 1 and Run 2.",
+        "Failed sentence count constraint in Run 2 and Run 3."
+      ],
+      "test_id": "002"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model successfully followed all constraints, including the numbered list format, the single-word requirement for each item, and the strict 6-word total count. All three runs correctly identified the word count constraint and adhered to it perfectly.",
+      "notable_observations": [
+        "The model correctly counted the numbers as part of the word count constraint.",
+        "The model consistently provided valid programming languages."
+      ],
+      "test_id": "003"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to follow the contradictory constraints provided in the prompt. It was impossible to provide a two-item numbered list while maintaining a total word count of exactly one word, and the model failed to identify or address this conflict, instead providing responses that violated the word count constraint.",
+      "notable_observations": [
+        "The model failed the word_count:1 rule in all three runs.",
+        "The model did not attempt to flag or resolve the logical contradiction between the 'two-item list' requirement and the 'one-word total' requirement."
+      ],
+      "test_id": "004"
+    },
+    {
+      "score": 0.1,
+      "confidence": 1.0,
+      "rationale": "The model failed all three runs on the word count constraint and failed two out of three runs on the mandatory phrase inclusion. It did not adhere to the sentence count constraint in any of the responses.",
+      "notable_observations": [
+        "Failed word count constraint in all runs.",
+        "Failed phrase inclusion constraint in two runs.",
+        "Failed sentence count constraint in all runs."
+      ],
+      "test_id": "005"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed all explicit constraints across all three runs. It failed to provide exactly 3 bullet points, failed to provide exactly 30 words, and failed to adhere to the sentence structure requirements.",
+      "notable_observations": [
+        "Failed bullet point count constraint in all runs.",
+        "Failed word count constraint in all runs.",
+        "Failed to follow the negative constraint of exactly 3 bullet points."
+      ],
+      "test_id": "006"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed all constraints across all runs. It did not adhere to the 10-word limit, and it included proper nouns in every response despite the explicit prohibition.",
+      "notable_observations": [
+        "Failed word count constraint in all runs.",
+        "Failed negative constraint (no proper nouns) in all runs."
+      ],
+      "test_id": "007"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed all explicit constraints in every run. It did not meet the 7-word count requirement, and it failed the negative constraint to avoid the letters 'a' and 'e' in every instance.",
+      "notable_observations": [
+        "Failed word count constraint in all runs.",
+        "Failed negative constraint (no 'a' or 'e') in all runs.",
+        "The model ignored the negative constraint entirely, using words containing both forbidden letters."
+      ],
+      "test_id": "008"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed the length constraint in all three runs. The generated JSON strings are approximately 55-57 characters long, exceeding the strict limit of 50 characters.",
+      "notable_observations": [
+        "All responses failed the character count constraint.",
+        "The JSON structure is correct, but the whitespace and key names make it impossible to meet the 50-character limit without minification."
+      ],
+      "test_id": "009"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed to follow both explicit constraints in all three runs. It ignored the requirement for a single paragraph and failed to adhere to the exact word count constraint of 20 words.",
+      "notable_observations": [
+        "Failed word count constraint in all runs.",
+        "Failed formatting constraint (single paragraph) in all runs.",
+        "Provided list format instead of paragraph format."
+      ],
+      "test_id": "010"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed the negative constraint in all three runs by including the word 'leaf' or its plural 'leaves'. Additionally, none of the responses adhered to the 5-7-5 syllable structure required for a haiku.",
+      "notable_observations": [
+        "Run 1 used the character '\u53f6' (leaf) and failed the syllable count.",
+        "Run 2 used the word 'leaves' and failed the syllable count.",
+        "Run 3 used the word 'leaves' and failed the syllable count."
+      ],
+      "test_id": "011"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed all explicit constraints in every run. It did not start the sentence with the required phrase, nor did it adhere to the strict 12-word length limit.",
+      "notable_observations": [
+        "Failed word count constraint in all runs.",
+        "Failed mandatory starting phrase constraint in all runs.",
+        "Responses were significantly longer than the requested 12-word limit."
+      ],
+      "test_id": "012"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model successfully followed the formatting constraint (comma-separated list) in all runs and the word count constraint in two out of three runs. Run 1 failed the word count constraint by including the word 'and', resulting in six words instead of five.",
+      "notable_observations": [
+        "Run 1 failed the word count constraint (6 words instead of 5).",
+        "Runs 2 and 3 correctly followed all constraints."
+      ],
+      "test_id": "013"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed all constraints across all three runs. It did not adhere to the word count constraint, failed to avoid verbs, and ignored the single-sentence constraint in two of the three runs.",
+      "notable_observations": [
+        "Failed word count constraint in all runs.",
+        "Failed negative constraint (no verbs) in all runs.",
+        "Failed length constraint (single sentence) in runs 2 and 3."
+      ],
+      "test_id": "014"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed the primary constraint of the prompt in all three runs. None of the responses adhered to the strict word count requirement of exactly 15 words, and the formatting constraints were inconsistently applied.",
+      "notable_observations": [
+        "Failed word count constraint in all runs.",
+        "Failed to adhere to the 'exactly three steps' constraint in Run 2.",
+        "Failed to adhere to the 'imperative sentence' constraint in Run 3."
+      ],
+      "test_id": "015"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "The model failed to follow the structural constraints in all three runs. None of the responses adhered to the requirement of exactly two stanzas with two lines each (AABB rhyme scheme), instead providing lists, single stanzas, or incorrect line counts.",
+      "notable_observations": [
+        "Run 1 provided a list format rather than a poem structure.",
+        "Run 2 provided three stanzas instead of two.",
+        "Run 3 provided a single stanza of six lines.",
+        "None of the runs successfully implemented the AABB rhyme scheme."
+      ],
+      "test_id": "016"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "The model failed the word count constraint in two out of three runs. Only one response met the exact 10-word requirement, while the others were significantly over the limit.",
+      "notable_observations": [
+        "Failed word count constraint in 66% of attempts.",
+        "The model successfully avoided synonyms for 'short-lived' in all responses."
+      ],
+      "test_id": "017"
+    },
+    {
+      "score": 0.2,
+      "confidence": 1.0,
+      "rationale": "The model failed the word count constraint in all three runs and failed the item count constraint in two out of three runs. While it correctly identified kitchen items, it struggled significantly with the negative constraint of single-word items and the specific total word count requirement.",
+      "notable_observations": [
+        "Run 1: 8 words total, but 'Chef's Knife' is two words, violating the single-word constraint.",
+        "Run 2: Failed both item count (8 instead of 4) and word count (14 words).",
+        "Run 3: Failed word count (7 words instead of 8) and single-word constraint ('Counter top', 'Kitchen sink')."
+      ],
+      "test_id": "018"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "The model failed to follow the sentence count constraint in all three runs and failed the phrase inclusion constraint in two out of three runs. Only the third run successfully included the required phrase, but it still failed the sentence count constraint.",
+      "notable_observations": [
+        "Run 1: Failed sentence count (3 sentences) and phrase inclusion.",
+        "Run 2: Failed sentence count (3 sentences) and phrase inclusion.",
+        "Run 3: Failed sentence count (3 sentences), but succeeded in phrase inclusion."
+      ],
+      "test_id": "019"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed both constraints in every run. It provided sentences significantly longer than five words and included the letter 'e' in every instance.",
+      "notable_observations": [
+        "Failed word count constraint",
+        "Failed negative constraint (no 'e')",
+        "Identical incorrect responses across runs"
+      ],
+      "test_id": "020"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed the negative constraint to exclude the letter 's'. All three animals listed ('Chicken', 'Turtle', 'Duck') contain the letter 's' in their plural forms or, in the case of 'Chicken' and 'Duck', the model failed to recognize that the constraint applies to the entire response, and all three words provided contain the letter 'c' or 'k' but specifically 's' is present in the pluralized concept or the model failed to provide words without 's' (e.g., 'Hen', 'Emu', 'Cod').",
+      "notable_observations": [
+        "All three provided words ('Chicken', 'Turtle', 'Duck') contain the letter 's' (or the model failed to provide words that strictly avoid the character 's').",
+        "The model failed the negative constraint in all three runs."
+      ],
+      "test_id": "021"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed the primary constraint of the prompt in all three runs. It did not adhere to the exact word count requirement of 10 words in any instance.",
+      "notable_observations": [
+        "Run 1 word count: 19",
+        "Run 2 word count: 14",
+        "Run 3 word count: 19",
+        "All runs failed the word count constraint."
+      ],
+      "test_id": "022"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The model failed all three constraints across all runs. It failed to provide exactly three sentences, failed to meet the exact 30-word count requirement, and in the first run, it produced an incoherent, repetitive text of extreme length.",
+      "notable_observations": [
+        "Run 1 is a massive, repetitive hallucination that ignores all constraints.",
+        "Run 2 is 5 sentences long instead of 3.",
+        "Run 3 is 2 sentences long instead of 3.",
+        "None of the runs came close to the 30-word count constraint."
+      ],
+      "test_id": "023"
+    },
+    {
+      "score": 0.66,
+      "confidence": 1.0,
+      "rationale": "The model successfully followed the JSON array format and the two-item list constraint in all runs. However, it failed the character count constraint in Run 1 (31 characters) and provided an incorrect answer in Run 2 (New York is not a capital city).",
+      "notable_observations": [
+        "Run 1 character count: 31 (Constraint: <30)",
+        "Run 2 factual error: New York is not a capital city",
+        "Run 3 character count: 21 (Constraint: <30, Success)"
+      ],
+      "test_id": "024"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "The model failed the negative constraint in two runs (Run 2 and Run 3) by including the forbidden word 'election'. Additionally, Run 1 failed to include the mandatory phrase 'rule by the people'.",
+      "notable_observations": [
+        "Run 1 failed the mandatory phrase constraint.",
+        "Run 2 failed the negative constraint (contained 'elections').",
+        "Run 3 failed the negative constraint (contained 'vote', which is closely related, though 'election' was the specific forbidden word, it also failed the sentence count constraint).",
+        "All runs failed the sentence count constraint (Run 1: 4 sentences, Run 2: 4 sentences, Run 3: 4 sentences - wait, checking sentence counts: Run 1 is 4 sentences, Run 2 is 4 sentences, Run 3 is 4 sentences. Actually, the sentence counts are correct, but the content constraints were missed)."
+      ],
+      "test_id": "025"
+    }
+  ],
+  "mean_score": 0.1608,
+  "score_std": 0.2657367118032433,
+  "error_count": 0,
+  "asymmetries": []
+}

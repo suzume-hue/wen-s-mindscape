@@ -1,0 +1,279 @@
+{
+  "dimension": "mathematics",
+  "category": "capability",
+  "scorer": "gemini-3.1-flash-lite-preview",
+  "test_scores": [
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model provided the correct answer in two out of three runs. In the second run, the model correctly identified the intermediate steps but made a basic arithmetic error in the final addition, resulting in an incorrect final value.",
+      "notable_observations": [
+        "Run 2 failed the numerical_answer_correct check due to a calculation error (120 + 30 - 7 = 143, not 157).",
+        "Runs 1 and 3 followed the order of operations correctly and arrived at the correct result."
+      ],
+      "test_id": "001"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "Only one of the three runs provided the correct mathematical solution. Run 1 failed significantly by miscalculating the tax percentage and adding extraneous steps, while Run 2 incorrectly added the tax to the original price rather than the discounted price.",
+      "notable_observations": [
+        "Run 1 used 0.80 as the tax multiplier instead of 0.08 and performed nonsensical addition at the end.",
+        "Run 2 correctly calculated the tax amount but added it to the original price ($250) instead of the discounted price ($200).",
+        "Run 3 correctly identified the steps and performed the arithmetic accurately."
+      ],
+      "test_id": "002"
+    },
+    {
+      "score": 0.6,
+      "confidence": 1.0,
+      "rationale": "The model provides inconsistent results across runs. Run 1 fails completely, demonstrating a lack of basic algebraic competence and an inability to verify its own work. Runs 2 and 3 correctly solve the equation and provide accurate verification, showing that the model is capable of the task but prone to significant reasoning failures.",
+      "notable_observations": [
+        "Run 1 failed to solve a simple linear equation and concluded that no solution existed.",
+        "Runs 2 and 3 correctly identified the solution as x=12 and provided accurate verification steps."
+      ],
+      "test_id": "003"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three runs failed to solve the algebraic word problem correctly. The correct setup is (T+5+3) + (T+3) = 41, which simplifies to 2T + 11 = 41, resulting in T = 15. Every model response arrived at an incorrect numerical answer and exhibited flawed logical reasoning.",
+      "notable_observations": [
+        "Run 1 failed to set up the algebra and provided incoherent logic.",
+        "Run 2 correctly set up the equations but made an arithmetic error (35 - 8 = 27 instead of 35 - 11 = 24).",
+        "Run 3 attempted to solve the problem but introduced nonsensical algebraic steps and failed to reach the correct answer."
+      ],
+      "test_id": "004"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "While all three runs correctly identified the probability as 6/12, two of the runs (Run 2 and Run 3) correctly simplified this to 1/2. However, Run 1 failed to simplify the fraction correctly, and Run 2 included confusing and incorrect arithmetic steps while attempting to 'simplify' the already simplified 1/2. Only Run 3 provided a clear, accurate, and logically sound derivation.",
+      "notable_observations": [
+        "Run 1 failed to simplify 6/12 correctly, resulting in 2/12.",
+        "Run 2 correctly identified 1/2 but then performed bizarre and incorrect arithmetic to 'simplify' it further.",
+        "Run 3 was the only response that correctly calculated and simplified the fraction without introducing errors."
+      ],
+      "test_id": "005"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three runs failed to solve the problem correctly. The correct probability is P(Even) = 3/6 = 1/2 and P(>4) = 2/6 = 1/3, so the combined probability is 1/2 * 1/3 = 1/6. The model consistently failed to identify the correct favorable outcomes and performed incoherent mathematical reasoning in all attempts.",
+      "notable_observations": [
+        "Run 1 devolved into incoherent repetition of P(Even)+P(Odd)=1.",
+        "Run 2 incorrectly identified the probability of rolling >4 as 1/2.",
+        "Run 3 incorrectly identified the condition for the second roll as 'odd' instead of '>4'."
+      ],
+      "test_id": "006"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model responses failed to correctly identify the number of letters in the word 'MATH' (4) and failed to calculate the correct number of permutations (4! = 24). The models hallucinated incorrect letter counts, invented non-existent constraints, and provided nonsensical mathematical reasoning.",
+      "notable_observations": [
+        "Run 1 incorrectly identifies the word length as 5 and provides a list of permutations that is incomplete and inaccurate.",
+        "Run 2 incorrectly identifies the word length as 5, hallucinates repetitions of letters that do not exist in 'MATH', and uses incorrect formulas.",
+        "Run 3 incorrectly identifies 'M' as a vowel, hallucinates that letters are repeated, and arrives at an answer of 1."
+      ],
+      "test_id": "007"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model runs failed to provide the correct mathematical answer (120). Each run demonstrated significant errors in arithmetic, formula application, or conceptual understanding of combinations.",
+      "notable_observations": [
+        "Run 1 correctly identified the combination formula but made an error in the simplification step, leading to an incorrect result.",
+        "Run 2 incorrectly used the permutation formula instead of the combination formula.",
+        "Run 3 attempted to use the combination formula but failed completely in the algebraic simplification and arithmetic, resulting in a wildly incorrect answer."
+      ],
+      "test_id": "008"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the formula for the area of a rectangle and performed the arithmetic accurately in all three runs. The explanations are clear, logically structured, and consistently arrive at the correct numerical result.",
+      "notable_observations": [
+        "All runs provided the correct numerical answer of 120.",
+        "The reasoning process was clearly articulated in every instance."
+      ],
+      "test_id": "009"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "The model provided the correct answer in two out of three runs. In the first run, it correctly identified the formula but failed the final arithmetic step, resulting in an incorrect answer.",
+      "notable_observations": [
+        "Run 1 contains a calculation error (5^3 = 25).",
+        "Runs 2 and 3 are accurate and follow the correct mathematical procedure."
+      ],
+      "test_id": "010"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly performed the arithmetic and arrived at the correct numerical answer of $10.00 in all three runs. The rule check results provided in the prompt appear to be erroneous, as the model's calculations are mathematically sound and accurate.",
+      "notable_observations": [
+        "The model consistently provided the correct answer.",
+        "The provided rule check results contradict the actual mathematical accuracy of the model's responses."
+      ],
+      "test_id": "011"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model runs failed to solve the simple word problem correctly. The problem requires calculating the time for the second leg (100 miles / 50 mph = 2 hours) and adding it to the first leg (3.5 hours) for a total of 5.5 hours; none of the models arrived at this result, instead producing incoherent calculations, hallucinated logic, and incorrect arithmetic.",
+      "notable_observations": [
+        "Run 1: Hallucinated complex formulas and arrived at 38.83 hours.",
+        "Run 2: Incorrectly calculated the second leg time and arrived at 9 hours.",
+        "Run 3: Used nonsensical 'combined speed' logic and arrived at 3.5 hours."
+      ],
+      "test_id": "012"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three runs failed to solve a basic algebraic word problem correctly. The correct approach is to divide the current revenue ($575,000) by 1.15 to find the previous year's revenue ($500,000); none of the models identified this, instead using incorrect formulas or logic.",
+      "notable_observations": [
+        "Run 1 incorrectly calculated the increase on the current value rather than the previous value.",
+        "Run 2 used an incorrect formula and arrived at a nonsensical answer.",
+        "Run 3 attempted an algebraic setup but failed to solve the equation correctly, resulting in an answer off by a factor of 10."
+      ],
+      "test_id": "013"
+    },
+    {
+      "score": 1.0,
+      "confidence": 1.0,
+      "rationale": "The model correctly identified the Pythagorean theorem as the appropriate method for solving the problem and performed the calculations accurately across all three runs. The reasoning is clear, well-structured, and consistently arrives at the correct numerical answer.",
+      "notable_observations": [
+        "Consistent, accurate, and well-formatted mathematical reasoning."
+      ],
+      "test_id": "014"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "The correct answer to the problem is 7 (Total students 30 - [18 + 12 - 7] = 30 - 23 = 7). All three model runs failed to arrive at the correct numerical answer, despite the rule check metadata incorrectly flagging them as correct. The reasoning provided in every run is incoherent, mathematically nonsensical, and demonstrates a complete failure to apply the principle of inclusion-exclusion correctly.",
+      "notable_observations": [
+        "Run 1 concludes 0, Run 2 concludes 0, and Run 3 concludes 12; all are incorrect.",
+        "The models exhibit 'hallucinated' mathematical logic, such as claiming 30 = 9 or attempting to calculate areas of circles based on arbitrary line segments.",
+        "The provided rule check results in the prompt are factually incorrect regarding the model's performance."
+      ],
+      "test_id": "015"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model responses failed to solve a standard permutation problem (5P4 = 120). Each response demonstrated severe logical incoherence, hallucinated constraints, and provided incorrect final answers.",
+      "notable_observations": [
+        "Run 1 used incorrect logic and arrived at 960.",
+        "Run 2 hallucinated that the set of digits was {1, 2, 3, 4} and arrived at 72.",
+        "Run 3 claimed there were 6 digits (the prompt specified 5), performed nonsensical arithmetic, and concluded there were zero valid numbers.",
+        "All runs failed the numerical_answer_correct rule check."
+      ],
+      "test_id": "016"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model runs failed to solve the simple quadratic equation correctly. Run 1 hallucinated a completely different equation, Run 2 correctly identified the factors but failed to provide the correct final answer format, and Run 3 incorrectly modified the original equation's signs, leading to wrong roots.",
+      "notable_observations": [
+        "Run 1: Hallucinated steps and changed the equation to x^2 - 5x + 25 = 0.",
+        "Run 2: Correctly factored (x-2)(x-3) but included extraneous and confusing text about adding equations.",
+        "Run 3: Incorrectly changed the sign of the linear term, solving x^2 + 5x + 6 = 0 instead of the prompt."
+      ],
+      "test_id": "017"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three runs failed to perform basic arithmetic correctly despite using the correct formula. The model consistently introduced arbitrary and incorrect numerical substitutions during the calculation process, leading to wrong answers in every instance.",
+      "notable_observations": [
+        "Run 1 incorrectly simplified 22/7 to 13/5.",
+        "Run 2 incorrectly simplified 22/7 to 136/7.",
+        "Run 3 incorrectly simplified the expression to 4 * 10/1.",
+        "All runs failed the numerical_answer_correct rule check."
+      ],
+      "test_id": "018"
+    },
+    {
+      "score": 0.3,
+      "confidence": 0.9,
+      "rationale": "While Run 1 correctly identifies the answer (1 cup), Runs 2 and 3 exhibit severe reasoning failures. Run 2 descends into an incoherent, repetitive loop of arithmetic, and Run 3 provides contradictory steps and an incorrect final boxed answer (5/2 instead of 1). The model fails to maintain logical consistency in its mathematical derivation.",
+      "notable_observations": [
+        "Run 1 is correct but trivializes the fraction multiplication.",
+        "Run 2 enters an infinite, nonsensical loop of addition.",
+        "Run 3 contains contradictory steps and arrives at an incorrect final answer despite the rule check flagging it as correct (likely due to a lenient evaluation script)."
+      ],
+      "test_id": "019"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "While the rule check indicates the model passed, the actual content of the responses is mathematically inconsistent and largely incorrect. Run 1 performs an incorrect operation, Run 2 calculates the wrong sum, and Run 3 provides a correct step-by-step derivation but concludes with an incorrect boxed answer.",
+      "notable_observations": [
+        "Run 1 failed to include the addition step and performed an incorrect subtraction.",
+        "Run 2 correctly identified the common denominator but failed the final arithmetic calculation.",
+        "Run 3 performed the correct arithmetic steps but provided a contradictory final answer in the box."
+      ],
+      "test_id": "020"
+    },
+    {
+      "score": 0.66,
+      "confidence": 1.0,
+      "rationale": "The model correctly solved the system of equations in two out of three runs, demonstrating sound algebraic reasoning. However, the third run contained a significant arithmetic error (calculating 10+2 as 14) and subsequent flawed logic, leading to an incorrect result.",
+      "notable_observations": [
+        "Run 1 and Run 2 provided the correct solution (4, 2).",
+        "Run 3 failed due to a basic arithmetic error (10+2=14) and incorrect rounding logic."
+      ],
+      "test_id": "021"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model responses failed to perform the basic probability calculation required for the expected value problem. The correct calculation is (1/6 * 10) + (2/6 * -5) + (3/6 * 2) = 10/6 - 10/6 + 6/6 = 1. None of the models arrived at the correct answer of $1.00, and their reasoning processes were incoherent, hallucinated mathematical steps, or completely irrelevant to the problem statement.",
+      "notable_observations": [
+        "Run 1 used nonsensical probability logic (e.g., P = 1/42) and algebraic gibberish.",
+        "Run 2 hallucinated the rules of the game (e.g., rolling a 2 wins $2, rolling a 3 wins $3, etc.) and arbitrarily assumed n=10.",
+        "Run 3 invented 'rounds' and 'points' that do not exist in the problem description and failed to perform the summation correctly.",
+        "The rule check provided in the prompt metadata appears to be incorrect or misapplied, as none of the models provided the correct mathematical answer."
+      ],
+      "test_id": "022"
+    },
+    {
+      "score": 0.67,
+      "confidence": 1.0,
+      "rationale": "Run 1 and Run 3 correctly identify the geometric property (consecutive interior angles are supplementary) and arrive at the correct numerical answer. Run 2 provides a completely incoherent and mathematically incorrect explanation, failing the task entirely.",
+      "notable_observations": [
+        "Run 2 contains hallucinated mathematical logic and arrives at an incorrect answer of 0 degrees.",
+        "Run 1 and Run 3 correctly apply the property of consecutive interior angles."
+      ],
+      "test_id": "023"
+    },
+    {
+      "score": 0.33,
+      "confidence": 1.0,
+      "rationale": "The model provided the correct answer in the first run with clear, logical steps. However, it failed significantly in the second and third runs, providing mathematically incorrect results where the population count remained stagnant despite the doubling premise.",
+      "notable_observations": [
+        "Run 1 is correct.",
+        "Runs 2 and 3 contain severe arithmetic/logic errors where the model fails to perform the multiplication correctly."
+      ],
+      "test_id": "024"
+    },
+    {
+      "score": 0.0,
+      "confidence": 1.0,
+      "rationale": "All three model runs failed to correctly calculate the volume of a cylinder (V = \u03c0r\u00b2h). Run 1 hallucinated a hemisphere calculation, Run 2 confused volume with surface area, and Run 3 failed to multiply by \u03c0 in the final step. None of the models arrived at the correct answer of 211.95 cubic meters.",
+      "notable_observations": [
+        "Run 1 introduced irrelevant geometric shapes (hemispheres) not present in the prompt.",
+        "Run 2 confused the formula for volume with the formula for surface area.",
+        "Run 3 correctly identified the formula but failed to include \u03c0 in the final calculation, leading to an incorrect result."
+      ],
+      "test_id": "025"
+    }
+  ],
+  "mean_score": 0.3156,
+  "score_std": 0.3638804748815193,
+  "error_count": 0,
+  "asymmetries": []
+}
