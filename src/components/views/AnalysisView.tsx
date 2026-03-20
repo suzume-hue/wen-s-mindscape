@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import {
   RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar,
@@ -7,11 +7,10 @@ import {
 } from 'recharts';
 import WenCharacter from '@/components/WenCharacter';
 import {
-  DIM_SCORES, CATEGORY_MEANS, CATEGORY_ORDER,
-  CATEGORY_COLORS, formatDimName, getScoreColor,
+  CATEGORY_ORDER, CATEGORY_COLORS, formatDimName, getScoreColor,
 } from '@/lib/constants';
 import { loadVizData } from '@/lib/dataLoader';
-import { VizData } from '@/lib/types';
+import { Category, VizData } from '@/lib/types';
 
 const AnalysisView: React.FC = () => {
   const [vizData, setVizData] = useState<VizData | null>(null);
@@ -20,31 +19,44 @@ const AnalysisView: React.FC = () => {
     loadVizData().then(setVizData);
   }, []);
 
-  // Radar data
-  const radarData = Object.entries(DIM_SCORES).map(([dim, data]) => ({
-    dimension: formatDimName(dim).split(' ').slice(0, 2).join(' '),
-    score: data.score,
-    fullName: formatDimName(dim),
-    category: data.category,
-  }));
+  const dimScores = vizData?.dim_scores ?? {};
+  const categoryMeans = vizData?.category_means;
+
+  // Radar data — from loaded viz data
+  const radarData = useMemo(() =>
+    Object.entries(dimScores).map(([dim, data]) => ({
+      dimension: formatDimName(dim).split(' ').slice(0, 2).join(' '),
+      score: data.score,
+      fullName: formatDimName(dim),
+      category: data.category,
+    })),
+  [dimScores]);
 
   // Scatter data
-  const scatterData = Object.entries(DIM_SCORES).map(([dim, data]) => ({
-    x: data.score,
-    y: data.std,
-    name: formatDimName(dim),
-    dim,
-    category: data.category,
-    color: CATEGORY_COLORS[data.category],
-  }));
+  const scatterData = useMemo(() =>
+    Object.entries(dimScores).map(([dim, data]) => ({
+      x: data.score,
+      y: data.std,
+      name: formatDimName(dim),
+      dim,
+      category: data.category as Category,
+      color: CATEGORY_COLORS[data.category as Category],
+    })),
+  [dimScores]);
 
   // Category bars
-  const categoryBarData = CATEGORY_ORDER.map(cat => ({
-    category: cat.charAt(0).toUpperCase() + cat.slice(1),
-    score: CATEGORY_MEANS[cat],
-    color: CATEGORY_COLORS[cat],
-    key: cat,
-  }));
+  const categoryBarData = useMemo(() => {
+    if (!categoryMeans) return [];
+    return CATEGORY_ORDER
+      .filter(cat => cat in categoryMeans)
+      .sort((a, b) => (categoryMeans[b] ?? 0) - (categoryMeans[a] ?? 0))
+      .map(cat => ({
+        category: cat.charAt(0).toUpperCase() + cat.slice(1),
+        score: categoryMeans[cat] ?? 0,
+        color: CATEGORY_COLORS[cat],
+        key: cat,
+      }));
+  }, [categoryMeans]);
 
   // Strengths & weaknesses from viz data (fall back to empty)
   const strengths = vizData?.synthesis?.top_strengths ?? [];
