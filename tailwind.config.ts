@@ -13,6 +13,13 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        display: ['Syne', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        mono: ['Space Mono', 'monospace'],
+        jp: ['Noto Sans JP', 'sans-serif'],
+        handwritten: ['Caveat', 'cursive'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -47,6 +54,24 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        wen: {
+          bg: "hsl(var(--wen-bg))",
+          surface: "hsl(var(--wen-surface))",
+          raised: "hsl(var(--wen-surface-raised))",
+          neon: "hsl(var(--wen-neon))",
+          amber: "hsl(var(--wen-amber))",
+          teal: "hsl(var(--wen-teal))",
+          danger: "hsl(var(--wen-danger))",
+          caution: "hsl(var(--wen-caution))",
+          success: "hsl(var(--wen-success))",
+        },
+        cat: {
+          personality: "hsl(var(--cat-personality))",
+          values: "hsl(var(--cat-values))",
+          cultural: "hsl(var(--cat-cultural))",
+          behavioral: "hsl(var(--cat-behavioral))",
+          capability: "hsl(var(--cat-capability))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -65,20 +90,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {

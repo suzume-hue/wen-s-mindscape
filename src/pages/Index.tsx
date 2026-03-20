@@ -1,16 +1,57 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React, { useState, useCallback } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import HudNav from '@/components/HudNav';
+import CustomCursor from '@/components/CustomCursor';
+import HomeView from '@/components/views/HomeView';
+import ExploreView from '@/components/views/ExploreView';
+import TestRoomView from '@/components/views/TestRoomView';
+import MindMapView from '@/components/views/MindMapView';
+import AnalysisView from '@/components/views/AnalysisView';
+import { ViewId } from '@/lib/types';
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const [activeView, setActiveView] = useState<ViewId>('home');
+  const [selectedDimension, setSelectedDimension] = useState<string | null>(null);
+
+  const handleNavigate = useCallback((view: ViewId) => {
+    setActiveView(view);
+    if (view !== 'testroom') setSelectedDimension(null);
+  }, []);
+
+  const handleSelectDimension = useCallback((dim: string) => {
+    setSelectedDimension(dim);
+    setActiveView('testroom');
+  }, []);
+
+  const handleBackFromTestRoom = useCallback(() => {
+    setActiveView('explore');
+    setSelectedDimension(null);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background text-foreground cursor-none">
+      <CustomCursor />
+      <HudNav activeView={activeView} onNavigate={handleNavigate} />
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeView + (selectedDimension || '')}
+          initial={{ x: 40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -40, opacity: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+        >
+          {activeView === 'home' && <HomeView />}
+          {activeView === 'explore' && <ExploreView onSelectDimension={handleSelectDimension} />}
+          {activeView === 'testroom' && selectedDimension && (
+            <TestRoomView dimension={selectedDimension} onBack={handleBackFromTestRoom} />
+          )}
+          {activeView === 'mindmap' && <MindMapView onSelectDimension={handleSelectDimension} />}
+          {activeView === 'analysis' && <AnalysisView />}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
