@@ -2,33 +2,39 @@ import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import WenCharacter from '@/components/WenCharacter';
 import {
-  DIM_SCORES, CATEGORY_COLORS, CATEGORY_ORDER,
-  formatDimName, getScoreColor,
+  CATEGORY_COLORS,
+  formatDimName,
 } from '@/lib/constants';
-import { Category, WenExpression } from '@/lib/types';
+import { loadVizData } from '@/lib/dataLoader';
+import { Category, DimScore, VizData } from '@/lib/types';
 
 interface MindMapViewProps {
   onSelectDimension: (dim: string) => void;
 }
 
-// Category angular ranges
 const CATEGORY_ANGLES: Record<Category, [number, number]> = {
   personality: [270, 330],
-  values: [330, 410],   // wraps past 360
+  values: [330, 410],
   cultural: [50, 150],
   behavioral: [150, 210],
   capability: [210, 270],
 };
 
 const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
+  const [vizData, setVizData] = useState<VizData | null>(null);
   const [hoveredDim, setHoveredDim] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const stars = useMemo(() => {
-    const entries = Object.entries(DIM_SCORES);
+  useEffect(() => {
+    loadVizData().then(setVizData);
+  }, []);
 
-    // Group by category and assign angles
-    const byCategory: Record<Category, [string, typeof DIM_SCORES[string]][]> = {
+  const dimScores = vizData?.dim_scores ?? {};
+
+  const stars = useMemo(() => {
+    const entries = Object.entries(dimScores) as [string, DimScore][];
+
+    const byCategory: Record<Category, [string, DimScore][]> = {
       personality: [], values: [], cultural: [], behavioral: [], capability: [],
     };
     entries.forEach(e => byCategory[e[1].category].push(e));
@@ -55,13 +61,12 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
         shimmerSpeed: data.std === 0 ? 0 : 1 + (1 - data.std) * 3,
       };
     });
-  }, []);
+  }, [dimScores]);
 
   const hoveredStar = stars.find(s => s.dim === hoveredDim);
 
   return (
     <div className="min-h-screen pt-16 pb-12 flex items-center justify-center relative overflow-hidden" ref={containerRef}>
-      {/* Star field background */}
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 80 }).map((_, i) => (
           <div
@@ -78,9 +83,7 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
         ))}
       </div>
 
-      {/* Constellation area */}
       <div className="relative" style={{ width: 700, height: 700 }}>
-        {/* Center: Wen */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <WenCharacter
             size={100}
@@ -89,10 +92,8 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
           />
         </div>
 
-        {/* Orbit ring */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-white/[0.03] pointer-events-none" />
 
-        {/* Connection line to hovered star */}
         {hoveredStar && (
           <svg className="absolute inset-0 pointer-events-none z-5" width="700" height="700">
             <line
@@ -106,7 +107,6 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
           </svg>
         )}
 
-        {/* Dimension stars */}
         {stars.map(star => {
           const isHovered = hoveredDim === star.dim;
           return (
@@ -137,7 +137,6 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
                   transition: 'opacity 0.2s, box-shadow 0.2s',
                 }}
               />
-              {/* Label */}
               {isHovered && (
                 <motion.div
                   initial={{ opacity: 0, y: 4 }}
@@ -152,7 +151,6 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
         })}
       </div>
 
-      {/* Mobile fallback note */}
       <div className="lg:hidden absolute bottom-4 left-4 right-4 text-center font-mono text-[10px] text-muted-foreground">
         Rotate device or use desktop for full constellation view
       </div>

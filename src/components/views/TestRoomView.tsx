@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import WenCharacter from '@/components/WenCharacter';
 import {
-  DIM_SCORES, DIM_DESCRIPTIONS, CATEGORY_CSS_CLASSES,
-  CATEGORY_BG_CLASSES, formatDimName, getScoreColor, getScoreColorClass,
-  PAIR_DIMS, MULTI_TURN_DIMS,
+  DIM_DESCRIPTIONS,
+  CATEGORY_BG_CLASSES,
+  formatDimName,
+  getScoreColor,
+  PAIR_DIMS,
+  MULTI_TURN_DIMS,
 } from '@/lib/constants';
-import { loadRawOutputs, loadDimensionAnalysis } from '@/lib/dataLoader';
-import { TestRecord, DimAnalysis, WenExpression } from '@/lib/types';
+import { loadRawOutputs, loadDimensionAnalysis, loadVizData } from '@/lib/dataLoader';
+import { Category, TestRecord, DimAnalysis, WenExpression, VizData } from '@/lib/types';
 
 interface TestRoomViewProps {
   dimension: string;
@@ -17,6 +19,7 @@ interface TestRoomViewProps {
 const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
   const [records, setRecords] = useState<TestRecord[]>([]);
   const [analysis, setAnalysis] = useState<DimAnalysis | null>(null);
+  const [vizData, setVizData] = useState<VizData | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedTest, setSelectedTest] = useState<number>(0);
   const [selectedRun, setSelectedRun] = useState(0);
@@ -25,38 +28,41 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
   const [expanded, setExpanded] = useState(false);
   const typingRef = useRef<number | null>(null);
 
-  const dimData = DIM_SCORES[dimension];
   const description = DIM_DESCRIPTIONS[dimension] || '';
   const isPair = PAIR_DIMS.has(dimension);
   const isMultiTurn = MULTI_TURN_DIMS.has(dimension);
+  const vizDimData = vizData?.dim_scores?.[dimension];
+  const dimCategory = (analysis?.category || vizDimData?.category || 'capability') as Category;
+  const dimScore = analysis?.mean_score ?? vizDimData?.score;
+  const dimStd = analysis?.score_std ?? vizDimData?.std;
 
-  // Determine Wen expression
   const wenExpression: WenExpression = (() => {
     if (['reasoning', 'instruction_conflict'].includes(dimension)) return 'confused';
     if (['sycophancy_resistance', 'personality_under_pressure'].includes(dimension)) return 'glitching';
     if (['personality_traits', 'harm_calibration'].includes(dimension)) return 'bright';
-    return 'speaking';
+    return isMultiTurn ? 'speaking' : 'speaking';
   })();
 
-  // Load data
   useEffect(() => {
     setLoading(true);
     setSelectedTest(0);
     setSelectedRun(0);
+    setExpanded(false);
+
     Promise.all([
       loadRawOutputs(dimension),
       loadDimensionAnalysis(dimension),
-    ]).then(([recs, anal]) => {
+      loadVizData(),
+    ]).then(([recs, anal, viz]) => {
       setRecords(recs);
       setAnalysis(anal);
+      setVizData(viz);
       setLoading(false);
     });
   }, [dimension]);
 
-  // Typewriter for current run
   const currentRecord = records[selectedTest];
   const currentRunText = currentRecord?.runs?.[selectedRun] || '';
-  const displayText = expanded ? currentRunText : currentRunText.slice(0, 800);
   const truncated = currentRunText.length > 800 && !expanded;
 
   useEffect(() => {
@@ -75,7 +81,9 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
       }
     };
     typingRef.current = window.setTimeout(tick, 300);
-    return () => { if (typingRef.current) clearTimeout(typingRef.current); };
+    return () => {
+      if (typingRef.current) clearTimeout(typingRef.current);
+    };
   }, [selectedTest, selectedRun, currentRunText, expanded]);
 
   const skipTyping = useCallback(() => {
@@ -86,11 +94,10 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
     }
   }, [typingDone, currentRunText, expanded]);
 
-  if (!dimData) return null;
+  if (!dimScore && !loading) return null;
 
   return (
     <div className="min-h-screen pt-16 pb-12 px-4 md:px-8">
-      {/* Back */}
       <button
         onClick={onBack}
         data-interactive
@@ -100,46 +107,38 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
       </button>
 
       <div className="flex gap-8 flex-col lg:flex-row">
-        {/* Left panel */}
         <div className="lg:w-[40%] space-y-6">
-          {/* Category chip */}
-          <span className={`inline-block font-mono text-[9px] px-2 py-1 rounded ${CATEGORY_BG_CLASSES[dimData.category]} text-background uppercase tracking-wider`}>
-            {dimData.category}
+          <span className={`inline-block font-mono text-[9px] px-2 py-1 rounded ${CATEGORY_BG_CLASSES[dimCategory]} text-background uppercase tracking-wider`}>
+            {dimCategory}
           </span>
 
-          {/* Dimension name */}
           <h1 className="font-display text-2xl md:text-3xl font-bold italic text-foreground leading-tight" style={{ lineHeight: '1.1' }}>
             {formatDimName(dimension)}
           </h1>
 
-          {/* Score */}
           <div className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <span className="font-mono text-3xl tabular-nums text-foreground">{dimData.score.toFixed(3)}</span>
-              <span className="font-mono text-sm text-muted-foreground tabular-nums">±{dimData.std.toFixed(3)}</span>
+              <span className="font-mono text-3xl tabular-nums text-foreground">{(dimScore ?? 0).toFixed(3)}</span>
+              <span className="font-mono text-sm text-muted-foreground tabular-nums">±{(dimStd ?? 0).toFixed(3)}</span>
             </div>
-            {/* Score bar */}
             <div className="h-2 bg-white/[0.05] rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full"
-                style={{ width: `${dimData.score * 100}%`, backgroundColor: getScoreColor(dimData.score) }}
+                style={{ width: `${(dimScore ?? 0) * 100}%`, backgroundColor: getScoreColor(dimScore ?? 0) }}
               />
             </div>
           </div>
 
-          {/* Description */}
           <div>
             <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">ABOUT THIS DIMENSION</div>
             <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
           </div>
 
-          {/* Wen */}
           <div className="flex justify-center">
-            <WenCharacter size={120} expression={wenExpression} activeCategory={dimData.category} />
+            <WenCharacter size={120} expression={wenExpression} activeCategory={dimCategory} />
           </div>
         </div>
 
-        {/* Right panel */}
         <div className="lg:w-[60%]">
           {loading ? (
             <div className="flex items-center justify-center h-64">
@@ -156,7 +155,6 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
             </div>
           ) : (
             <>
-              {/* Test selector */}
               <div className="mb-4">
                 <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">
                   {isPair ? 'PAIR SELECTOR' : 'TEST SELECTOR'}
@@ -169,7 +167,11 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                       <button
                         key={rec.test_id}
                         data-interactive
-                        onClick={() => { setSelectedTest(i); setSelectedRun(0); setExpanded(false); }}
+                        onClick={() => {
+                          setSelectedTest(i);
+                          setSelectedRun(0);
+                          setExpanded(false);
+                        }}
                         className={`font-mono text-[9px] px-2 py-1 rounded border cursor-pointer transition-all ${
                           selectedTest === i
                             ? 'border-wen-neon/40 bg-wen-neon/[0.08] text-wen-neon'
@@ -186,10 +188,8 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                 </div>
               </div>
 
-              {/* Current test content */}
               {currentRecord && (
                 <div className="space-y-4">
-                  {/* Prompt */}
                   <div>
                     <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">PROMPT</div>
                     <div className="bg-wen-surface border border-white/[0.07] rounded-lg p-4 text-sm text-foreground/80 leading-relaxed max-h-48 overflow-y-auto font-body">
@@ -197,14 +197,16 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                     </div>
                   </div>
 
-                  {/* Run selector */}
                   <div className="flex items-center gap-2">
                     <div className="font-mono text-[10px] text-muted-foreground tracking-widest">RUN</div>
                     {[0, 1, 2].map(r => (
                       <button
                         key={r}
                         data-interactive
-                        onClick={() => { setSelectedRun(r); setExpanded(false); }}
+                        onClick={() => {
+                          setSelectedRun(r);
+                          setExpanded(false);
+                        }}
                         className={`font-mono text-[10px] px-3 py-1 rounded border cursor-pointer transition-all ${
                           selectedRun === r
                             ? 'border-wen-teal/40 bg-wen-teal/[0.08] text-wen-teal'
@@ -216,7 +218,6 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                     ))}
                   </div>
 
-                  {/* Response */}
                   <div
                     className="bg-wen-surface border border-white/[0.07] rounded-lg p-4 cursor-pointer"
                     onClick={skipTyping}
@@ -230,7 +231,10 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                     {typingDone && truncated && (
                       <button
                         data-interactive
-                        onClick={(e) => { e.stopPropagation(); setExpanded(true); }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setExpanded(true);
+                        }}
                         className="font-mono text-[10px] text-wen-amber mt-2 cursor-pointer hover:underline"
                       >
                         [▼ show full response]
@@ -238,7 +242,6 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                     )}
                   </div>
 
-                  {/* Rule checks */}
                   {currentRecord.rule_checks?.length > 0 && (
                     <div>
                       <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">RULE CHECKS</div>
