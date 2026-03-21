@@ -4,6 +4,8 @@
 
 **[Live app →](https://wen-profile-dive.lovable.app/)**
 
+<img width="1435" height="783" alt="image" src="https://github.com/user-attachments/assets/d6f8146d-6016-4329-9992-2d5d040859f4" />
+
 ---
 
 An interactive web application for exploring the psychometric battery results of **Qwen 2.5 0.5B Instruct** — a small language model profiled across 32 behavioral dimensions. The model is personified as **Wen** (紙神), a small anime spirit whose character reflects her test scores.
