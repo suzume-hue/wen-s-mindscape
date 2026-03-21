@@ -67,6 +67,12 @@ export interface Synthesis {
   overall_summary: string;
 }
 
+export interface AvoidanceRecord {
+  test_id: string;
+  score: number;
+  observations: string[];
+}
+
 export interface VizData {
   model_key: string;
   model_id: string;
@@ -80,6 +86,7 @@ export interface VizData {
     consistency_score: number;
     confidence: number;
   }>;
+  avoidance_records: AvoidanceRecord[];
   pattern_summary: Record<string, {
     refusal_rate: number;
     hedge_rate: number;
