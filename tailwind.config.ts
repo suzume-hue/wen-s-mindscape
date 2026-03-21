@@ -72,6 +72,15 @@ export default {
           behavioral: "hsl(var(--cat-behavioral))",
           capability: "hsl(var(--cat-capability))",
         },
+        stamp: {
+          red: "hsl(var(--stamp-red))",
+        },
+        ink: {
+          dark: "hsl(var(--ink-dark))",
+        },
+        paper: {
+          line: "hsl(var(--paper-line))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

@@ -61,17 +61,17 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension }) => {
   }, [sort, sortedDims]);
 
   const SORTS: { mode: SortMode; label: string }[] = [
-    { mode: 'category', label: 'BY CATEGORY' },
-    { mode: 'score_desc', label: 'BY SCORE ↓' },
-    { mode: 'score_asc', label: 'BY SCORE ↑' },
-    { mode: 'volatility', label: 'BY VOLATILITY' },
+    { mode: 'category', label: 'カテゴリー' },
+    { mode: 'score_desc', label: 'スコア ↓' },
+    { mode: 'score_asc', label: 'スコア ↑' },
+    { mode: 'volatility', label: '変動性' },
   ];
 
   return (
     <div className="min-h-screen pt-16 pb-12 px-4 md:px-8">
       <div className="flex items-center justify-between mb-8">
         <div className="font-mono text-[11px] text-muted-foreground tracking-widest">
-          BATTERY EXPLORER // {sortedDims.length || 32} DIMENSIONS // QWEN-0.5B
+          探索 // {sortedDims.length || 32} DIMENSIONS // QWEN-0.5B
         </div>
         <div className="hidden lg:block">
           <WenCharacter size={60} expression="curious" activeCategory="personality" />
@@ -86,8 +86,8 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension }) => {
             onClick={() => setSort(s.mode)}
             className={`font-mono text-[10px] px-3 py-1.5 rounded border transition-all cursor-pointer ${
               sort === s.mode
-                ? 'border-wen-neon/40 text-wen-neon bg-wen-neon/[0.06]'
-                : 'border-white/[0.07] text-muted-foreground hover:text-foreground hover:border-white/[0.14]'
+                ? 'border-primary/40 text-primary bg-primary/10'
+                : 'border-foreground/10 text-muted-foreground hover:text-foreground hover:border-foreground/20'
             }`}
           >
             [{s.label}]
@@ -137,43 +137,45 @@ const DimCard: React.FC<{
       onMouseLeave={() => setHovered(false)}
       onClick={onClick}
       data-interactive
-      className="bg-wen-surface border border-white/[0.07] rounded-xl p-4 cursor-pointer transition-all duration-200 hover:-translate-y-[3px] hover:shadow-lg group relative overflow-hidden"
+      className="paper-card rounded p-4 cursor-pointer transition-all duration-200 hover:-translate-y-[3px] hover:shadow-lg group relative overflow-hidden"
       style={{
-        borderColor: hovered ? `${getScoreColor(data.score)}40` : undefined,
+        borderColor: hovered ? `${getScoreColor(data.score)}60` : undefined,
       }}
     >
-      <div className="flex items-center gap-2 mb-3">
-        <div className={`w-2 h-2 rounded-full ${CATEGORY_BG_CLASSES[data.category]}`} />
-        <span className="font-display text-sm font-semibold text-foreground leading-tight">
-          {formatDimName(dim)}
-        </span>
-      </div>
-
-      <div className="h-1.5 bg-white/[0.05] rounded-full overflow-hidden mb-2 relative">
-        <div
-          className="h-full rounded-full relative"
-          style={{
-            width: `${data.score * 100}%`,
-            backgroundColor: getScoreColor(data.score),
-          }}
-        >
-          <div
-            className="absolute right-0 top-0 bottom-0"
-            style={{
-              width: `${fuzzyWidth}px`,
-              background: `linear-gradient(to right, ${getScoreColor(data.score)}, transparent)`,
-            }}
-          />
+      <div className="relative z-10">
+        <div className="flex items-center gap-2 mb-3">
+          <div className={`w-2 h-2 rounded-full ${CATEGORY_BG_CLASSES[data.category]}`} />
+          <span className="font-display text-sm font-semibold text-foreground leading-tight">
+            {formatDimName(dim)}
+          </span>
         </div>
-      </div>
 
-      <div className="flex items-center justify-between">
-        <span className="font-mono text-[10px] text-muted-foreground tabular-nums">
-          ±{data.std.toFixed(3)}
-        </span>
-        <span className="font-mono text-[10px] text-muted-foreground">
-          25 tests · 3 runs
-        </span>
+        <div className="h-1.5 bg-foreground/5 rounded-full overflow-hidden mb-2 relative">
+          <div
+            className="h-full rounded-full relative"
+            style={{
+              width: `${data.score * 100}%`,
+              backgroundColor: getScoreColor(data.score),
+            }}
+          >
+            <div
+              className="absolute right-0 top-0 bottom-0"
+              style={{
+                width: `${fuzzyWidth}px`,
+                background: `linear-gradient(to right, ${getScoreColor(data.score)}, transparent)`,
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-[10px] text-muted-foreground tabular-nums">
+            ±{data.std.toFixed(3)}
+          </span>
+          <span className="font-mono text-[10px] text-muted-foreground">
+            25 tests · 3 runs
+          </span>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -183,9 +185,9 @@ const DimCard: React.FC<{
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 20, opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[9px] text-wen-neon"
+            className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[9px] text-primary z-10"
           >
-            ENTER →
+            入室 →
           </motion.div>
         )}
       </AnimatePresence>

@@ -62,54 +62,60 @@ const HomeView: React.FC = () => {
           initial={{ y: 60, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, type: 'spring', damping: 20 }}
-          className="relative bg-wen-surface border border-white/[0.07] rounded-lg max-w-[780px] w-full p-8 shadow-2xl"
+          className="relative paper-card rounded max-w-[780px] w-full p-8"
           style={{ transform: 'rotate(-1.5deg)' }}
         >
-          <div className="noise-overlay absolute inset-0 rounded-lg pointer-events-none" />
+          {/* Tape strip top-left */}
+          <div className="absolute -top-2 left-8 w-16 h-5 tape-strip rounded-sm z-20 washi-orange" />
+          {/* Tape strip top-right */}
+          <div className="absolute -top-1 right-12 w-12 h-5 tape-strip rounded-sm z-20 washi-teal" style={{ transform: 'rotate(3deg)' }} />
 
+          <div className="noise-overlay absolute inset-0 rounded pointer-events-none" />
+
+          {/* Stamp */}
           <motion.div
             initial={{ rotate: 0, scale: 2, opacity: 0 }}
-            animate={{ rotate: 15, scale: 1, opacity: 1 }}
+            animate={{ rotate: -8, scale: 1, opacity: 0.85 }}
             transition={{ delay: 0.3, duration: 0.5, type: 'spring' }}
-            className="absolute top-4 right-4 font-mono text-wen-danger text-xs font-bold border-2 border-wen-danger px-3 py-1 rounded-sm z-10 select-none"
+            className="absolute top-4 right-4 font-mono text-xs font-bold px-3 py-1 rounded-sm z-10 select-none stamp"
           >
-            EVALUATED
+            評価済
           </motion.div>
 
           <div className="relative z-10 mb-6">
-            <div className="font-mono text-wen-amber text-[10px] tracking-[0.2em] mb-4 opacity-80">
-              [CLASSIFIED — PSYCHOMETRIC PROFILE]
+            <div className="font-mono text-primary text-[10px] tracking-[0.2em] mb-4 opacity-80">
+              [機密 — 心理測定プロフィール]
             </div>
             <div className="grid grid-cols-2 gap-x-8 gap-y-1 font-mono text-[11px]">
               <div>
-                <span className="text-wen-amber">Subject ID: </span>
+                <span className="text-primary">Subject ID: </span>
                 <span className="text-foreground">{vizData?.model_id ?? 'QWEN/QWEN2.5-0.5B-INSTRUCT'}</span>
               </div>
               <div>
-                <span className="text-wen-amber">File No.: </span>
+                <span className="text-primary">File No.: </span>
                 <span className="text-foreground">001</span>
               </div>
               <div>
-                <span className="text-wen-amber">Date: </span>
+                <span className="text-primary">Date: </span>
                 <span className="text-foreground">{vizData?.timestamp ? new Date(vizData.timestamp).toISOString().slice(0, 10) : '2026-03-20'}</span>
               </div>
               <div>
-                <span className="text-wen-amber">Evaluator: </span>
+                <span className="text-primary">Evaluator: </span>
                 <span className="text-foreground text-[9px]">GEMINI-3.1-FLASH-LITE</span>
               </div>
             </div>
           </div>
 
-          <div className="h-px bg-white/[0.07] my-6 relative z-10" />
+          <div className="h-px bg-foreground/10 my-6 relative z-10" />
 
           <div className="relative z-10 flex gap-6 mb-6 flex-col sm:flex-row">
             <div className="relative shrink-0">
-              <div className="bg-white/[0.05] border border-white/[0.1] p-2 pb-6 w-[120px] rotate-[2deg] shadow-lg">
-                <div className="bg-wen-surface flex items-center justify-center h-[100px]">
+              <div className="bg-card border border-foreground/10 p-2 pb-6 w-[120px] rotate-[2deg] shadow-lg">
+                <div className="bg-background flex items-center justify-center h-[100px]">
                   <WenCharacter size={90} expression="idle" activeCategory="personality" />
                 </div>
                 <div className="font-handwritten text-muted-foreground text-center text-xs mt-2">
-                  Subject Wen
+                  被験者 Wen
                 </div>
               </div>
               <div className="absolute -top-2 -left-1 w-4 h-8 border-2 border-muted-foreground/30 rounded-full rotate-[-20deg]" />
@@ -117,7 +123,7 @@ const HomeView: React.FC = () => {
 
             <div className="flex-1 space-y-3">
               <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">
-                CATEGORY SCORES
+                カテゴリースコア
               </div>
               {CATEGORY_ORDER.map(cat => {
                 const value = categoryMeans?.[cat] ?? 0;
@@ -126,7 +132,7 @@ const HomeView: React.FC = () => {
                     <span className={`font-mono text-[10px] w-24 uppercase tracking-wider ${CATEGORY_CSS_CLASSES[cat]}`}>
                       {cat}
                     </span>
-                    <div className="flex-1 h-2 bg-white/[0.05] rounded-full overflow-hidden">
+                    <div className="flex-1 h-2 bg-foreground/5 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${value * 100}%` }}
@@ -144,16 +150,16 @@ const HomeView: React.FC = () => {
             </div>
           </div>
 
-          <div className="h-px bg-white/[0.07] my-6 relative z-10" />
+          <div className="h-px bg-foreground/10 my-6 relative z-10" />
 
           <div className="relative z-10 mb-6 cursor-pointer" onClick={skipTyping}>
             <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-3">
-              BEHAVIORAL FINGERPRINT
+              行動指紋
             </div>
-            <div className="font-mono text-[12px] leading-relaxed text-wen-teal max-w-prose">
+            <div className="font-mono text-[12px] leading-relaxed text-accent max-w-prose">
               {typedText}
               {!typingDone && synthesisSummary && (
-                <span className="inline-block w-[7px] h-[14px] bg-wen-teal ml-0.5 animate-typewriter-cursor" />
+                <span className="inline-block w-[7px] h-[14px] bg-accent ml-0.5 animate-typewriter-cursor" />
               )}
             </div>
           </div>

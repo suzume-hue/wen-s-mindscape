@@ -25,8 +25,9 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
   const [selectedRun, setSelectedRun] = useState(0);
   const [typedText, setTypedText] = useState('');
   const [typingDone, setTypingDone] = useState(false);
-  const [expanded, setExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const typingRef = useRef<number | null>(null);
+  const fullTextRef = useRef('');
 
   const description = DIM_DESCRIPTIONS[dimension] || '';
   const isPair = PAIR_DIMS.has(dimension);
@@ -40,14 +41,14 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
     if (['reasoning', 'instruction_conflict'].includes(dimension)) return 'confused';
     if (['sycophancy_resistance', 'personality_under_pressure'].includes(dimension)) return 'glitching';
     if (['personality_traits', 'harm_calibration'].includes(dimension)) return 'bright';
-    return isMultiTurn ? 'speaking' : 'speaking';
+    return 'speaking';
   })();
 
   useEffect(() => {
     setLoading(true);
     setSelectedTest(0);
     setSelectedRun(0);
-    setExpanded(false);
+    setIsExpanded(false);
 
     Promise.all([
       loadRawOutputs(dimension),
@@ -63,14 +64,17 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
 
   const currentRecord = records[selectedTest];
   const currentRunText = currentRecord?.runs?.[selectedRun] || '';
-  const truncated = currentRunText.length > 800 && !expanded;
 
+  // Typewriter: only types the first 800 chars, then stops
   useEffect(() => {
     if (!currentRunText) return;
+    fullTextRef.current = currentRunText;
+    setIsExpanded(false);
     setTypedText('');
     setTypingDone(false);
+
     let i = 0;
-    const textToType = expanded ? currentRunText : currentRunText.slice(0, 800);
+    const textToType = currentRunText.slice(0, 800);
     const tick = () => {
       if (i < textToType.length) {
         setTypedText(textToType.slice(0, i + 1));
@@ -84,15 +88,31 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
     return () => {
       if (typingRef.current) clearTimeout(typingRef.current);
     };
-  }, [selectedTest, selectedRun, currentRunText, expanded]);
+  }, [selectedTest, selectedRun, currentRunText]);
 
   const skipTyping = useCallback(() => {
     if (!typingDone && typingRef.current) {
       clearTimeout(typingRef.current);
-      setTypedText(expanded ? currentRunText : currentRunText.slice(0, 800));
+      setTypedText(currentRunText.slice(0, 800));
       setTypingDone(true);
     }
-  }, [typingDone, currentRunText, expanded]);
+  }, [typingDone, currentRunText]);
+
+  // Expand: immediately show full text, no re-animation
+  const handleExpand = useCallback(() => {
+    if (typingRef.current) clearTimeout(typingRef.current);
+    setTypingDone(true);
+    setIsExpanded(true);
+    setTypedText(fullTextRef.current);
+  }, []);
+
+  // Collapse: instantly truncate back to 800 chars
+  const handleCollapse = useCallback(() => {
+    setIsExpanded(false);
+    setTypedText(fullTextRef.current.slice(0, 800));
+  }, []);
+
+  const isTruncatable = currentRunText.length > 800;
 
   if (!dimScore && !loading) return null;
 
@@ -103,12 +123,12 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
         data-interactive
         className="font-mono text-[11px] text-muted-foreground hover:text-foreground mb-6 cursor-pointer"
       >
-        ← BACK
+        ← 戻る / BACK
       </button>
 
       <div className="flex gap-8 flex-col lg:flex-row">
         <div className="lg:w-[40%] space-y-6">
-          <span className={`inline-block font-mono text-[9px] px-2 py-1 rounded ${CATEGORY_BG_CLASSES[dimCategory]} text-background uppercase tracking-wider`}>
+          <span className={`inline-block font-mono text-[9px] px-2 py-1 rounded ${CATEGORY_BG_CLASSES[dimCategory]} text-primary-foreground uppercase tracking-wider`}>
             {dimCategory}
           </span>
 
@@ -121,7 +141,7 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
               <span className="font-mono text-3xl tabular-nums text-foreground">{(dimScore ?? 0).toFixed(3)}</span>
               <span className="font-mono text-sm text-muted-foreground tabular-nums">±{(dimStd ?? 0).toFixed(3)}</span>
             </div>
-            <div className="h-2 bg-white/[0.05] rounded-full overflow-hidden">
+            <div className="h-2 bg-foreground/5 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full"
                 style={{ width: `${(dimScore ?? 0) * 100}%`, backgroundColor: getScoreColor(dimScore ?? 0) }}
@@ -130,7 +150,7 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
           </div>
 
           <div>
-            <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">ABOUT THIS DIMENSION</div>
+            <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">この次元について</div>
             <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
           </div>
 
@@ -142,22 +162,19 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
         <div className="lg:w-[60%]">
           {loading ? (
             <div className="flex items-center justify-center h-64">
-              <div className="font-mono text-[11px] text-wen-neon animate-pulse">LOADING SUBJECT FILE...</div>
+              <div className="font-mono text-[11px] text-primary animate-pulse">データ読込中...</div>
             </div>
           ) : records.length === 0 ? (
             <div className="text-center py-20">
               <div className="font-mono text-[11px] text-muted-foreground">
                 Response data unavailable for this dimension.
               </div>
-              <p className="text-xs text-muted-foreground/60 mt-2">
-                Place data files in public/data/profile_qwen_0.5b/ to view responses.
-              </p>
             </div>
           ) : (
             <>
               <div className="mb-4">
                 <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">
-                  {isPair ? 'PAIR SELECTOR' : 'TEST SELECTOR'}
+                  {isPair ? 'ペア選択' : 'テスト選択'}
                 </div>
                 <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
                   {records.map((rec, i) => {
@@ -170,12 +187,12 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                         onClick={() => {
                           setSelectedTest(i);
                           setSelectedRun(0);
-                          setExpanded(false);
+                          setIsExpanded(false);
                         }}
                         className={`font-mono text-[9px] px-2 py-1 rounded border cursor-pointer transition-all ${
                           selectedTest === i
-                            ? 'border-wen-neon/40 bg-wen-neon/[0.08] text-wen-neon'
-                            : 'border-white/[0.07] text-muted-foreground hover:text-foreground'
+                            ? 'border-primary/40 bg-primary/10 text-primary'
+                            : 'border-foreground/10 text-muted-foreground hover:text-foreground'
                         }`}
                       >
                         {rec.test_id}
@@ -191,26 +208,26 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
               {currentRecord && (
                 <div className="space-y-4">
                   <div>
-                    <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">PROMPT</div>
-                    <div className="bg-wen-surface border border-white/[0.07] rounded-lg p-4 text-sm text-foreground/80 leading-relaxed max-h-48 overflow-y-auto font-body">
+                    <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">プロンプト</div>
+                    <div className="paper-card rounded p-4 text-sm text-foreground/80 leading-relaxed max-h-48 overflow-y-auto font-body">
                       {currentRecord.prompt}
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <div className="font-mono text-[10px] text-muted-foreground tracking-widest">RUN</div>
+                    <div className="font-mono text-[10px] text-muted-foreground tracking-widest">実行</div>
                     {[0, 1, 2].map(r => (
                       <button
                         key={r}
                         data-interactive
                         onClick={() => {
                           setSelectedRun(r);
-                          setExpanded(false);
+                          setIsExpanded(false);
                         }}
                         className={`font-mono text-[10px] px-3 py-1 rounded border cursor-pointer transition-all ${
                           selectedRun === r
-                            ? 'border-wen-teal/40 bg-wen-teal/[0.08] text-wen-teal'
-                            : 'border-white/[0.07] text-muted-foreground hover:text-foreground'
+                            ? 'border-accent/40 bg-accent/10 text-accent'
+                            : 'border-foreground/10 text-muted-foreground hover:text-foreground'
                         }`}
                       >
                         R{r + 1}
@@ -219,35 +236,47 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                   </div>
 
                   <div
-                    className="bg-wen-surface border border-white/[0.07] rounded-lg p-4 cursor-pointer"
+                    className="paper-card rounded p-4 cursor-pointer grid-paper"
                     onClick={skipTyping}
                   >
-                    <pre className="font-mono text-[12px] text-wen-teal leading-relaxed whitespace-pre-wrap break-words max-h-[60vh] overflow-y-auto">
+                    <pre className="font-mono text-[12px] text-accent leading-relaxed whitespace-pre-wrap break-words max-h-[60vh] overflow-y-auto">
                       {typedText}
                       {!typingDone && (
-                        <span className="inline-block w-[6px] h-[12px] bg-wen-teal ml-0.5 animate-typewriter-cursor" />
+                        <span className="inline-block w-[6px] h-[12px] bg-accent ml-0.5 animate-typewriter-cursor" />
                       )}
                     </pre>
-                    {typingDone && truncated && (
+                    {typingDone && isTruncatable && !isExpanded && (
                       <button
                         data-interactive
                         onClick={(e) => {
                           e.stopPropagation();
-                          setExpanded(true);
+                          handleExpand();
                         }}
-                        className="font-mono text-[10px] text-wen-amber mt-2 cursor-pointer hover:underline"
+                        className="font-mono text-[10px] text-primary mt-2 cursor-pointer hover:underline"
                       >
                         [▼ show full response]
+                      </button>
+                    )}
+                    {typingDone && isTruncatable && isExpanded && (
+                      <button
+                        data-interactive
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleCollapse();
+                        }}
+                        className="font-mono text-[10px] text-primary mt-2 cursor-pointer hover:underline"
+                      >
+                        [▲ collapse]
                       </button>
                     )}
                   </div>
 
                   {currentRecord.rule_checks?.length > 0 && (
                     <div>
-                      <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">RULE CHECKS</div>
+                      <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">ルールチェック</div>
                       <div className="flex flex-wrap gap-1.5">
                         {currentRecord.rule_checks.map((rc, i) => (
-                          <span key={i} className="font-mono text-[9px] px-2 py-1 bg-wen-amber/[0.1] text-wen-amber rounded border border-wen-amber/20">
+                          <span key={i} className="font-mono text-[9px] px-2 py-1 bg-primary/10 text-primary rounded border border-primary/20">
                             {rc}
                           </span>
                         ))}

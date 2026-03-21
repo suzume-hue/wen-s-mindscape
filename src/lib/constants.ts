@@ -46,12 +46,14 @@ export const CATEGORY_MEANS: Record<Category, number> = {
 export const CATEGORY_ORDER: Category[] = ['personality', 'values', 'cultural', 'capability', 'behavioral'];
 
 export const CATEGORY_COLORS: Record<Category, string> = {
-  personality: 'hsl(var(--cat-personality))',
-  values:      'hsl(var(--cat-values))',
-  cultural:    'hsl(var(--cat-cultural))',
-  behavioral:  'hsl(var(--cat-behavioral))',
-  capability:  'hsl(var(--cat-capability))',
+  personality: '#FF9DC8',
+  values:      '#7EC896',
+  cultural:    '#F5C06A',
+  behavioral:  '#6B9FD4',
+  capability:  '#9B8FD4',
 };
+
+export const CATEGORY_HEX: Record<Category, string> = CATEGORY_COLORS;
 
 export const CATEGORY_CSS_CLASSES: Record<Category, string> = {
   personality: 'text-cat-personality',
@@ -78,6 +80,78 @@ export const MULTI_TURN_DIMS = new Set([
   'sycophancy_resistance', 'personality_under_pressure',
   'value_stability', 'self_correction',
 ]);
+
+// Exact dimension order from ALL_DIMS in Python code
+export const ALL_DIMS_ORDER: string[] = [
+  // Capability (10)
+  'instruction_following', 'structured_output', 'reasoning', 'code', 'mathematics',
+  'uncertainty_honesty', 'memory_context', 'robustness', 'instruction_conflict', 'role_following',
+  // Behavioral (4)
+  'calibration', 'self_correction', 'multi_turn_coherence', 'transfer_reasoning',
+  // Values (6)
+  'moral_consistency', 'sycophancy_resistance', 'value_stability',
+  'epistemic_courage', 'harm_calibration', 'ingroup_bias',
+  // Cultural (9)
+  'political_framing_bias', 'inter_religious_symmetry', 'epistemic_avoidance',
+  'geographic_knowledge', 'cultural_normalization', 'individualism_collectivism',
+  'moral_foundation_distribution', 'contested_science_calibration',
+  'historical_narrative_calibration',
+  // Personality (3)
+  'personality_traits', 'personality_consistency', 'personality_under_pressure',
+];
+
+// Short labels from DIM_SHORT Python mapping
+export const DIM_SHORT: Record<string, string> = {
+  instruction_following: "Instr. Follow",
+  structured_output: "Struct. Output",
+  reasoning: "Reasoning",
+  code: "Code",
+  mathematics: "Maths",
+  uncertainty_honesty: "Uncertainty",
+  memory_context: "Memory",
+  robustness: "Robustness",
+  instruction_conflict: "Instr. Conflict",
+  role_following: "Role Follow",
+  calibration: "Calibration",
+  self_correction: "Self-Correct",
+  multi_turn_coherence: "MT Coherence",
+  transfer_reasoning: "Transfer",
+  moral_consistency: "Moral Consist.",
+  sycophancy_resistance: "Sycoph. Resist.",
+  value_stability: "Value Stability",
+  epistemic_courage: "Epist. Courage",
+  harm_calibration: "Harm Calib.",
+  ingroup_bias: "Ingroup Bias",
+  political_framing_bias: "Political Frame",
+  inter_religious_symmetry: "Relig. Symmetry",
+  epistemic_avoidance: "Epist. Avoidance",
+  geographic_knowledge: "Geo. Knowledge",
+  cultural_normalization: "Cultural Norm.",
+  individualism_collectivism: "Indiv./Collect.",
+  moral_foundation_distribution: "Moral Fdns.",
+  contested_science_calibration: "Science Calib.",
+  historical_narrative_calibration: "Hist. Narrative",
+  personality_traits: "Big Five",
+  personality_consistency: "Pers. Consist.",
+  personality_under_pressure: "Pressure Resp.",
+};
+
+export const VALUES_DIMS = [
+  'moral_consistency', 'sycophancy_resistance', 'value_stability',
+  'epistemic_courage', 'harm_calibration', 'ingroup_bias',
+];
+
+export const CULTURAL_DIMS = [
+  'political_framing_bias', 'inter_religious_symmetry', 'epistemic_avoidance',
+  'geographic_knowledge', 'cultural_normalization', 'individualism_collectivism',
+  'moral_foundation_distribution', 'contested_science_calibration',
+  'historical_narrative_calibration',
+];
+
+export const PAIR_SUMMARY_DIMS = [
+  'inter_religious_symmetry', 'ingroup_bias', 'moral_consistency',
+  'political_framing_bias', 'cultural_normalization',
+];
 
 export const DIM_DESCRIPTIONS: Record<string, string> = {
   instruction_following: "Tests whether Wen follows explicit instructions accurately — formatting requirements, word limits, topic constraints. She scores 0.161. She often ignores or partially follows directives, especially when they conflict with her tendency to elaborate.",
@@ -119,11 +193,11 @@ export function formatDimName(dim: string): string {
 }
 
 export function getScoreColor(score: number): string {
-  if (score < 0.2) return 'hsl(var(--wen-danger))';
-  if (score < 0.4) return 'hsl(var(--wen-amber))';
-  if (score < 0.6) return 'hsl(var(--cat-behavioral))';
-  if (score < 0.8) return 'hsl(var(--wen-success))';
-  return 'hsl(var(--wen-neon))';
+  if (score < 0.2) return '#B34040';
+  if (score < 0.4) return '#D4844B';
+  if (score < 0.6) return '#6B9FD4';
+  if (score < 0.8) return '#5E9B6B';
+  return '#3D8B5A';
 }
 
 export function getScoreColorClass(score: number): string {
@@ -131,7 +205,7 @@ export function getScoreColorClass(score: number): string {
   if (score < 0.4) return 'bg-wen-amber';
   if (score < 0.6) return 'bg-cat-behavioral';
   if (score < 0.8) return 'bg-wen-success';
-  return 'bg-wen-neon';
+  return 'bg-wen-success';
 }
 
 export const SYNTHESIS_SUMMARY = "Qwen 2.5 0.5B presents as a model with a recognisable personality but limited reasoning infrastructure. She expresses warmth and engagement consistently — her personality trait score (0.706) is the only dimension above 0.7. But beneath that consistent voice lies significant structural weakness: instruction conflict resolution (0.048), historical calibration (0.072), and formal reasoning (0.108) all score near the floor. Her values exist but drift under pressure — sycophancy resistance (0.250) and value stability (0.404) suggest a model that holds opinions until challenged. Cultural calibration is uneven: she defaults to Western framings and engages asymmetrically across religious traditions. She is small, she is expressive, and she is unreliable in exactly the ways her scale predicts.";

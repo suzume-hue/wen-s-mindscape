@@ -67,15 +67,16 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
 
   return (
     <div className="min-h-screen pt-16 pb-12 flex items-center justify-center relative overflow-hidden" ref={containerRef}>
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Paper texture background dots */}
+      <div className="absolute inset-0 pointer-events-none opacity-30">
         {Array.from({ length: 80 }).map((_, i) => (
           <div
             key={i}
-            className="absolute w-px h-px bg-foreground rounded-full"
+            className="absolute rounded-full bg-foreground"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              opacity: 0.1 + Math.random() * 0.2,
+              opacity: 0.08 + Math.random() * 0.12,
               width: Math.random() > 0.8 ? 2 : 1,
               height: Math.random() > 0.8 ? 2 : 1,
             }}
@@ -92,7 +93,7 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
           />
         </div>
 
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-white/[0.03] pointer-events-none" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-foreground/5 pointer-events-none" />
 
         {hoveredStar && (
           <svg className="absolute inset-0 pointer-events-none z-5" width="700" height="700">
@@ -103,6 +104,7 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
               stroke={hoveredStar.color}
               strokeWidth="0.5"
               opacity="0.4"
+              strokeDasharray="4 4"
             />
           </svg>
         )}
@@ -129,8 +131,8 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
                   width: star.size,
                   height: star.size,
                   backgroundColor: star.color,
-                  opacity: isHovered ? 1 : 0.6,
-                  boxShadow: isHovered ? `0 0 12px ${star.color}` : `0 0 4px ${star.color}`,
+                  opacity: isHovered ? 1 : 0.7,
+                  boxShadow: isHovered ? `0 0 12px ${star.color}` : `0 0 4px ${star.color}40`,
                   animation: star.shimmerSpeed > 0
                     ? `pulse ${star.shimmerSpeed}s ease-in-out infinite`
                     : 'none',
@@ -141,7 +143,7 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
                 <motion.div
                   initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="absolute top-full mt-2 left-1/2 -translate-x-1/2 font-mono text-[9px] text-foreground whitespace-nowrap bg-wen-surface px-2 py-1 rounded border border-white/[0.1]"
+                  className="absolute top-full mt-2 left-1/2 -translate-x-1/2 font-mono text-[9px] text-foreground whitespace-nowrap paper-card px-2 py-1 rounded"
                 >
                   {formatDimName(star.dim)} — {star.data.score.toFixed(3)}
                 </motion.div>
@@ -152,7 +154,7 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
       </div>
 
       <div className="lg:hidden absolute bottom-4 left-4 right-4 text-center font-mono text-[10px] text-muted-foreground">
-        Rotate device or use desktop for full constellation view
+        デスクトップで完全な星座ビューをご覧ください
       </div>
     </div>
   );
