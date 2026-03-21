@@ -4,64 +4,69 @@
 
 @layer base {
   :root {
-    /* WEN theme — near-black space palette with neon accents */
-    --background: 228 40% 4%;
-    --foreground: 252 59% 93%;
+    /* 紙神 Kami Paper — warm parchment + ink + stamp aesthetic */
+    --background: 36 25% 88%;
+    --foreground: 20 15% 18%;
 
-    --card: 228 38% 9%;
-    --card-foreground: 252 59% 93%;
+    --card: 38 22% 82%;
+    --card-foreground: 20 15% 18%;
 
-    --popover: 228 38% 9%;
-    --popover-foreground: 252 59% 93%;
+    --popover: 38 22% 82%;
+    --popover-foreground: 20 15% 18%;
 
-    --primary: 79 100% 64%;
-    --primary-foreground: 228 40% 4%;
+    --primary: 24 80% 52%;
+    --primary-foreground: 38 30% 95%;
 
-    --secondary: 233 33% 12%;
-    --secondary-foreground: 252 59% 93%;
+    --secondary: 36 18% 76%;
+    --secondary-foreground: 20 15% 18%;
 
-    --muted: 233 33% 12%;
-    --muted-foreground: 244 13% 54%;
+    --muted: 36 15% 78%;
+    --muted-foreground: 20 10% 42%;
 
-    --accent: 171 100% 45%;
-    --accent-foreground: 228 40% 4%;
+    --accent: 172 45% 42%;
+    --accent-foreground: 38 30% 95%;
 
-    --destructive: 0 100% 71%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 55% 48%;
+    --destructive-foreground: 38 30% 95%;
 
-    --border: 0 0% 100% / 0.07;
-    --input: 0 0% 100% / 0.07;
-    --ring: 79 100% 64%;
+    --border: 20 12% 60%;
+    --input: 20 12% 60%;
+    --ring: 24 80% 52%;
 
-    --radius: 0.75rem;
+    --radius: 0.25rem;
 
-    /* WEN specific tokens */
-    --wen-bg: 228 40% 4%;
-    --wen-surface: 228 38% 9%;
-    --wen-surface-raised: 233 33% 12%;
-    --wen-neon: 79 100% 64%;
-    --wen-amber: 36 91% 55%;
-    --wen-teal: 171 100% 45%;
-    --wen-danger: 0 100% 71%;
-    --wen-caution: 36 91% 55%;
-    --wen-success: 142 36% 64%;
+    /* Kami Paper tokens */
+    --wen-bg: 36 25% 88%;
+    --wen-surface: 38 22% 82%;
+    --wen-surface-raised: 36 18% 76%;
+    --wen-neon: 24 80% 52%;
+    --wen-amber: 24 80% 52%;
+    --wen-teal: 172 45% 42%;
+    --wen-danger: 0 55% 48%;
+    --wen-caution: 40 70% 50%;
+    --wen-success: 145 35% 38%;
 
-    /* Category colors */
-    --cat-personality: 336 100% 81%;
-    --cat-values: 142 36% 64%;
-    --cat-cultural: 37 89% 69%;
-    --cat-behavioral: 211 53% 63%;
-    --cat-capability: 251 44% 70%;
+    /* Category colors — ink & stamp palette */
+    --cat-personality: 330 50% 60%;
+    --cat-values: 145 35% 45%;
+    --cat-cultural: 37 75% 58%;
+    --cat-behavioral: 210 40% 52%;
+    --cat-capability: 255 35% 58%;
 
-    /* Sidebar (unused but required) */
-    --sidebar-background: 228 38% 9%;
-    --sidebar-foreground: 252 59% 93%;
-    --sidebar-primary: 79 100% 64%;
-    --sidebar-primary-foreground: 228 40% 4%;
-    --sidebar-accent: 233 33% 12%;
-    --sidebar-accent-foreground: 252 59% 93%;
-    --sidebar-border: 0 0% 100% / 0.07;
-    --sidebar-ring: 79 100% 64%;
+    /* Stamp red */
+    --stamp-red: 0 65% 45%;
+    --ink-dark: 20 15% 18%;
+    --paper-line: 20 8% 72%;
+
+    /* Sidebar */
+    --sidebar-background: 38 22% 82%;
+    --sidebar-foreground: 20 15% 18%;
+    --sidebar-primary: 24 80% 52%;
+    --sidebar-primary-foreground: 38 30% 95%;
+    --sidebar-accent: 36 18% 76%;
+    --sidebar-accent-foreground: 20 15% 18%;
+    --sidebar-border: 20 12% 60%;
+    --sidebar-ring: 24 80% 52%;
   }
 }
 
@@ -74,10 +79,15 @@
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
     cursor: none;
+    background-image:
+      url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"),
+      linear-gradient(180deg, hsl(36 25% 88%) 0%, hsl(34 22% 84%) 100%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Syne', sans-serif;
+    color: hsl(20 15% 18%);
   }
 }
 
@@ -105,6 +115,64 @@
   font-family: 'Caveat', cursive;
 }
 
+/* Paper card styling */
+.paper-card {
+  background: hsl(38 22% 82%);
+  border: 1px solid hsl(20 12% 68%);
+  box-shadow:
+    2px 2px 0 hsl(20 12% 72%),
+    4px 4px 0 hsl(20 12% 76%),
+    inset 0 0 40px hsl(36 20% 85% / 0.5);
+  position: relative;
+}
+
+.paper-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Grid paper lines */
+.grid-paper {
+  background-image:
+    linear-gradient(hsl(210 30% 72% / 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(210 30% 72% / 0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Stamp effect */
+.stamp {
+  color: hsl(var(--stamp-red));
+  border: 2px solid hsl(var(--stamp-red));
+  transform: rotate(-8deg);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  opacity: 0.85;
+  filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='rough'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2'/%3E%3C/filter%3E%3C/svg%3E#rough");
+}
+
+/* Tape strip decoration */
+.tape-strip {
+  background: hsl(50 40% 80% / 0.6);
+  backdrop-filter: blur(1px);
+  transform: rotate(-2deg);
+  box-shadow: 0 1px 3px hsl(20 15% 18% / 0.1);
+}
+
+/* Ink underline */
+.ink-underline {
+  text-decoration: none;
+  background-image: linear-gradient(
+    transparent calc(100% - 2px),
+    hsl(var(--ink-dark)) calc(100% - 2px)
+  );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
 /* Scan line animation */
 @keyframes scanline {
   0% { transform: translateY(-100%); }
@@ -113,7 +181,7 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-4px); }
 }
 
 @keyframes breathe {
@@ -133,8 +201,13 @@
 
 @keyframes stamp-in {
   0% { transform: rotate(0deg) scale(2); opacity: 0; }
-  60% { transform: rotate(18deg) scale(1.1); opacity: 0.8; }
-  100% { transform: rotate(15deg) scale(1); opacity: 1; }
+  60% { transform: rotate(-8deg) scale(1.1); opacity: 0.8; }
+  100% { transform: rotate(-8deg) scale(1); opacity: 0.85; }
+}
+
+@keyframes brush-in {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
 }
 
 .animate-float {
@@ -157,12 +230,36 @@
   animation: stamp-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Noise/grain overlay */
+.animate-brush {
+  animation: brush-in 0.8s ease-out forwards;
+}
+
+/* Noise/grain overlay — paper patina */
 .noise-overlay::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
+}
+
+/* Washi tape colors */
+.washi-orange { background: hsl(24 70% 65% / 0.4); }
+.washi-teal { background: hsl(172 40% 55% / 0.4); }
+.washi-pink { background: hsl(330 45% 65% / 0.4); }
+
+/* Scrollbar styling — parchment themed */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(36 18% 76%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(20 12% 55%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(20 12% 45%);
 }
