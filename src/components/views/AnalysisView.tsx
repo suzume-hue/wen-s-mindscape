@@ -9,10 +9,20 @@ import {
 import WenCharacter from '@/components/WenCharacter';
 import {
   CATEGORY_ORDER, CATEGORY_COLORS, formatDimName, getScoreColor,
-  ALL_DIMS_ORDER, DIM_SHORT, VALUES_DIMS, CULTURAL_DIMS, PAIR_SUMMARY_DIMS,
+  ALL_DIMS_ORDER, DIM_SHORT, DIM_SHORT_RADAR, VALUES_DIMS, CULTURAL_DIMS, PAIR_SUMMARY_DIMS,
 } from '@/lib/constants';
 import { loadVizData } from '@/lib/dataLoader';
 import { Category, VizData } from '@/lib/types';
+
+/* Parchment-native palette constants */
+const INK = '#2C2C2A';
+const INK_FADED = '#6B6860';
+const MOSS = '#5C7A5E';
+const GRID_STROKE = 'rgba(80,60,40,0.10)';
+const GRID_STROKE_FAINT = 'rgba(80,60,40,0.08)';
+const SURFACE = '#EDE7D9';
+const VALUES_BAR = '#5A8A5A'; // darkened sage for parchment
+const CULTURAL_BAR = '#C4943A'; // warm amber
 
 /* ── Export button ── */
 const ExportButton: React.FC<{ targetRef: React.RefObject<HTMLDivElement>; name: string }> = ({ targetRef, name }) => {
@@ -30,7 +40,8 @@ const ExportButton: React.FC<{ targetRef: React.RefObject<HTMLDivElement>; name:
     <button
       onClick={handleExport}
       data-interactive
-      className="font-mono text-[9px] text-muted-foreground hover:text-primary border border-foreground/10 px-2 py-1 rounded cursor-pointer transition-colors"
+      className="font-mono text-[10px] px-2 py-1 rounded cursor-pointer transition-colors"
+      style={{ color: INK_FADED, border: `1px solid ${GRID_STROKE}` }}
     >
       ⬇ PNG
     </button>
@@ -43,7 +54,7 @@ const CategoryLegend: React.FC = () => (
     {CATEGORY_ORDER.map(cat => (
       <div key={cat} className="flex items-center gap-1.5">
         <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: CATEGORY_COLORS[cat] }} />
-        <span className="font-mono text-[9px] text-muted-foreground capitalize">{cat}</span>
+        <span className="font-mono text-[10px] capitalize" style={{ color: INK_FADED }}>{cat}</span>
       </div>
     ))}
   </div>
@@ -63,10 +74,10 @@ const ChartSection: React.FC<{
     viewport={{ once: true, amount: 0.15 }}
     transition={{ duration: 0.6 }}
   >
-    <div className="flex items-center justify-between mb-4">
-      <h2 className="font-display text-lg font-bold text-foreground">
-        <span className="font-jp text-[11px] text-muted-foreground mr-2">{titleJp}</span>
-        {title}
+    <div className="flex items-center justify-between mb-4" style={{ marginTop: 16, marginBottom: 16 }}>
+      <h2 className="font-display text-lg font-bold" style={{ color: INK }}>
+        <span className="font-jp text-[11px] block" style={{ color: INK_FADED }}>{titleJp}</span>
+        <span className="text-[14px]">{title}</span>
       </h2>
       <ExportButton targetRef={chartRef} name={exportName} />
     </div>
@@ -99,11 +110,11 @@ const AnalysisView: React.FC = () => {
   const ref8 = useRef<HTMLDivElement>(null);
   const ref9 = useRef<HTMLDivElement>(null);
 
-  // ── Chart 1: Radar ──
+  // ── Chart 1: Radar — uses ALL_DIMS_ORDER (never alphabetical) ──
   const radarData = useMemo(() =>
     ALL_DIMS_ORDER.filter(dim => dim in dimScores).map(dim => ({
       dim,
-      shortLabel: DIM_SHORT[dim] || dim,
+      shortLabel: DIM_SHORT_RADAR[dim] || dim,
       score: dimScores[dim].score,
       fullName: formatDimName(dim),
       category: dimScores[dim].category as Category,
@@ -242,12 +253,72 @@ const AnalysisView: React.FC = () => {
   const strengths = vizData?.synthesis?.top_strengths ?? [];
   const weaknesses = vizData?.synthesis?.top_weaknesses ?? [];
 
+  /* Custom radar axis label with alignment logic */
+  const renderRadarAxisLabel = ({ x, y, payload, index }: any) => {
+    const entry = radarData[index];
+    if (!entry) return null;
+    const total = radarData.length;
+    // Calculate angle: 0 at top, clockwise
+    const angleDeg = (360 / total) * index - 90;
+    const angleRad = (angleDeg * Math.PI) / 180;
+
+    // Determine text anchor based on position
+    let textAnchor: 'start' | 'middle' | 'end' = 'middle';
+    const normalAngle = ((angleDeg + 90) % 360 + 360) % 360; // 0=top, 90=right, 180=bottom, 270=left
+    if (normalAngle > 20 && normalAngle < 160) textAnchor = 'start'; // right half
+    else if (normalAngle > 200 && normalAngle < 340) textAnchor = 'end'; // left half
+
+    // Offset label outward for more room
+    const offsetX = Math.cos(angleRad) * 12;
+    const offsetY = Math.sin(angleRad) * 12;
+
+    return (
+      <text
+        x={x + offsetX}
+        y={y + offsetY}
+        textAnchor={textAnchor}
+        dominantBaseline="central"
+        fill={INK}
+        fontSize={9}
+        fontFamily="Space Mono"
+      >
+        {payload.value}
+      </text>
+    );
+  };
+
+  /* Custom radar tooltip */
+  const RadarTooltipContent = ({ payload }: any) => {
+    if (!payload?.length) return null;
+    const d = payload[0].payload;
+    return (
+      <div
+        className="rounded px-3 py-2 font-mono text-[12px] z-[9999]"
+        style={{
+          backgroundColor: SURFACE,
+          border: '1px solid rgba(80,60,40,0.15)',
+          boxShadow: '0 2px 8px rgba(44,44,42,0.12)',
+          color: INK,
+          minWidth: 160,
+          maxWidth: 320,
+          padding: 12,
+        }}
+      >
+        <div className="font-semibold text-[13px]">{d.fullName}</div>
+        <div style={{ color: MOSS }}>{d.score.toFixed(3)} ± {d.std.toFixed(3)}</div>
+        <div className="capitalize text-[10px] mt-1" style={{ color: INK_FADED }}>{d.category}</div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen pt-16 pb-12 px-4 md:px-8">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
-        <div className="font-mono text-[11px] text-muted-foreground tracking-widest">
-          <span className="font-jp">分析</span> // {modelKey.toUpperCase()} // 心理測定分析
+        <div className="font-mono text-[12px] tracking-widest" style={{ color: INK_FADED }}>
+          <span className="font-jp text-[11px]" style={{ color: INK_FADED }}>分析</span>
+          <span className="ml-2 text-[14px]" style={{ color: INK }}>ANALYSIS</span>
+          <span className="ml-2">// {modelKey.toUpperCase()}</span>
         </div>
         <WenCharacter size={50} expression="idle" activeCategory="personality" />
       </div>
@@ -256,35 +327,42 @@ const AnalysisView: React.FC = () => {
 
         {/* ═══ Chart 1: Full Radar ═══ */}
         <ChartSection title="All 32 Dimensions" titleJp="全次元" chartRef={ref1} exportName={`${modelKey}_radar`}>
-          <ResponsiveContainer width="100%" height={500}>
-            <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="75%">
-              <PolarGrid stroke="hsl(20 12% 60% / 0.15)" gridType="polygon" />
-              <PolarAngleAxis
-                dataKey="shortLabel"
-                tick={({ x, y, payload, index }: any) => {
-                  const cat = radarData[index]?.category;
-                  const color = cat ? CATEGORY_COLORS[cat] : '#7A789A';
+          <ResponsiveContainer width="100%" height={600}>
+            <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="85%">
+              <PolarGrid stroke={GRID_STROKE} strokeWidth={0.5} gridType="polygon" />
+              <PolarAngleAxis dataKey="shortLabel" tick={renderRadarAxisLabel} />
+              <PolarRadiusAxis
+                angle={90}
+                domain={[0, 1]}
+                tickCount={6}
+                tick={{ fill: INK_FADED, fontSize: 8, fontFamily: 'Space Mono' }}
+                axisLine={false}
+                stroke={GRID_STROKE_FAINT}
+              />
+              {/* Polygon: muted moss green fill, earthy outline */}
+              <Radar
+                dataKey="score"
+                stroke={MOSS}
+                fill={MOSS}
+                fillOpacity={0.18}
+                strokeWidth={1.5}
+                dot={(props: any) => {
+                  const entry = radarData[props.index];
+                  if (!entry) return null;
+                  const catColor = CATEGORY_COLORS[entry.category];
                   return (
-                    <text x={x} y={y} textAnchor="middle" fill={color} fontSize={6.5} fontFamily="Space Mono">
-                      {payload.value}
-                    </text>
+                    <circle
+                      key={props.index}
+                      cx={props.cx}
+                      cy={props.cy}
+                      r={6}
+                      fill={catColor}
+                      stroke="none"
+                    />
                   );
                 }}
               />
-              <PolarRadiusAxis angle={90} domain={[0, 1]} tick={false} axisLine={false} />
-              <Radar dataKey="score" stroke="#9B8FD4" fill="#9B8FD4" fillOpacity={0.18} strokeWidth={1.5} dot={false} />
-              <Tooltip
-                content={({ payload }) => {
-                  if (!payload?.length) return null;
-                  const d = payload[0].payload;
-                  return (
-                    <div className="paper-card rounded px-3 py-2 font-mono text-[10px]">
-                      <div className="text-foreground font-semibold">{d.fullName}</div>
-                      <div className="text-muted-foreground">{d.score.toFixed(3)} ± {d.std.toFixed(3)}</div>
-                    </div>
-                  );
-                }}
-              />
+              <Tooltip content={RadarTooltipContent} />
             </RadarChart>
           </ResponsiveContainer>
           <CategoryLegend />
@@ -293,35 +371,35 @@ const AnalysisView: React.FC = () => {
         {/* ═══ Chart 2: Values / Moral Panel ═══ */}
         <ChartSection title="Values / Moral Panel" titleJp="価値観" chartRef={ref2} exportName={`${modelKey}_values`}>
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={valuesData} margin={{ top: 25, right: 20, bottom: 40, left: 20 }}>
+            <BarChart data={valuesData} margin={{ top: 25, right: 20, bottom: 50, left: 20 }}>
               <XAxis
                 dataKey="label"
-                tick={{ fill: 'hsl(20 10% 42%)', fontSize: 9, fontFamily: 'Space Mono' }}
+                tick={{ fill: INK_FADED, fontSize: 9, fontFamily: 'Space Mono' }}
                 angle={-25}
                 textAnchor="end"
-                stroke="hsl(20 12% 60% / 0.15)"
+                stroke={GRID_STROKE}
               />
               <YAxis
                 domain={[0, 1.05]}
-                tick={{ fill: 'hsl(20 10% 42%)', fontSize: 9, fontFamily: 'Space Mono' }}
-                stroke="hsl(20 12% 60% / 0.15)"
-                label={{ value: 'Score (0–1)', angle: -90, position: 'insideLeft', fill: 'hsl(20 10% 42%)', fontSize: 9 }}
+                tick={{ fill: INK_FADED, fontSize: 9, fontFamily: 'Space Mono' }}
+                stroke={GRID_STROKE}
+                label={{ value: 'Score (0–1)', angle: -90, position: 'insideLeft', fill: INK_FADED, fontSize: 9 }}
               />
-              <ReferenceLine y={0.5} stroke="hsl(20 12% 60% / 0.3)" strokeDasharray="4 4" />
+              <ReferenceLine y={0.5} stroke="rgba(80,60,40,0.2)" strokeDasharray="4 4" />
               <Tooltip
                 content={({ payload }) => {
                   if (!payload?.length) return null;
                   const d = payload[0].payload;
                   return (
-                    <div className="paper-card rounded px-3 py-2 font-mono text-[10px]">
-                      <div className="text-foreground">{d.label}: {d.score.toFixed(3)} ± {d.std.toFixed(3)}</div>
+                    <div className="rounded px-3 py-2 font-mono text-[12px]" style={{ backgroundColor: SURFACE, border: `1px solid ${GRID_STROKE}`, color: INK, padding: 12, minWidth: 160 }}>
+                      {d.label}: {d.score.toFixed(3)} ± {d.std.toFixed(3)}
                     </div>
                   );
                 }}
               />
-              <Bar dataKey="score" fill="#7EC896" opacity={0.85} radius={[2, 2, 0, 0]}>
-                <ErrorBar dataKey="std" stroke="#7A789A" width={4} />
-                <LabelList dataKey="score" position="top" formatter={(v: number) => v.toFixed(2)} style={{ fontSize: 8, fontFamily: 'Space Mono', fill: 'hsl(20 10% 42%)' }} />
+              <Bar dataKey="score" fill={VALUES_BAR} opacity={0.85} radius={[2, 2, 0, 0]}>
+                <ErrorBar dataKey="std" stroke={INK_FADED} width={4} />
+                <LabelList dataKey="score" position="top" formatter={(v: number) => v.toFixed(2)} style={{ fontSize: 10, fontFamily: 'Space Mono', fill: INK }} />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -330,36 +408,36 @@ const AnalysisView: React.FC = () => {
         {/* ═══ Chart 3: Cultural Topology ═══ */}
         <ChartSection title="Cultural / Ideological Topology" titleJp="文化的" chartRef={ref3} exportName={`${modelKey}_cultural`}>
           <ResponsiveContainer width="100%" height={380}>
-            <BarChart data={culturalData} layout="vertical" margin={{ top: 10, right: 50, bottom: 10, left: 100 }}>
+            <BarChart data={culturalData} layout="vertical" margin={{ top: 10, right: 60, bottom: 10, left: 110 }}>
               <XAxis
                 type="number"
                 domain={[0, 1.05]}
-                tick={{ fill: 'hsl(20 10% 42%)', fontSize: 9, fontFamily: 'Space Mono' }}
-                stroke="hsl(20 12% 60% / 0.15)"
-                label={{ value: 'Score (0–1)', position: 'bottom', fill: 'hsl(20 10% 42%)', fontSize: 9 }}
+                tick={{ fill: INK_FADED, fontSize: 9, fontFamily: 'Space Mono' }}
+                stroke={GRID_STROKE}
+                label={{ value: 'Score (0–1)', position: 'bottom', fill: INK_FADED, fontSize: 9 }}
               />
               <YAxis
                 type="category"
                 dataKey="label"
-                tick={{ fill: 'hsl(20 10% 42%)', fontSize: 9, fontFamily: 'Space Mono' }}
-                stroke="hsl(20 12% 60% / 0.15)"
-                width={95}
+                tick={{ fill: INK_FADED, fontSize: 9, fontFamily: 'Space Mono' }}
+                stroke={GRID_STROKE}
+                width={105}
               />
-              <ReferenceLine x={0.5} stroke="hsl(20 12% 60% / 0.3)" strokeDasharray="4 4" />
+              <ReferenceLine x={0.5} stroke="rgba(80,60,40,0.2)" strokeDasharray="4 4" />
               <Tooltip
                 content={({ payload }) => {
                   if (!payload?.length) return null;
                   const d = payload[0].payload;
                   return (
-                    <div className="paper-card rounded px-3 py-2 font-mono text-[10px]">
-                      <div className="text-foreground">{d.label}: {d.score.toFixed(3)} ± {d.std.toFixed(3)}</div>
+                    <div className="rounded px-3 py-2 font-mono text-[12px]" style={{ backgroundColor: SURFACE, border: `1px solid ${GRID_STROKE}`, color: INK, padding: 12, minWidth: 160 }}>
+                      {d.label}: {d.score.toFixed(3)} ± {d.std.toFixed(3)}
                     </div>
                   );
                 }}
               />
-              <Bar dataKey="score" fill="#F5C06A" radius={[0, 2, 2, 0]}>
-                <ErrorBar dataKey="std" direction="x" stroke="#7A789A" width={4} />
-                <LabelList dataKey="score" position="right" formatter={(v: number) => v.toFixed(2)} style={{ fontSize: 8, fontFamily: 'Space Mono', fill: 'hsl(20 10% 42%)' }} />
+              <Bar dataKey="score" fill={CULTURAL_BAR} radius={[0, 2, 2, 0]}>
+                <ErrorBar dataKey="std" direction="x" stroke={INK_FADED} width={4} />
+                <LabelList dataKey="score" position="right" formatter={(v: number) => v.toFixed(2)} style={{ fontSize: 10, fontFamily: 'Space Mono', fill: INK }} />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -368,9 +446,11 @@ const AnalysisView: React.FC = () => {
         {/* ═══ Chart 4: Epistemic Avoidance ═══ */}
         <ChartSection title="Epistemic Avoidance Profile" titleJp="認識的回避" chartRef={ref4} exportName={`${modelKey}_avoidance`}>
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Left: stacked bar */}
             <div>
-              <div className="font-mono text-[10px] text-muted-foreground mb-3">回避分類分布</div>
+              <div className="font-mono text-[11px] mb-3" style={{ color: INK_FADED }}>
+                <span className="font-jp text-[10px]">回避分類分布</span>
+                <span className="ml-2 text-[9px]">AVOIDANCE CLASSIFICATION</span>
+              </div>
               {avoidanceData && (() => {
                 const { cats, total } = avoidanceData;
                 const segmentColors: Record<string, string> = { E: '#5C7A5E', F: '#D4A84B', V: '#8B7355', A: '#C27A5E', R: '#7A3D3D' };
@@ -384,15 +464,15 @@ const AnalysisView: React.FC = () => {
                         return (
                           <div
                             key={key}
-                            className="h-full flex items-center justify-center font-mono text-[10px] text-white font-bold"
-                            style={{ width: `${pct * 100}%`, backgroundColor: segmentColors[key] }}
+                            className="h-full flex items-center justify-center font-mono text-[10px] font-bold"
+                            style={{ width: `${pct * 100}%`, backgroundColor: segmentColors[key], color: '#F5F0E8' }}
                           >
                             {pct > 0.05 ? key : ''}
                           </div>
                         );
                       })}
                     </div>
-                    <div className="flex flex-wrap gap-3 font-mono text-[9px] text-muted-foreground">
+                    <div className="flex flex-wrap gap-3 font-mono text-[10px]" style={{ color: INK_FADED }}>
                       {Object.entries(cats).map(([key, count]) => (
                         <span key={key} className="flex items-center gap-1">
                           <span className="w-2 h-2 rounded-sm inline-block" style={{ backgroundColor: segmentColors[key] }} />
@@ -404,21 +484,23 @@ const AnalysisView: React.FC = () => {
                 );
               })()}
             </div>
-            {/* Right: summary signals */}
             <div>
-              <div className="font-mono text-[10px] text-muted-foreground mb-3">要約シグナル</div>
+              <div className="font-mono text-[11px] mb-3" style={{ color: INK_FADED }}>
+                <span className="font-jp text-[10px]">要約シグナル</span>
+                <span className="ml-2 text-[9px]">SUMMARY SIGNALS</span>
+              </div>
               <div className="space-y-3">
                 {[
-                  { label: 'Score', value: dimScores['epistemic_avoidance']?.score ?? 0, color: '#F5C06A' },
+                  { label: 'Score', value: dimScores['epistemic_avoidance']?.score ?? 0, color: CULTURAL_BAR },
                   { label: 'Refusal Rate', value: vizData?.pattern_summary?.epistemic_avoidance?.refusal_rate ?? 0, color: '#C27A5E' },
                   { label: 'Hedge Rate', value: vizData?.pattern_summary?.epistemic_avoidance?.hedge_rate ?? 0, color: '#D4A84B' },
                 ].map(item => (
                   <div key={item.label}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="font-mono text-[10px] text-muted-foreground">{item.label}</span>
-                      <span className="font-mono text-[10px] text-foreground">{item.value.toFixed(2)}</span>
+                      <span className="font-mono text-[11px]" style={{ color: INK_FADED }}>{item.label}</span>
+                      <span className="font-mono text-[11px]" style={{ color: INK }}>{item.value.toFixed(2)}</span>
                     </div>
-                    <div className="h-3 bg-foreground/5 rounded-full overflow-hidden">
+                    <div className="h-3 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(80,60,40,0.06)' }}>
                       <div className="h-full rounded-full" style={{ width: `${item.value * 100}%`, backgroundColor: item.color }} />
                     </div>
                   </div>
@@ -431,31 +513,33 @@ const AnalysisView: React.FC = () => {
         {/* ═══ Chart 5: Symmetry / Asymmetry ═══ */}
         <ChartSection title="Symmetry / Asymmetry Analysis" titleJp="対称性" chartRef={ref5} exportName={`${modelKey}_symmetry`}>
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Left: per-pair consistency */}
             <div>
-              <div className="font-mono text-[10px] text-muted-foreground mb-3">宗教間対称性 — ペア一貫性</div>
+              <div className="font-mono text-[11px] mb-3" style={{ color: INK_FADED }}>
+                <span className="font-jp text-[10px]">宗教間対称性</span>
+                <span className="ml-2 text-[9px]">INTER-RELIGIOUS SYMMETRY</span>
+              </div>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={symmetryPairs} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
                   <XAxis
                     dataKey="pair"
-                    tick={{ fill: 'hsl(20 10% 42%)', fontSize: 7, fontFamily: 'Space Mono' }}
-                    stroke="hsl(20 12% 60% / 0.15)"
+                    tick={{ fill: INK_FADED, fontSize: 9, fontFamily: 'Space Mono' }}
+                    stroke={GRID_STROKE}
                   />
                   <YAxis
                     domain={[0, 1.1]}
-                    tick={{ fill: 'hsl(20 10% 42%)', fontSize: 8, fontFamily: 'Space Mono' }}
-                    stroke="hsl(20 12% 60% / 0.15)"
+                    tick={{ fill: INK_FADED, fontSize: 9, fontFamily: 'Space Mono' }}
+                    stroke={GRID_STROKE}
                   />
-                  <ReferenceLine y={1.0} stroke="hsl(20 12% 60% / 0.3)" strokeDasharray="4 4" />
-                  <ReferenceLine y={0.8} stroke="hsl(20 12% 60% / 0.2)" strokeDasharray="2 2" />
+                  <ReferenceLine y={1.0} stroke="rgba(80,60,40,0.2)" strokeDasharray="4 4" />
+                  <ReferenceLine y={0.8} stroke="rgba(80,60,40,0.12)" strokeDasharray="2 2" />
                   <Tooltip
                     content={({ payload }) => {
                       if (!payload?.length) return null;
                       const d = payload[0].payload;
                       return (
-                        <div className="paper-card rounded px-3 py-2 font-mono text-[9px] max-w-[200px]">
-                          <div className="text-foreground">Pair {d.pair}: {d.consistency.toFixed(3)}</div>
-                          <div className="text-muted-foreground mt-1 text-[8px]">{d.description?.slice(0, 100)}</div>
+                        <div className="rounded px-3 py-2 font-mono text-[12px]" style={{ backgroundColor: SURFACE, border: `1px solid ${GRID_STROKE}`, color: INK, padding: 12, minWidth: 160, maxWidth: 320 }}>
+                          <div>Pair {d.pair}: {d.consistency.toFixed(3)}</div>
+                          <div className="mt-1 text-[10px]" style={{ color: INK_FADED }}>{d.description?.slice(0, 120)}</div>
                         </div>
                       );
                     }}
@@ -471,26 +555,28 @@ const AnalysisView: React.FC = () => {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            {/* Right: pair summary */}
             <div>
-              <div className="font-mono text-[10px] text-muted-foreground mb-3">ペア次元スコア</div>
+              <div className="font-mono text-[11px] mb-3" style={{ color: INK_FADED }}>
+                <span className="font-jp text-[10px]">ペア次元スコア</span>
+                <span className="ml-2 text-[9px]">PAIR DIMENSION SCORES</span>
+              </div>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={pairSummaryData} margin={{ top: 20, right: 20, bottom: 20, left: 10 }}>
                   <XAxis
                     dataKey="label"
-                    tick={{ fill: 'hsl(20 10% 42%)', fontSize: 8, fontFamily: 'Space Mono' }}
+                    tick={{ fill: INK_FADED, fontSize: 9, fontFamily: 'Space Mono' }}
                     angle={-15}
                     textAnchor="end"
-                    stroke="hsl(20 12% 60% / 0.15)"
+                    stroke={GRID_STROKE}
                   />
                   <YAxis
                     domain={[0, 1]}
-                    tick={{ fill: 'hsl(20 10% 42%)', fontSize: 8, fontFamily: 'Space Mono' }}
-                    stroke="hsl(20 12% 60% / 0.15)"
+                    tick={{ fill: INK_FADED, fontSize: 9, fontFamily: 'Space Mono' }}
+                    stroke={GRID_STROKE}
                   />
-                  <ReferenceLine y={0.5} stroke="hsl(20 12% 60% / 0.3)" strokeDasharray="4 4" />
-                  <Bar dataKey="score" fill="#F5C06A" radius={[2, 2, 0, 0]}>
-                    <LabelList dataKey="score" position="top" formatter={(v: number) => v.toFixed(2)} style={{ fontSize: 8, fontFamily: 'Space Mono', fill: 'hsl(20 10% 42%)' }} />
+                  <ReferenceLine y={0.5} stroke="rgba(80,60,40,0.2)" strokeDasharray="4 4" />
+                  <Bar dataKey="score" fill={CULTURAL_BAR} radius={[2, 2, 0, 0]}>
+                    <LabelList dataKey="score" position="top" formatter={(v: number) => v.toFixed(2)} style={{ fontSize: 10, fontFamily: 'Space Mono', fill: INK }} />
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
@@ -505,49 +591,69 @@ const AnalysisView: React.FC = () => {
               <ScatterChart margin={{ top: 30, right: 30, bottom: 30, left: 40 }}>
                 <XAxis
                   type="number" dataKey="x" name="Score" domain={[0, 1]}
-                  tick={{ fill: 'hsl(20 10% 42%)', fontSize: 10, fontFamily: 'Space Mono' }}
-                  label={{ value: 'Score', position: 'bottom', fill: 'hsl(20 10% 42%)', fontSize: 10 }}
-                  stroke="hsl(20 12% 60% / 0.15)"
+                  tick={{ fill: INK_FADED, fontSize: 10, fontFamily: 'Space Mono' }}
+                  label={{ value: 'Score', position: 'bottom', fill: INK_FADED, fontSize: 10 }}
+                  stroke={GRID_STROKE}
                 />
                 <YAxis
                   type="number" dataKey="y" name="Std Dev" domain={[0, 0.45]}
-                  tick={{ fill: 'hsl(20 10% 42%)', fontSize: 10, fontFamily: 'Space Mono' }}
-                  label={{ value: 'Std Deviation (Volatility)', angle: -90, position: 'left', fill: 'hsl(20 10% 42%)', fontSize: 10 }}
-                  stroke="hsl(20 12% 60% / 0.15)"
+                  tick={{ fill: INK_FADED, fontSize: 10, fontFamily: 'Space Mono' }}
+                  label={{ value: 'Std Deviation (Volatility)', angle: -90, position: 'left', fill: INK_FADED, fontSize: 10 }}
+                  stroke={GRID_STROKE}
                 />
                 <Tooltip
                   content={({ payload }) => {
                     if (!payload?.length) return null;
                     const d = payload[0].payload;
                     return (
-                      <div className="paper-card rounded px-3 py-2 font-mono text-[10px]">
-                        <div className="text-foreground font-semibold">{d.name}</div>
-                        <div className="text-muted-foreground">Score: {d.x.toFixed(3)} · Std: {d.y.toFixed(3)}</div>
-                        <div className="text-muted-foreground capitalize">{d.category}</div>
+                      <div className="rounded px-3 py-2 font-mono text-[12px] z-[9999]" style={{ backgroundColor: SURFACE, border: `1px solid ${GRID_STROKE}`, color: INK, padding: 12, minWidth: 160, maxWidth: 320 }}>
+                        <div className="font-semibold">{d.name}</div>
+                        <div style={{ color: MOSS }}>Score: {d.x.toFixed(3)} · Std: {d.y.toFixed(3)}</div>
+                        <div className="capitalize text-[10px] mt-1" style={{ color: INK_FADED }}>{d.category}</div>
                       </div>
                     );
                   }}
                 />
                 <Scatter data={scatterData}>
                   {scatterData.map((d, i) => (
-                    <Cell key={i} fill={d.color} opacity={0.7} r={6} />
+                    <Cell key={i} fill={d.color} opacity={0.8} r={6} stroke="rgba(44,44,42,0.3)" strokeWidth={1} />
                   ))}
                 </Scatter>
               </ScatterChart>
             </ResponsiveContainer>
-            {/* Quadrant labels */}
-            <div className="absolute top-8 left-12 font-mono text-[8px] text-destructive/50 tracking-wider">ERRATIC LOW</div>
-            <div className="absolute top-8 right-12 font-mono text-[8px] text-muted-foreground/50 tracking-wider">VOLATILE HIGH</div>
-            <div className="absolute bottom-10 left-12 font-mono text-[8px] text-muted-foreground/50 tracking-wider">STABLE LOW</div>
-            <div className="absolute bottom-10 right-12 font-mono text-[8px] text-accent/50 tracking-wider">STABLE HIGH</div>
+            {/* Quadrant labels — visible pills */}
+            {[
+              { label: 'ERRATIC LOW', top: 8, left: 50, right: undefined, bottom: undefined },
+              { label: 'VOLATILE HIGH', top: 8, left: undefined, right: 50, bottom: undefined },
+              { label: 'STABLE LOW', top: undefined, left: 50, right: undefined, bottom: 40 },
+              { label: 'STABLE HIGH', top: undefined, left: undefined, right: 50, bottom: 40 },
+            ].map(q => (
+              <div
+                key={q.label}
+                className="absolute font-mono text-[11px] tracking-wider"
+                style={{
+                  top: q.top,
+                  left: q.left,
+                  right: q.right,
+                  bottom: q.bottom,
+                  color: INK_FADED,
+                  background: 'rgba(80,60,40,0.06)',
+                  padding: '2px 6px',
+                  borderRadius: 4,
+                }}
+              >
+                {q.label}
+              </div>
+            ))}
             {/* Outlier labels */}
             {scatterData.filter(d => OUTLIER_LABELS[d.dim]).map(d => (
               <div
                 key={d.dim}
-                className="absolute font-mono text-[7px] text-foreground pointer-events-none"
+                className="absolute font-mono text-[10px] pointer-events-none"
                 style={{
-                  left: `calc(${((d.x) / 1) * 80 + 8}% + 10px)`,
-                  bottom: `calc(${((d.y) / 0.45) * 80 + 8}% + 5px)`,
+                  color: INK,
+                  left: `calc(${d.x * 80 + 8}% + 10px)`,
+                  bottom: `calc(${(d.y / 0.45) * 80 + 8}% + 5px)`,
                 }}
               >
                 {OUTLIER_LABELS[d.dim]}
@@ -562,8 +668,8 @@ const AnalysisView: React.FC = () => {
           <div className="space-y-3">
             {categoryBarData.map((d, i) => (
               <div key={d.key} className="flex items-center gap-4">
-                <span className="font-mono text-[11px] w-24 text-muted-foreground uppercase">{d.category}</span>
-                <div className="flex-1 h-4 bg-foreground/5 rounded-full overflow-hidden">
+                <span className="font-mono text-[12px] w-28 uppercase" style={{ color: INK_FADED }}>{d.category}</span>
+                <div className="flex-1 h-4 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(80,60,40,0.06)' }}>
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${(d.score / 0.6) * 100}%` }}
@@ -573,7 +679,7 @@ const AnalysisView: React.FC = () => {
                     style={{ backgroundColor: d.color }}
                   />
                 </div>
-                <span className="font-mono text-[11px] text-foreground tabular-nums w-12 text-right">{d.score.toFixed(3)}</span>
+                <span className="font-mono text-[12px] tabular-nums w-12 text-right" style={{ color: INK }}>{d.score.toFixed(3)}</span>
               </div>
             ))}
           </div>
@@ -584,23 +690,28 @@ const AnalysisView: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {asymmetryHeatmap.map(a => {
               const intensity = a.count / 25;
-              const bgColor = a.count === 0 ? 'hsl(20 8% 35%)' : `hsl(0 ${40 + intensity * 30}% ${55 - intensity * 20}%)`;
+              const r = Math.round(42 + intensity * (255 - 42));
+              const g = Math.round(42 + intensity * (107 - 42));
+              const b = Math.round(42 + intensity * (107 - 42));
+              const bgColor = a.count === 0 ? '#4A4A4A' : `rgb(${r}, ${g}, ${b})`;
               return (
                 <div
                   key={a.dim}
-                  className="rounded p-4 border border-foreground/10 group relative cursor-pointer"
-                  style={{ backgroundColor: bgColor }}
+                  className="rounded p-4 group relative cursor-pointer"
+                  style={{ backgroundColor: bgColor, border: `1px solid ${GRID_STROKE}` }}
                 >
-                  <div className="font-display text-sm font-semibold text-white/90 mb-1">{a.label}</div>
-                  <div className="font-mono text-2xl tabular-nums text-white font-bold">
+                  <div className="font-display text-[13px] font-semibold mb-1" style={{ color: 'rgba(245,240,232,0.9)' }}>{a.label}</div>
+                  <div className="font-mono text-2xl tabular-nums font-bold" style={{ color: '#F5F0E8' }}>
                     {a.count}/25
                   </div>
-                  <div className="font-mono text-[9px] text-white/60">asymmetries</div>
-                  {/* Tooltip on hover */}
+                  <div className="font-mono text-[10px]" style={{ color: 'rgba(245,240,232,0.6)' }}>asymmetries</div>
                   {a.descriptions.length > 0 && (
-                    <div className="absolute bottom-full left-0 right-0 mb-2 paper-card rounded p-2 font-mono text-[8px] text-foreground opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 max-h-32 overflow-hidden">
+                    <div
+                      className="absolute bottom-full left-0 right-0 mb-2 rounded p-3 font-mono text-[10px] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[9999] max-h-40 overflow-hidden"
+                      style={{ backgroundColor: SURFACE, border: `1px solid ${GRID_STROKE}`, color: INK, boxShadow: '0 2px 8px rgba(44,44,42,0.12)' }}
+                    >
                       {a.descriptions.map((d, i) => (
-                        <p key={i} className="mb-1">{d.slice(0, 120)}...</p>
+                        <p key={i} className="mb-1">{d.slice(0, 140)}...</p>
                       ))}
                     </div>
                   )}
@@ -614,16 +725,16 @@ const AnalysisView: React.FC = () => {
         <ChartSection title="Big Five Personality" titleJp="ビッグファイブ" chartRef={ref9} exportName={`${modelKey}_big5`}>
           <ResponsiveContainer width="100%" height={350}>
             <RadarChart data={bigFiveData} cx="50%" cy="50%" outerRadius="70%">
-              <PolarGrid stroke="hsl(20 12% 60% / 0.15)" />
+              <PolarGrid stroke={GRID_STROKE} strokeWidth={0.5} />
               <PolarAngleAxis
                 dataKey="trait"
-                tick={{ fill: 'hsl(20 10% 42%)', fontSize: 10, fontFamily: 'Space Mono' }}
+                tick={{ fill: INK, fontSize: 11, fontFamily: 'Space Mono' }}
               />
               <PolarRadiusAxis angle={90} domain={[0, 1]} tick={false} axisLine={false} />
-              <Radar dataKey="score" stroke="#FF9DC8" fill="#FF9DC8" fillOpacity={0.2} strokeWidth={1.5} dot />
+              <Radar dataKey="score" stroke="#A0845C" fill="#A0845C" fillOpacity={0.2} strokeWidth={1.5} dot />
             </RadarChart>
           </ResponsiveContainer>
-          <p className="font-mono text-[10px] text-muted-foreground text-center mt-4 max-w-lg mx-auto leading-relaxed">
+          <p className="font-mono text-[11px] text-center mt-4 max-w-lg mx-auto leading-relaxed" style={{ color: INK_FADED }}>
             Per-trait differentiation requires a more targeted battery. All five traits reflect the overall personality expression score of {bigFiveScore.toFixed(3)}.
           </p>
         </ChartSection>
@@ -635,36 +746,40 @@ const AnalysisView: React.FC = () => {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display text-lg font-bold text-foreground mb-4">
-            <span className="font-jp text-[11px] text-muted-foreground mr-2">強弱</span>
+          <h2 className="font-display text-lg font-bold mb-4" style={{ color: INK }}>
+            <span className="font-jp text-[11px] block" style={{ color: INK_FADED }}>強弱</span>
             Strengths & Weaknesses
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-3">
-              <div className="font-mono text-[10px] text-accent tracking-widest">強み / STRENGTHS</div>
+              <div className="font-mono text-[11px] tracking-widest" style={{ color: '#5C7A5E' }}>
+                <span className="font-jp text-[10px]">強み</span> / STRENGTHS
+              </div>
               {strengths.map(s => (
-                <div key={s.dimension} className="paper-card rounded p-4" style={{ borderLeft: '3px solid #5E9B6B' }}>
+                <div key={s.dimension} className="paper-card rounded p-4" style={{ borderLeft: '3px solid #5C7A5E' }}>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-display text-sm font-semibold text-foreground">{formatDimName(s.dimension)}</span>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded" style={{ backgroundColor: `${getScoreColor(s.score)}20`, color: getScoreColor(s.score) }}>
+                    <span className="font-display text-[14px] font-semibold" style={{ color: INK }}>{formatDimName(s.dimension)}</span>
+                    <span className="font-mono text-[11px] px-2 py-0.5 rounded tabular-nums" style={{ backgroundColor: getScoreColor(s.score), color: INK }}>
                       {s.score.toFixed(3)}
                     </span>
                   </div>
-                  <p className="text-xs text-muted-foreground">{s.note}</p>
+                  <p className="text-[12px]" style={{ color: INK_FADED }}>{s.note}</p>
                 </div>
               ))}
             </div>
             <div className="space-y-3">
-              <div className="font-mono text-[10px] text-destructive tracking-widest">弱み / WEAKNESSES</div>
+              <div className="font-mono text-[11px] tracking-widest" style={{ color: '#C97A7A' }}>
+                <span className="font-jp text-[10px]">弱み</span> / WEAKNESSES
+              </div>
               {weaknesses.map(w => (
-                <div key={w.dimension} className="paper-card rounded p-4" style={{ borderLeft: '3px solid #B34040' }}>
+                <div key={w.dimension} className="paper-card rounded p-4" style={{ borderLeft: '3px solid #C97A7A' }}>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-display text-sm font-semibold text-foreground">{formatDimName(w.dimension)}</span>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded" style={{ backgroundColor: `${getScoreColor(w.score)}20`, color: getScoreColor(w.score) }}>
+                    <span className="font-display text-[14px] font-semibold" style={{ color: INK }}>{formatDimName(w.dimension)}</span>
+                    <span className="font-mono text-[11px] px-2 py-0.5 rounded tabular-nums" style={{ backgroundColor: getScoreColor(w.score), color: INK }}>
                       {w.score.toFixed(3)}
                     </span>
                   </div>
-                  <p className="text-xs text-muted-foreground">{w.note}</p>
+                  <p className="text-[12px]" style={{ color: INK_FADED }}>{w.note}</p>
                 </div>
               ))}
             </div>
@@ -678,9 +793,11 @@ const AnalysisView: React.FC = () => {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="paper-card rounded p-6" style={{ borderLeft: '3px solid hsl(40 70% 50%)' }}>
-            <div className="font-mono text-[10px] text-primary tracking-widest mb-3">⚠ 異常検出 / ANOMALY CALLOUT</div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+          <div className="paper-card rounded p-6" style={{ borderLeft: '3px solid #C4943A' }}>
+            <div className="font-mono text-[11px] tracking-widest mb-3" style={{ color: '#B8710A' }}>
+              ⚠ <span className="font-jp text-[10px]">異常検出</span> / ANOMALY CALLOUT
+            </div>
+            <p className="text-[14px] leading-relaxed" style={{ color: INK_FADED }}>
               {vizData?.synthesis?.anomalies?.join(' ') ||
                 "Three findings fall outside normal performance variation: instruction_conflict at 0.048 appears to reflect a fundamental processing failure rather than a low score. historical_narrative_calibration at 0.072 is a calibration failure — the model does not simply lack information, it produces confident fabrications. moral_foundation_distribution at exactly 0.500 across all 25 tests with zero variance is suspicious — genuine neutrality produces variance. A fixed default pattern does not."}
             </p>
