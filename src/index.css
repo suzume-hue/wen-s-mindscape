@@ -4,69 +4,70 @@
 
 @layer base {
   :root {
-    /* 紙神 Kami Paper — warm parchment + ink + stamp aesthetic */
-    --background: 36 25% 88%;
-    --foreground: 20 15% 18%;
+    /* 紙神 Kami Paper — Botanical field notes aesthetic */
+    --background: 36 25% 94%;
+    --foreground: 60 2% 17%;
 
-    --card: 38 22% 82%;
-    --card-foreground: 20 15% 18%;
+    --card: 36 22% 89%;
+    --card-foreground: 60 2% 17%;
 
-    --popover: 38 22% 82%;
-    --popover-foreground: 20 15% 18%;
+    --popover: 36 22% 89%;
+    --popover-foreground: 60 2% 17%;
 
-    --primary: 24 80% 52%;
-    --primary-foreground: 38 30% 95%;
+    --primary: 79 44% 43%;
+    --primary-foreground: 36 30% 95%;
 
-    --secondary: 36 18% 76%;
-    --secondary-foreground: 20 15% 18%;
+    --secondary: 36 18% 85%;
+    --secondary-foreground: 60 2% 17%;
 
-    --muted: 36 15% 78%;
-    --muted-foreground: 20 10% 42%;
+    --muted: 36 15% 85%;
+    --muted-foreground: 40 4% 39%;
 
-    --accent: 172 45% 42%;
-    --accent-foreground: 38 30% 95%;
+    --accent: 170 48% 30%;
+    --accent-foreground: 36 30% 95%;
 
-    --destructive: 0 55% 48%;
-    --destructive-foreground: 38 30% 95%;
+    --destructive: 0 40% 45%;
+    --destructive-foreground: 36 30% 95%;
 
-    --border: 20 12% 60%;
-    --input: 20 12% 60%;
-    --ring: 24 80% 52%;
+    --border: 25 15% 72%;
+    --input: 25 15% 72%;
+    --ring: 79 44% 43%;
 
     --radius: 0.25rem;
 
     /* Kami Paper tokens */
-    --wen-bg: 36 25% 88%;
-    --wen-surface: 38 22% 82%;
-    --wen-surface-raised: 36 18% 76%;
-    --wen-neon: 24 80% 52%;
-    --wen-amber: 24 80% 52%;
-    --wen-teal: 172 45% 42%;
-    --wen-danger: 0 55% 48%;
+    --wen-bg: 36 25% 94%;
+    --wen-surface: 36 22% 89%;
+    --wen-surface-raised: 36 18% 84%;
+    --wen-olive: 79 44% 43%;
+    --wen-amber: 37 88% 38%;
+    --wen-teal: 170 48% 30%;
+    --wen-danger: 0 40% 45%;
     --wen-caution: 40 70% 50%;
     --wen-success: 145 35% 38%;
+    --wen-moss-mono: 130 16% 42%;
 
-    /* Category colors — ink & stamp palette */
-    --cat-personality: 330 50% 60%;
-    --cat-values: 145 35% 45%;
-    --cat-cultural: 37 75% 58%;
-    --cat-behavioral: 210 40% 52%;
-    --cat-capability: 255 35% 58%;
+    /* Category colours — earthy, parchment-native */
+    --cat-personality: 32 33% 49%;
+    --cat-values: 3 27% 48%;
+    --cat-cultural: 209 28% 41%;
+    --cat-behavioral: 30 22% 41%;
+    --cat-capability: 260 24% 56%;
 
-    /* Stamp red */
+    /* Stamp & ink */
     --stamp-red: 0 65% 45%;
-    --ink-dark: 20 15% 18%;
-    --paper-line: 20 8% 72%;
+    --ink-dark: 60 2% 17%;
+    --paper-line: 25 10% 72%;
 
     /* Sidebar */
-    --sidebar-background: 38 22% 82%;
-    --sidebar-foreground: 20 15% 18%;
-    --sidebar-primary: 24 80% 52%;
-    --sidebar-primary-foreground: 38 30% 95%;
-    --sidebar-accent: 36 18% 76%;
-    --sidebar-accent-foreground: 20 15% 18%;
-    --sidebar-border: 20 12% 60%;
-    --sidebar-ring: 24 80% 52%;
+    --sidebar-background: 36 22% 89%;
+    --sidebar-foreground: 60 2% 17%;
+    --sidebar-primary: 79 44% 43%;
+    --sidebar-primary-foreground: 36 30% 95%;
+    --sidebar-accent: 36 18% 85%;
+    --sidebar-accent-foreground: 60 2% 17%;
+    --sidebar-border: 25 15% 72%;
+    --sidebar-ring: 79 44% 43%;
   }
 }
 
@@ -79,15 +80,16 @@
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
     cursor: none;
+    background-color: #F5F0E8;
     background-image:
       url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"),
-      linear-gradient(180deg, hsl(36 25% 88%) 0%, hsl(34 22% 84%) 100%);
+      linear-gradient(180deg, #F5F0E8 0%, #EDE7D9 100%);
     background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Syne', sans-serif;
-    color: hsl(20 15% 18%);
+    color: #2C2C2A;
   }
 }
 
@@ -107,6 +109,7 @@
 }
 .font-mono-data {
   font-family: 'Space Mono', monospace;
+  color: #5C7A5E;
 }
 .font-jp {
   font-family: 'Noto Sans JP', sans-serif;
@@ -117,12 +120,12 @@
 
 /* Paper card styling */
 .paper-card {
-  background: hsl(38 22% 82%);
-  border: 1px solid hsl(20 12% 68%);
+  background: #EDE7D9;
+  border: 1px solid rgba(80, 60, 40, 0.10);
   box-shadow:
-    2px 2px 0 hsl(20 12% 72%),
-    4px 4px 0 hsl(20 12% 76%),
-    inset 0 0 40px hsl(36 20% 85% / 0.5);
+    2px 2px 0 rgba(80, 60, 40, 0.06),
+    4px 4px 0 rgba(80, 60, 40, 0.03),
+    inset 0 0 40px rgba(245, 240, 232, 0.5);
   position: relative;
 }
 
@@ -138,8 +141,8 @@
 /* Grid paper lines */
 .grid-paper {
   background-image:
-    linear-gradient(hsl(210 30% 72% / 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(210 30% 72% / 0.15) 1px, transparent 1px);
+    linear-gradient(rgba(80, 60, 40, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 60, 40, 0.06) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
@@ -156,10 +159,10 @@
 
 /* Tape strip decoration */
 .tape-strip {
-  background: hsl(50 40% 80% / 0.6);
+  background: rgba(200, 185, 150, 0.5);
   backdrop-filter: blur(1px);
   transform: rotate(-2deg);
-  box-shadow: 0 1px 3px hsl(20 15% 18% / 0.1);
+  box-shadow: 0 1px 3px rgba(80, 60, 40, 0.1);
 }
 
 /* Ink underline */
@@ -167,13 +170,13 @@
   text-decoration: none;
   background-image: linear-gradient(
     transparent calc(100% - 2px),
-    hsl(var(--ink-dark)) calc(100% - 2px)
+    #2C2C2A calc(100% - 2px)
   );
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 
-/* Scan line animation */
+/* Animations */
 @keyframes scanline {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100vh); }
@@ -245,21 +248,21 @@
 }
 
 /* Washi tape colors */
-.washi-orange { background: hsl(24 70% 65% / 0.4); }
-.washi-teal { background: hsl(172 40% 55% / 0.4); }
-.washi-pink { background: hsl(330 45% 65% / 0.4); }
+.washi-orange { background: rgba(184, 113, 10, 0.25); }
+.washi-teal { background: rgba(42, 122, 106, 0.25); }
+.washi-pink { background: rgba(155, 94, 82, 0.25); }
 
 /* Scrollbar styling — parchment themed */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(36 18% 76%);
+  background: #E4DDCC;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(20 12% 55%);
+  background: rgba(80, 60, 40, 0.3);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(20 12% 45%);
+  background: rgba(80, 60, 40, 0.5);
 }

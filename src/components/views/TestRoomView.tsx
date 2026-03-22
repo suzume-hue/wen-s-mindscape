@@ -3,6 +3,7 @@ import WenCharacter from '@/components/WenCharacter';
 import {
   DIM_DESCRIPTIONS,
   CATEGORY_BG_CLASSES,
+  CATEGORY_COLORS,
   formatDimName,
   getScoreColor,
   PAIR_DIMS,
@@ -65,7 +66,7 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
   const currentRecord = records[selectedTest];
   const currentRunText = currentRecord?.runs?.[selectedRun] || '';
 
-  // Typewriter: only types the first 800 chars, then stops
+  // Typewriter: types first 800 chars
   useEffect(() => {
     if (!currentRunText) return;
     fullTextRef.current = currentRunText;
@@ -85,9 +86,7 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
       }
     };
     typingRef.current = window.setTimeout(tick, 300);
-    return () => {
-      if (typingRef.current) clearTimeout(typingRef.current);
-    };
+    return () => { if (typingRef.current) clearTimeout(typingRef.current); };
   }, [selectedTest, selectedRun, currentRunText]);
 
   const skipTyping = useCallback(() => {
@@ -113,6 +112,7 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
   }, []);
 
   const isTruncatable = currentRunText.length > 800;
+  const scoreColor = getScoreColor(dimScore ?? 0);
 
   if (!dimScore && !loading) return null;
 
@@ -121,37 +121,44 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
       <button
         onClick={onBack}
         data-interactive
-        className="font-mono text-[11px] text-muted-foreground hover:text-foreground mb-6 cursor-pointer"
+        className="font-mono text-[12px] mb-6 cursor-pointer hover:underline"
+        style={{ color: '#6B6860' }}
       >
-        ← 戻る / BACK
+        ← <span className="font-jp text-[10px]">戻る</span> / BACK
       </button>
 
       <div className="flex gap-8 flex-col lg:flex-row">
         <div className="lg:w-[40%] space-y-6">
-          <span className={`inline-block font-mono text-[9px] px-2 py-1 rounded ${CATEGORY_BG_CLASSES[dimCategory]} text-primary-foreground uppercase tracking-wider`}>
+          <span
+            className={`inline-block font-mono text-[10px] px-2 py-1 rounded uppercase tracking-wider ${CATEGORY_BG_CLASSES[dimCategory]}`}
+            style={{ color: '#F5F0E8' }}
+          >
             {dimCategory}
           </span>
 
-          <h1 className="font-display text-2xl md:text-3xl font-bold italic text-foreground leading-tight" style={{ lineHeight: '1.1' }}>
+          <h1 className="font-display text-2xl md:text-3xl font-bold italic leading-tight" style={{ color: '#2C2C2A', lineHeight: '1.1' }}>
             {formatDimName(dimension)}
           </h1>
 
           <div className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <span className="font-mono text-3xl tabular-nums text-foreground">{(dimScore ?? 0).toFixed(3)}</span>
-              <span className="font-mono text-sm text-muted-foreground tabular-nums">±{(dimStd ?? 0).toFixed(3)}</span>
+              <span className="font-mono text-3xl tabular-nums" style={{ color: '#2C2C2A' }}>{(dimScore ?? 0).toFixed(3)}</span>
+              <span className="font-mono text-[13px] tabular-nums" style={{ color: '#6B6860' }}>±{(dimStd ?? 0).toFixed(3)}</span>
             </div>
-            <div className="h-2 bg-foreground/5 rounded-full overflow-hidden">
+            <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(80,60,40,0.06)' }}>
               <div
                 className="h-full rounded-full"
-                style={{ width: `${(dimScore ?? 0) * 100}%`, backgroundColor: getScoreColor(dimScore ?? 0) }}
+                style={{ width: `${(dimScore ?? 0) * 100}%`, backgroundColor: scoreColor }}
               />
             </div>
           </div>
 
           <div>
-            <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">この次元について</div>
-            <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+            <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: '#6B6860' }}>
+              <span className="font-jp text-[10px]">この次元について</span>
+              <span className="ml-2 text-[9px]">ABOUT THIS DIMENSION</span>
+            </div>
+            <p className="text-[14px] leading-relaxed" style={{ color: '#6B6860' }}>{description}</p>
           </div>
 
           <div className="flex justify-center">
@@ -162,19 +169,22 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
         <div className="lg:w-[60%]">
           {loading ? (
             <div className="flex items-center justify-center h-64">
-              <div className="font-mono text-[11px] text-primary animate-pulse">データ読込中...</div>
+              <div className="font-mono text-[12px] animate-pulse" style={{ color: '#7A9E3F' }}>
+                <span className="font-jp text-[10px]">データ読込中</span> / Loading...
+              </div>
             </div>
           ) : records.length === 0 ? (
             <div className="text-center py-20">
-              <div className="font-mono text-[11px] text-muted-foreground">
+              <div className="font-mono text-[12px]" style={{ color: '#6B6860' }}>
                 Response data unavailable for this dimension.
               </div>
             </div>
           ) : (
             <>
               <div className="mb-4">
-                <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">
-                  {isPair ? 'ペア選択' : 'テスト選択'}
+                <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: '#6B6860' }}>
+                  <span className="font-jp text-[10px]">{isPair ? 'ペア選択' : 'テスト選択'}</span>
+                  <span className="ml-2 text-[9px]">{isPair ? 'PAIR SELECTION' : 'TEST SELECTION'}</span>
                 </div>
                 <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
                   {records.map((rec, i) => {
@@ -184,16 +194,13 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                       <button
                         key={rec.test_id}
                         data-interactive
-                        onClick={() => {
-                          setSelectedTest(i);
-                          setSelectedRun(0);
-                          setIsExpanded(false);
+                        onClick={() => { setSelectedTest(i); setSelectedRun(0); setIsExpanded(false); }}
+                        className="font-mono text-[10px] px-2 py-1 rounded cursor-pointer transition-all"
+                        style={{
+                          border: selectedTest === i ? '1px solid rgba(122,158,63,0.4)' : '1px solid rgba(80,60,40,0.10)',
+                          backgroundColor: selectedTest === i ? 'rgba(122,158,63,0.1)' : 'transparent',
+                          color: selectedTest === i ? '#7A9E3F' : '#6B6860',
                         }}
-                        className={`font-mono text-[9px] px-2 py-1 rounded border cursor-pointer transition-all ${
-                          selectedTest === i
-                            ? 'border-primary/40 bg-primary/10 text-primary'
-                            : 'border-foreground/10 text-muted-foreground hover:text-foreground'
-                        }`}
                       >
                         {rec.test_id}
                         {score !== undefined && (
@@ -208,51 +215,50 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
               {currentRecord && (
                 <div className="space-y-4">
                   <div>
-                    <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">プロンプト</div>
-                    <div className="paper-card rounded p-4 text-sm text-foreground/80 leading-relaxed max-h-48 overflow-y-auto font-body">
+                    <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: '#6B6860' }}>
+                      <span className="font-jp text-[10px]">プロンプト</span>
+                      <span className="ml-2 text-[9px]">PROMPT</span>
+                    </div>
+                    <div className="paper-card rounded p-4 text-[14px] leading-relaxed max-h-48 overflow-y-auto font-body" style={{ color: 'rgba(44,44,42,0.8)' }}>
                       {currentRecord.prompt}
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <div className="font-mono text-[10px] text-muted-foreground tracking-widest">実行</div>
+                    <div className="font-mono text-[11px] tracking-widest" style={{ color: '#6B6860' }}>
+                      <span className="font-jp text-[10px]">実行</span>
+                      <span className="ml-1 text-[9px]">RUN</span>
+                    </div>
                     {[0, 1, 2].map(r => (
                       <button
                         key={r}
                         data-interactive
-                        onClick={() => {
-                          setSelectedRun(r);
-                          setIsExpanded(false);
+                        onClick={() => { setSelectedRun(r); setIsExpanded(false); }}
+                        className="font-mono text-[11px] px-3 py-1 rounded cursor-pointer transition-all"
+                        style={{
+                          border: selectedRun === r ? '1px solid rgba(42,122,106,0.4)' : '1px solid rgba(80,60,40,0.10)',
+                          backgroundColor: selectedRun === r ? 'rgba(42,122,106,0.1)' : 'transparent',
+                          color: selectedRun === r ? '#2A7A6A' : '#6B6860',
                         }}
-                        className={`font-mono text-[10px] px-3 py-1 rounded border cursor-pointer transition-all ${
-                          selectedRun === r
-                            ? 'border-accent/40 bg-accent/10 text-accent'
-                            : 'border-foreground/10 text-muted-foreground hover:text-foreground'
-                        }`}
                       >
                         R{r + 1}
                       </button>
                     ))}
                   </div>
 
-                  <div
-                    className="paper-card rounded p-4 cursor-pointer grid-paper"
-                    onClick={skipTyping}
-                  >
-                    <pre className="font-mono text-[12px] text-accent leading-relaxed whitespace-pre-wrap break-words max-h-[60vh] overflow-y-auto">
+                  <div className="paper-card rounded p-4 cursor-pointer grid-paper" onClick={skipTyping}>
+                    <pre className="font-mono text-[12px] leading-relaxed whitespace-pre-wrap break-words max-h-[60vh] overflow-y-auto" style={{ color: '#5C7A5E' }}>
                       {typedText}
                       {!typingDone && (
-                        <span className="inline-block w-[6px] h-[12px] bg-accent ml-0.5 animate-typewriter-cursor" />
+                        <span className="inline-block w-[6px] h-[12px] ml-0.5 animate-typewriter-cursor" style={{ backgroundColor: '#5C7A5E' }} />
                       )}
                     </pre>
                     {typingDone && isTruncatable && !isExpanded && (
                       <button
                         data-interactive
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleExpand();
-                        }}
-                        className="font-mono text-[10px] text-primary mt-2 cursor-pointer hover:underline"
+                        onClick={(e) => { e.stopPropagation(); handleExpand(); }}
+                        className="font-mono text-[11px] mt-2 cursor-pointer hover:underline"
+                        style={{ color: '#7A9E3F' }}
                       >
                         [▼ show full response]
                       </button>
@@ -260,11 +266,9 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
                     {typingDone && isTruncatable && isExpanded && (
                       <button
                         data-interactive
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCollapse();
-                        }}
-                        className="font-mono text-[10px] text-primary mt-2 cursor-pointer hover:underline"
+                        onClick={(e) => { e.stopPropagation(); handleCollapse(); }}
+                        className="font-mono text-[11px] mt-2 cursor-pointer hover:underline"
+                        style={{ color: '#7A9E3F' }}
                       >
                         [▲ collapse]
                       </button>
@@ -273,10 +277,17 @@ const TestRoomView: React.FC<TestRoomViewProps> = ({ dimension, onBack }) => {
 
                   {currentRecord.rule_checks?.length > 0 && (
                     <div>
-                      <div className="font-mono text-[10px] text-muted-foreground tracking-widest mb-2">ルールチェック</div>
+                      <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: '#6B6860' }}>
+                        <span className="font-jp text-[10px]">ルールチェック</span>
+                        <span className="ml-2 text-[9px]">RULE CHECKS</span>
+                      </div>
                       <div className="flex flex-wrap gap-1.5">
                         {currentRecord.rule_checks.map((rc, i) => (
-                          <span key={i} className="font-mono text-[9px] px-2 py-1 bg-primary/10 text-primary rounded border border-primary/20">
+                          <span
+                            key={i}
+                            className="font-mono text-[10px] px-2 py-1 rounded"
+                            style={{ backgroundColor: 'rgba(122,158,63,0.1)', color: '#7A9E3F', border: '1px solid rgba(122,158,63,0.2)' }}
+                          >
                             {rc}
                           </span>
                         ))}

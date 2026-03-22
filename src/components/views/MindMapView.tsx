@@ -4,6 +4,7 @@ import WenCharacter from '@/components/WenCharacter';
 import {
   CATEGORY_COLORS,
   formatDimName,
+  ALL_DIMS_ORDER,
 } from '@/lib/constants';
 import { loadVizData } from '@/lib/dataLoader';
 import { Category, DimScore, VizData } from '@/lib/types';
@@ -13,11 +14,11 @@ interface MindMapViewProps {
 }
 
 const CATEGORY_ANGLES: Record<Category, [number, number]> = {
-  personality: [270, 330],
-  values: [330, 410],
-  cultural: [50, 150],
-  behavioral: [150, 210],
-  capability: [210, 270],
+  capability:  [210, 290],
+  behavioral:  [290, 340],
+  values:      [340, 410],
+  cultural:    [50, 150],
+  personality: [150, 210],
 };
 
 const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
@@ -32,21 +33,23 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
   const dimScores = vizData?.dim_scores ?? {};
 
   const stars = useMemo(() => {
-    const entries = Object.entries(dimScores) as [string, DimScore][];
-
-    const byCategory: Record<Category, [string, DimScore][]> = {
-      personality: [], values: [], cultural: [], behavioral: [], capability: [],
+    // Use ALL_DIMS_ORDER for consistent angular placement
+    const byCategory: Record<Category, string[]> = {
+      capability: [], behavioral: [], values: [], cultural: [], personality: [],
     };
-    entries.forEach(e => byCategory[e[1].category].push(e));
+    ALL_DIMS_ORDER.forEach(dim => {
+      if (dimScores[dim]) byCategory[dimScores[dim].category].push(dim);
+    });
 
-    return entries.map(([dim, data]) => {
+    return ALL_DIMS_ORDER.filter(dim => dim in dimScores).map(dim => {
+      const data = dimScores[dim];
       const catDims = byCategory[data.category];
-      const idx = catDims.findIndex(d => d[0] === dim);
+      const idx = catDims.indexOf(dim);
       const [startAngle, endAngle] = CATEGORY_ANGLES[data.category];
       const angleSpan = endAngle - startAngle;
       const angle = startAngle + (angleSpan / (catDims.length + 1)) * (idx + 1);
       const radius = 80 + (1 - data.score) * 220;
-      const size = 4 + data.score * 10;
+      const size = 6 + data.score * 10;
       const rad = (angle * Math.PI) / 180;
 
       return {
@@ -67,16 +70,17 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
 
   return (
     <div className="min-h-screen pt-16 pb-12 flex items-center justify-center relative overflow-hidden" ref={containerRef}>
-      {/* Paper texture background dots */}
+      {/* Paper texture dots */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
         {Array.from({ length: 80 }).map((_, i) => (
           <div
             key={i}
-            className="absolute rounded-full bg-foreground"
+            className="absolute rounded-full"
             style={{
+              backgroundColor: '#2C2C2A',
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              opacity: 0.08 + Math.random() * 0.12,
+              opacity: 0.06 + Math.random() * 0.08,
               width: Math.random() > 0.8 ? 2 : 1,
               height: Math.random() > 0.8 ? 2 : 1,
             }}
@@ -93,7 +97,7 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
           />
         </div>
 
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-foreground/5 pointer-events-none" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ border: '1px solid rgba(80,60,40,0.06)' }} />
 
         {hoveredStar && (
           <svg className="absolute inset-0 pointer-events-none z-5" width="700" height="700">
@@ -119,11 +123,17 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
               style={{
                 left: 350 + star.x - star.size / 2,
                 top: 350 + star.y - star.size / 2,
+                // Ensure 20×20px minimum hover target
+                minWidth: 20,
+                minHeight: 20,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
               onMouseEnter={() => setHoveredDim(star.dim)}
               onMouseLeave={() => setHoveredDim(null)}
               onClick={() => onSelectDimension(star.dim)}
-              whileHover={{ scale: 1.5 }}
+              whileHover={{ scale: 1.4 }}
             >
               <div
                 className="rounded-full"
@@ -132,20 +142,31 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
                   height: star.size,
                   backgroundColor: star.color,
                   opacity: isHovered ? 1 : 0.7,
-                  boxShadow: isHovered ? `0 0 12px ${star.color}` : `0 0 4px ${star.color}40`,
+                  outline: '1px solid rgba(44,44,42,0.3)',
+                  boxShadow: isHovered ? `0 2px 8px rgba(44,44,42,0.25)` : `0 0 4px ${star.color}40`,
                   animation: star.shimmerSpeed > 0
                     ? `pulse ${star.shimmerSpeed}s ease-in-out infinite`
                     : 'none',
                   transition: 'opacity 0.2s, box-shadow 0.2s',
                 }}
               />
+              {/* Tooltip on hover only — no static labels */}
               {isHovered && (
                 <motion.div
                   initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="absolute top-full mt-2 left-1/2 -translate-x-1/2 font-mono text-[9px] text-foreground whitespace-nowrap paper-card px-2 py-1 rounded"
+                  className="absolute top-full mt-2 left-1/2 -translate-x-1/2 font-mono text-[12px] whitespace-nowrap px-3 py-2 rounded z-50"
+                  style={{
+                    backgroundColor: '#EDE7D9',
+                    color: '#2C2C2A',
+                    border: '1px solid rgba(80,60,40,0.15)',
+                    boxShadow: '0 2px 8px rgba(44,44,42,0.12)',
+                    minWidth: 160,
+                    maxWidth: 320,
+                  }}
                 >
-                  {formatDimName(star.dim)} — {star.data.score.toFixed(3)}
+                  <div className="font-semibold">{formatDimName(star.dim)}</div>
+                  <div style={{ color: '#5C7A5E' }}>{star.data.score.toFixed(3)} ± {(star.data.std ?? 0).toFixed(3)}</div>
                 </motion.div>
               )}
             </motion.div>
@@ -153,8 +174,9 @@ const MindMapView: React.FC<MindMapViewProps> = ({ onSelectDimension }) => {
         })}
       </div>
 
-      <div className="lg:hidden absolute bottom-4 left-4 right-4 text-center font-mono text-[10px] text-muted-foreground">
-        デスクトップで完全な星座ビューをご覧ください
+      <div className="lg:hidden absolute bottom-4 left-4 right-4 text-center font-mono text-[12px]" style={{ color: '#6B6860' }}>
+        <span className="font-jp text-[10px]">デスクトップで完全な星座ビューをご覧ください</span>
+        <span className="block text-[10px]">View full constellation on desktop</span>
       </div>
     </div>
   );
