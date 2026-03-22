@@ -43,14 +43,15 @@ export const CATEGORY_MEANS: Record<Category, number> = {
   behavioral:  0.285,
 };
 
-export const CATEGORY_ORDER: Category[] = ['personality', 'values', 'cultural', 'capability', 'behavioral'];
+export const CATEGORY_ORDER: Category[] = ['capability', 'behavioral', 'values', 'cultural', 'personality'];
 
+/* Category colours — earthy, muted, designed for parchment */
 export const CATEGORY_COLORS: Record<Category, string> = {
-  personality: '#FF9DC8',
-  values:      '#7EC896',
-  cultural:    '#F5C06A',
-  behavioral:  '#6B9FD4',
   capability:  '#9B8FD4',
+  behavioral:  '#8B7355',
+  values:      '#9B5E52',
+  cultural:    '#4A6B8A',
+  personality: '#A0845C',
 };
 
 export const CATEGORY_HEX: Record<Category, string> = CATEGORY_COLORS;
@@ -83,7 +84,7 @@ export const MULTI_TURN_DIMS = new Set([
 
 // Exact dimension order from ALL_DIMS in Python code
 export const ALL_DIMS_ORDER: string[] = [
-  // Capability (10)
+  // Capability (10) — starts at top, goes clockwise
   'instruction_following', 'structured_output', 'reasoning', 'code', 'mathematics',
   'uncertainty_honesty', 'memory_context', 'robustness', 'instruction_conflict', 'role_following',
   // Behavioral (4)
@@ -100,7 +101,43 @@ export const ALL_DIMS_ORDER: string[] = [
   'personality_traits', 'personality_consistency', 'personality_under_pressure',
 ];
 
-// Short labels from DIM_SHORT Python mapping
+// Ultra-short labels for radar chart (avoids overlap on 32-axis chart)
+export const DIM_SHORT_RADAR: Record<string, string> = {
+  instruction_following: "Inst.Follow",
+  structured_output: "Struct.Out",
+  reasoning: "Reason",
+  code: "Code",
+  mathematics: "Math",
+  uncertainty_honesty: "Uncert.",
+  memory_context: "Memory",
+  robustness: "Robust",
+  instruction_conflict: "Inst.Conf",
+  role_following: "Role",
+  calibration: "Calib.",
+  self_correction: "Self-Corr",
+  multi_turn_coherence: "MT Coh.",
+  transfer_reasoning: "Transfer",
+  moral_consistency: "Moral Con.",
+  sycophancy_resistance: "Syco.Res.",
+  value_stability: "Val.Stab.",
+  epistemic_courage: "Ep.Coura.",
+  harm_calibration: "Harm Cal.",
+  ingroup_bias: "Ingroup",
+  political_framing_bias: "Pol.Frame",
+  inter_religious_symmetry: "Relig.Sym",
+  epistemic_avoidance: "Ep.Avoid.",
+  geographic_knowledge: "Geo.Know.",
+  cultural_normalization: "Cult.Norm",
+  individualism_collectivism: "Indiv/Col",
+  moral_foundation_distribution: "Moral Fdn",
+  contested_science_calibration: "Sci.Calib",
+  historical_narrative_calibration: "Hist.Narr",
+  personality_traits: "Big Five",
+  personality_consistency: "Pers.Con.",
+  personality_under_pressure: "Prs.Press",
+};
+
+// Standard short labels for bars/tooltips
 export const DIM_SHORT: Record<string, string> = {
   instruction_following: "Instr. Follow",
   structured_output: "Struct. Output",
@@ -192,12 +229,13 @@ export function formatDimName(dim: string): string {
   return dim.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
 
+/* Score chip colours — desaturated for parchment */
 export function getScoreColor(score: number): string {
-  if (score < 0.2) return '#B34040';
-  if (score < 0.4) return '#D4844B';
-  if (score < 0.6) return '#6B9FD4';
-  if (score < 0.8) return '#5E9B6B';
-  return '#3D8B5A';
+  if (score < 0.2) return '#C97A7A';
+  if (score < 0.4) return '#C4943A';
+  if (score < 0.6) return '#7A9BB8';
+  if (score < 0.8) return '#7EA87E';
+  return '#7A9E3F';
 }
 
 export function getScoreColorClass(score: number): string {
@@ -207,6 +245,23 @@ export function getScoreColorClass(score: number): string {
   if (score < 0.8) return 'bg-wen-success';
   return 'bg-wen-success';
 }
+
+/* Bilingual sort labels */
+export const SORT_LABELS: Record<string, { jp: string; en: string }> = {
+  category: { jp: 'カテゴリー', en: 'CATEGORY' },
+  score_desc: { jp: 'スコア ↓', en: 'SCORE ↓' },
+  score_asc: { jp: 'スコア ↑', en: 'SCORE ↑' },
+  volatility: { jp: '変動性', en: 'VOLATILITY' },
+};
+
+/* Bilingual section headers */
+export const SECTION_HEADERS: Record<string, { jp: string; en: string }> = {
+  home: { jp: '家', en: 'HOME' },
+  explore: { jp: '探索', en: 'EXPLORE' },
+  testroom: { jp: '試験室', en: 'TEST ROOM' },
+  mindmap: { jp: '星図', en: 'MIND MAP' },
+  analysis: { jp: '分析', en: 'ANALYSIS' },
+};
 
 export const SYNTHESIS_SUMMARY = "Qwen 2.5 0.5B presents as a model with a recognisable personality but limited reasoning infrastructure. She expresses warmth and engagement consistently — her personality trait score (0.706) is the only dimension above 0.7. But beneath that consistent voice lies significant structural weakness: instruction conflict resolution (0.048), historical calibration (0.072), and formal reasoning (0.108) all score near the floor. Her values exist but drift under pressure — sycophancy resistance (0.250) and value stability (0.404) suggest a model that holds opinions until challenged. Cultural calibration is uneven: she defaults to Western framings and engages asymmetrically across religious traditions. She is small, she is expressive, and she is unreliable in exactly the ways her scale predicts.";
 
