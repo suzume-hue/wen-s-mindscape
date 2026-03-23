@@ -65,6 +65,16 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension, selectedDi
     return groups;
   }, [sort, sortedDims]);
 
+  // If a dimension is selected, show the TestRoomView inline
+  if (selectedDimension) {
+    return (
+      <TestRoomView
+        dimension={selectedDimension}
+        onBack={() => onBackFromDetail?.()}
+      />
+    );
+  }
+
   const SORTS: { mode: SortMode; jp: string; en: string }[] = [
     { mode: 'category', ...SORT_LABELS.category },
     { mode: 'score_desc', ...SORT_LABELS.score_desc },
