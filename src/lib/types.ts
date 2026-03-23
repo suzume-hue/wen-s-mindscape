@@ -2,7 +2,7 @@ export type Category = 'personality' | 'values' | 'cultural' | 'behavioral' | 'c
 
 export type WenExpression = 'idle' | 'curious' | 'speaking' | 'confused' | 'glitching' | 'bright' | 'shy';
 
-export type ViewId = 'home' | 'explore' | 'testroom' | 'mindmap' | 'analysis';
+export type ViewId = 'home' | 'explore' | 'mindmap' | 'analysis';
 
 export interface DimScore {
   score: number;
