@@ -647,20 +647,39 @@ const AnalysisView: React.FC = () => {
                 {q.label}
               </div>
             ))}
-            {/* Outlier labels */}
-            {scatterData.filter(d => OUTLIER_LABELS[d.dim]).map(d => (
-              <div
-                key={d.dim}
-                className="absolute font-mono text-[10px] pointer-events-none"
-                style={{
-                  color: INK,
-                  left: `calc(${d.x * 80 + 8}% + 10px)`,
-                  bottom: `calc(${(d.y / 0.45) * 80 + 8}% + 5px)`,
-                }}
-              >
-                {OUTLIER_LABELS[d.dim]}
-              </div>
-            ))}
+            {/* Outlier labels — nudged to avoid overlap */}
+            {(() => {
+              const outliers = scatterData.filter(d => OUTLIER_LABELS[d.dim]);
+              // Calculate positions and nudge overlapping labels
+              const positioned = outliers.map(d => {
+                const baseLeft = d.x * 80 + 8;
+                const baseBottom = (d.y / 0.45) * 80 + 8;
+                return { ...d, pctLeft: baseLeft, pctBottom: baseBottom };
+              });
+              // Simple nudge: offset vertically if two labels are within 5% of each other
+              for (let i = 0; i < positioned.length; i++) {
+                for (let j = i + 1; j < positioned.length; j++) {
+                  const dx = Math.abs(positioned[i].pctLeft - positioned[j].pctLeft);
+                  const dy = Math.abs(positioned[i].pctBottom - positioned[j].pctBottom);
+                  if (dx < 12 && dy < 6) {
+                    positioned[j].pctBottom += 6;
+                  }
+                }
+              }
+              return positioned.map(d => (
+                <div
+                  key={d.dim}
+                  className="absolute font-mono text-[10px] pointer-events-none"
+                  style={{
+                    color: INK,
+                    left: `calc(${d.pctLeft}% + 10px)`,
+                    bottom: `calc(${d.pctBottom}% + 5px)`,
+                  }}
+                >
+                  {OUTLIER_LABELS[d.dim]}
+                </div>
+              ));
+            })()}
           </div>
           <CategoryLegend />
         </ChartSection>
