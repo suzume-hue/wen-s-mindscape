@@ -269,8 +269,8 @@ const AnalysisView: React.FC = () => {
     else if (normalAngle > 200 && normalAngle < 340) textAnchor = 'end'; // left half
 
     // Offset label outward for more room
-    const offsetX = Math.cos(angleRad) * 12;
-    const offsetY = Math.sin(angleRad) * 12;
+    const offsetX = Math.cos(angleRad) * 20;
+    const offsetY = Math.sin(angleRad) * 20;
 
     return (
       <text
@@ -593,12 +593,16 @@ const AnalysisView: React.FC = () => {
               <ScatterChart margin={{ top: 30, right: 30, bottom: 30, left: 40 }}>
                 <XAxis
                   type="number" dataKey="x" name="Score" domain={[0, 1]}
+                  ticks={[0, 0.25, 0.5, 0.75, 1.0]}
+                  tickFormatter={(v: number) => v.toFixed(2)}
                   tick={{ fill: INK_FADED, fontSize: 10, fontFamily: 'Space Mono' }}
                   label={{ value: 'Score', position: 'bottom', fill: INK_FADED, fontSize: 10 }}
                   stroke={GRID_STROKE}
                 />
                 <YAxis
                   type="number" dataKey="y" name="Std Dev" domain={[0, 0.45]}
+                  ticks={[0, 0.1, 0.2, 0.3, 0.4]}
+                  tickFormatter={(v: number) => v.toFixed(2)}
                   tick={{ fill: INK_FADED, fontSize: 10, fontFamily: 'Space Mono' }}
                   label={{ value: 'Std Deviation (Volatility)', angle: -90, position: 'left', fill: INK_FADED, fontSize: 10 }}
                   stroke={GRID_STROKE}

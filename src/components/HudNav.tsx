@@ -1,6 +1,6 @@
 import React from 'react';
 import { ViewId } from '@/lib/types';
-import { Home, Grid3X3, Microscope, Orbit, BarChart3 } from 'lucide-react';
+import { Home, Grid3X3, Orbit, BarChart3 } from 'lucide-react';
 import { SECTION_HEADERS } from '@/lib/constants';
 
 interface HudNavProps {
@@ -11,7 +11,6 @@ interface HudNavProps {
 const NAV_ITEMS: { id: ViewId; icon: React.ElementType; label: string; jp: string }[] = [
   { id: 'home', icon: Home, label: SECTION_HEADERS.home.en, jp: SECTION_HEADERS.home.jp },
   { id: 'explore', icon: Grid3X3, label: SECTION_HEADERS.explore.en, jp: SECTION_HEADERS.explore.jp },
-  { id: 'testroom', icon: Microscope, label: SECTION_HEADERS.testroom.en, jp: SECTION_HEADERS.testroom.jp },
   { id: 'mindmap', icon: Orbit, label: SECTION_HEADERS.mindmap.en, jp: SECTION_HEADERS.mindmap.jp },
   { id: 'analysis', icon: BarChart3, label: SECTION_HEADERS.analysis.en, jp: SECTION_HEADERS.analysis.jp },
 ];

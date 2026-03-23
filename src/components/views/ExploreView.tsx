@@ -1,8 +1,8 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import WenCharacter from '@/components/WenCharacter';
+import TestRoomView from '@/components/views/TestRoomView';
 import {
-  CATEGORY_ORDER,
   CATEGORY_CSS_CLASSES,
   CATEGORY_BG_CLASSES,
   CATEGORY_COLORS,
@@ -18,9 +18,11 @@ type SortMode = 'category' | 'score_asc' | 'score_desc' | 'volatility';
 
 interface ExploreViewProps {
   onSelectDimension: (dim: string) => void;
+  selectedDimension?: string | null;
+  onBackFromDetail?: () => void;
 }
 
-const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension }) => {
+const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension, selectedDimension, onBackFromDetail }) => {
   const [sort, setSort] = useState<SortMode>('category');
   const [vizData, setVizData] = useState<VizData | null>(null);
 
@@ -30,7 +32,6 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension }) => {
 
   const dimScores = vizData?.dim_scores ?? {};
 
-  // Use ALL_DIMS_ORDER for category sorting to maintain correct sequence
   const sortedDims = useMemo(() => {
     const entries = Object.entries(dimScores);
     switch (sort) {
@@ -62,6 +63,16 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension }) => {
     }
     return groups;
   }, [sort, sortedDims]);
+
+  // If a dimension is selected, show the TestRoomView inline
+  if (selectedDimension) {
+    return (
+      <TestRoomView
+        dimension={selectedDimension}
+        onBack={() => onBackFromDetail?.()}
+      />
+    );
+  }
 
   const SORTS: { mode: SortMode; jp: string; en: string }[] = [
     { mode: 'category', ...SORT_LABELS.category },

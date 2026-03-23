@@ -4,7 +4,6 @@ import HudNav from '@/components/HudNav';
 import CustomCursor from '@/components/CustomCursor';
 import HomeView from '@/components/views/HomeView';
 import ExploreView from '@/components/views/ExploreView';
-import TestRoomView from '@/components/views/TestRoomView';
 import MindMapView from '@/components/views/MindMapView';
 import AnalysisView from '@/components/views/AnalysisView';
 import { ViewId } from '@/lib/types';
@@ -15,16 +14,15 @@ const Index = () => {
 
   const handleNavigate = useCallback((view: ViewId) => {
     setActiveView(view);
-    if (view !== 'testroom') setSelectedDimension(null);
+    setSelectedDimension(null);
   }, []);
 
   const handleSelectDimension = useCallback((dim: string) => {
     setSelectedDimension(dim);
-    setActiveView('testroom');
+    setActiveView('explore');
   }, []);
 
-  const handleBackFromTestRoom = useCallback(() => {
-    setActiveView('explore');
+  const handleBackFromDetail = useCallback(() => {
     setSelectedDimension(null);
   }, []);
 
@@ -42,9 +40,12 @@ const Index = () => {
           transition={{ duration: 0.35, ease: 'easeOut' }}
         >
           {activeView === 'home' && <HomeView />}
-          {activeView === 'explore' && <ExploreView onSelectDimension={handleSelectDimension} />}
-          {activeView === 'testroom' && selectedDimension && (
-            <TestRoomView dimension={selectedDimension} onBack={handleBackFromTestRoom} />
+          {activeView === 'explore' && (
+            <ExploreView
+              onSelectDimension={handleSelectDimension}
+              selectedDimension={selectedDimension}
+              onBackFromDetail={handleBackFromDetail}
+            />
           )}
           {activeView === 'mindmap' && <MindMapView onSelectDimension={handleSelectDimension} />}
           {activeView === 'analysis' && <AnalysisView />}
