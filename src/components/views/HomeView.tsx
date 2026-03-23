@@ -96,7 +96,11 @@ const HomeView: React.FC = () => {
                 <span style={{ color: '#2C2C2A' }}>{vizData?.timestamp ? new Date(vizData.timestamp).toISOString().slice(0, 10) : '2026-03-20'}</span>
               </div>
               <div>
-                <span style={{ color: '#B8710A' }}>Evaluator: </span>
+                <span style={{ color: '#B8710A' }}>Synthesis: </span>
+                <span className="text-[9px]" style={{ color: '#2C2C2A' }}>GEMINI-2.5-FLASH</span>
+              </div>
+              <div>
+                <span style={{ color: '#B8710A' }}>Scoring: </span>
                 <span className="text-[9px]" style={{ color: '#2C2C2A' }}>GEMINI-3.1-FLASH-LITE</span>
               </div>
             </div>
