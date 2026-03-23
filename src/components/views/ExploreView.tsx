@@ -27,6 +27,10 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension, selectedDi
   const [sort, setSort] = useState<SortMode>('category');
   const [vizData, setVizData] = useState<VizData | null>(null);
 
+  useEffect(() => {
+    loadVizData().then(setVizData);
+  }, []);
+
   // If a dimension is selected, show the TestRoomView inline
   if (selectedDimension) {
     return (
@@ -36,12 +40,6 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension, selectedDi
       />
     );
   }
-  const [sort, setSort] = useState<SortMode>('category');
-  const [vizData, setVizData] = useState<VizData | null>(null);
-
-  useEffect(() => {
-    loadVizData().then(setVizData);
-  }, []);
 
   const dimScores = vizData?.dim_scores ?? {};
 
