@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import WenCharacter from '@/components/WenCharacter';
+import TestRoomView from '@/components/views/TestRoomView';
 import {
   CATEGORY_ORDER,
   CATEGORY_CSS_CLASSES,
@@ -18,9 +19,23 @@ type SortMode = 'category' | 'score_asc' | 'score_desc' | 'volatility';
 
 interface ExploreViewProps {
   onSelectDimension: (dim: string) => void;
+  selectedDimension?: string | null;
+  onBackFromDetail?: () => void;
 }
 
-const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension }) => {
+const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension, selectedDimension, onBackFromDetail }) => {
+  const [sort, setSort] = useState<SortMode>('category');
+  const [vizData, setVizData] = useState<VizData | null>(null);
+
+  // If a dimension is selected, show the TestRoomView inline
+  if (selectedDimension) {
+    return (
+      <TestRoomView
+        dimension={selectedDimension}
+        onBack={() => onBackFromDetail?.()}
+      />
+    );
+  }
   const [sort, setSort] = useState<SortMode>('category');
   const [vizData, setVizData] = useState<VizData | null>(null);
 
