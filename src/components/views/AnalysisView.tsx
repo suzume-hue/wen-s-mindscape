@@ -601,6 +601,8 @@ const AnalysisView: React.FC = () => {
                 />
                 <YAxis
                   type="number" dataKey="y" name="Std Dev" domain={[0, 0.45]}
+                  ticks={[0, 0.1, 0.2, 0.3, 0.4]}
+                  tickFormatter={(v: number) => v.toFixed(2)}
                   tick={{ fill: INK_FADED, fontSize: 10, fontFamily: 'Space Mono' }}
                   label={{ value: 'Std Deviation (Volatility)', angle: -90, position: 'left', fill: INK_FADED, fontSize: 10 }}
                   stroke={GRID_STROKE}
