@@ -31,19 +31,8 @@ const ExploreView: React.FC<ExploreViewProps> = ({ onSelectDimension, selectedDi
     loadVizData().then(setVizData);
   }, []);
 
-  // If a dimension is selected, show the TestRoomView inline
-  if (selectedDimension) {
-    return (
-      <TestRoomView
-        dimension={selectedDimension}
-        onBack={() => onBackFromDetail?.()}
-      />
-    );
-  }
-
   const dimScores = vizData?.dim_scores ?? {};
 
-  // Use ALL_DIMS_ORDER for category sorting to maintain correct sequence
   const sortedDims = useMemo(() => {
     const entries = Object.entries(dimScores);
     switch (sort) {
