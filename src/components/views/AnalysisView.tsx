@@ -412,6 +412,8 @@ const AnalysisView: React.FC = () => {
               <XAxis
                 type="number"
                 domain={[0, 1.05]}
+                ticks={[0, 0.25, 0.5, 0.75, 1.0]}
+                tickFormatter={(v: number) => v.toFixed(2)}
                 tick={{ fill: INK_FADED, fontSize: 9, fontFamily: 'Space Mono' }}
                 stroke={GRID_STROKE}
                 label={{ value: 'Score (0–1)', position: 'bottom', fill: INK_FADED, fontSize: 9 }}
