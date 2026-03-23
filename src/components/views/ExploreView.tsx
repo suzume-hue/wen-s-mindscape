@@ -3,7 +3,6 @@ import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import WenCharacter from '@/components/WenCharacter';
 import TestRoomView from '@/components/views/TestRoomView';
 import {
-  CATEGORY_ORDER,
   CATEGORY_CSS_CLASSES,
   CATEGORY_BG_CLASSES,
   CATEGORY_COLORS,
