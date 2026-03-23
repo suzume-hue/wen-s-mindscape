@@ -593,6 +593,8 @@ const AnalysisView: React.FC = () => {
               <ScatterChart margin={{ top: 30, right: 30, bottom: 30, left: 40 }}>
                 <XAxis
                   type="number" dataKey="x" name="Score" domain={[0, 1]}
+                  ticks={[0, 0.25, 0.5, 0.75, 1.0]}
+                  tickFormatter={(v: number) => v.toFixed(2)}
                   tick={{ fill: INK_FADED, fontSize: 10, fontFamily: 'Space Mono' }}
                   label={{ value: 'Score', position: 'bottom', fill: INK_FADED, fontSize: 10 }}
                   stroke={GRID_STROKE}
