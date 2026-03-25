@@ -408,7 +408,7 @@ const AnalysisView: React.FC = () => {
         {/* ═══ Chart 3: Cultural Topology ═══ */}
         <ChartSection title="Cultural / Ideological Topology" titleJp="文化的" chartRef={ref3} exportName={`${modelKey}_cultural`}>
           <ResponsiveContainer width="100%" height={380}>
-            <BarChart data={culturalData} layout="vertical" margin={{ top: 10, right: 60, bottom: 10, left: 110 }}>
+            <BarChart data={culturalData} layout="vertical" margin={{ top: 10, right: 80, bottom: 10, left: 110 }}>
               <XAxis
                 type="number"
                 domain={[0, 1.05]}
