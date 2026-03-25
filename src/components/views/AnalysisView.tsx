@@ -629,10 +629,10 @@ const AnalysisView: React.FC = () => {
             </ResponsiveContainer>
             {/* Quadrant labels — visible pills */}
             {[
-              { label: 'ERRATIC LOW', top: 8, left: 50, right: undefined, bottom: undefined },
+              { label: 'ERRATIC LOW', top: 8, left: 70, right: undefined, bottom: undefined },
               { label: 'VOLATILE HIGH', top: 8, left: undefined, right: 50, bottom: undefined },
-              { label: 'STABLE LOW', top: undefined, left: 50, right: undefined, bottom: 40 },
-              { label: 'STABLE HIGH', top: undefined, left: undefined, right: 50, bottom: 40 },
+              { label: 'STABLE LOW', top: undefined, left: 70, right: undefined, bottom: 55 },
+              { label: 'STABLE HIGH', top: undefined, left: undefined, right: 50, bottom: 55 },
             ].map(q => (
               <div
                 key={q.label}
