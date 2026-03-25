@@ -269,8 +269,8 @@ const AnalysisView: React.FC = () => {
     else if (normalAngle > 200 && normalAngle < 340) textAnchor = 'end'; // left half
 
     // Offset label outward for more room
-    const offsetX = Math.cos(angleRad) * 20;
-    const offsetY = Math.sin(angleRad) * 20;
+    const offsetX = Math.cos(angleRad) * 32;
+    const offsetY = Math.sin(angleRad) * 32;
 
     return (
       <text
