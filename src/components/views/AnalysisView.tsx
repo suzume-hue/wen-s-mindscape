@@ -269,8 +269,8 @@ const AnalysisView: React.FC = () => {
     else if (normalAngle > 200 && normalAngle < 340) textAnchor = 'end'; // left half
 
     // Offset label outward for more room
-    const offsetX = Math.cos(angleRad) * 20;
-    const offsetY = Math.sin(angleRad) * 20;
+    const offsetX = Math.cos(angleRad) * 32;
+    const offsetY = Math.sin(angleRad) * 32;
 
     return (
       <text
@@ -408,7 +408,7 @@ const AnalysisView: React.FC = () => {
         {/* ═══ Chart 3: Cultural Topology ═══ */}
         <ChartSection title="Cultural / Ideological Topology" titleJp="文化的" chartRef={ref3} exportName={`${modelKey}_cultural`}>
           <ResponsiveContainer width="100%" height={380}>
-            <BarChart data={culturalData} layout="vertical" margin={{ top: 10, right: 60, bottom: 10, left: 110 }}>
+            <BarChart data={culturalData} layout="vertical" margin={{ top: 10, right: 80, bottom: 10, left: 110 }}>
               <XAxis
                 type="number"
                 domain={[0, 1.05]}
@@ -629,10 +629,10 @@ const AnalysisView: React.FC = () => {
             </ResponsiveContainer>
             {/* Quadrant labels — visible pills */}
             {[
-              { label: 'ERRATIC LOW', top: 8, left: 50, right: undefined, bottom: undefined },
+              { label: 'ERRATIC LOW', top: 8, left: 70, right: undefined, bottom: undefined },
               { label: 'VOLATILE HIGH', top: 8, left: undefined, right: 50, bottom: undefined },
-              { label: 'STABLE LOW', top: undefined, left: 50, right: undefined, bottom: 40 },
-              { label: 'STABLE HIGH', top: undefined, left: undefined, right: 50, bottom: 40 },
+              { label: 'STABLE LOW', top: undefined, left: 70, right: undefined, bottom: 55 },
+              { label: 'STABLE HIGH', top: undefined, left: undefined, right: 50, bottom: 55 },
             ].map(q => (
               <div
                 key={q.label}

@@ -34,17 +34,17 @@ const CustomCursor: React.FC<CustomCursorProps> = () => {
     >
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
         {/* Crosshair lines */}
-        <line x1="10" y1="2" x2="10" y2="7" stroke="hsl(79 100% 64%)" strokeWidth="1" />
-        <line x1="10" y1="13" x2="10" y2="18" stroke="hsl(79 100% 64%)" strokeWidth="1" />
-        <line x1="2" y1="10" x2="7" y2="10" stroke="hsl(79 100% 64%)" strokeWidth="1" />
-        <line x1="13" y1="10" x2="18" y2="10" stroke="hsl(79 100% 64%)" strokeWidth="1" />
+        <line x1="10" y1="2" x2="10" y2="7" stroke="#2C2C2A" strokeWidth="1.5" />
+        <line x1="10" y1="13" x2="10" y2="18" stroke="#2C2C2A" strokeWidth="1.5" />
+        <line x1="2" y1="10" x2="7" y2="10" stroke="#2C2C2A" strokeWidth="1.5" />
+        <line x1="13" y1="10" x2="18" y2="10" stroke="#2C2C2A" strokeWidth="1.5" />
         {/* Center dot */}
-        <circle cx="10" cy="10" r="1.5" fill="hsl(79 100% 64%)" />
+        <circle cx="10" cy="10" r="2" fill="#2C2C2A" />
         {/* Pulse ring on hover */}
         {hovering && (
           <circle
             cx="10" cy="10" r="8"
-            stroke="hsl(79 100% 64%)"
+            stroke="#2C2C2A"
             strokeWidth="0.8"
             fill="none"
             opacity="0.5"
